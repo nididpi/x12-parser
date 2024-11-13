@@ -5,7 +5,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.io.IOException;
 import java.util.Map;
@@ -71,7 +70,8 @@ public class X12Test {
                // If the key already exists, append the loop to the array
                if (childLoopsMap.containsKey(childLoopId)) {
                     childLoopsMap.get(childLoopId).put(childLoopJson);
-               } else {
+               } else
+               {
                     // Create a new array if the key doesn't exist
                     JSONArray childArray = new JSONArray();
                     childArray.put(childLoopJson);
