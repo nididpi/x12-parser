@@ -1,11 +1,9 @@
-package com.imsweb.x12;
+package com.imsweb.x12.util;
 
-import com.imsweb.x12.mapping.CompositeDefinition;
 import com.imsweb.x12.mapping.ElementDefinition;
 import com.imsweb.x12.mapping.LoopDefinition;
 import com.imsweb.x12.mapping.SegmentDefinition;
 import com.imsweb.x12.mapping.TransactionDefinition;
-import com.imsweb.x12.mapping.TransactionDefinition.Usage;
 import com.imsweb.x12.reader.X12Reader;
 
 import java.io.BufferedWriter;
@@ -61,7 +59,8 @@ public class ElementKeyMapping {
                     e.printStackTrace();
                 }
             }
-        }}
+        }
+    }
 
     public void saveDefinitionMapToFile(String filePath) throws IOException {
 
