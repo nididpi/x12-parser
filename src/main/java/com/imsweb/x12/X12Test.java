@@ -1,17 +1,22 @@
 package com.imsweb.x12;
 
 import com.imsweb.x12.writer.X12Writer;
+import com.imsweb.x12.reader.X12Reader.FileType;
+import com.imsweb.x12.reader.X12Reader;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.File;
-import java.util.List;
+import java.io.FileReader;
 import java.io.IOException;
-import java.util.Map;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import com.imsweb.x12.reader.X12Reader.FileType;
-import com.imsweb.x12.reader.X12Reader;
+
 
 public class X12Test {
 
@@ -47,43 +52,83 @@ public class X12Test {
 
 
 
-     private static JSONObject processLoop(Loop loop) {
+     private static JSONObject processLoop(Loop loop) throws IOException {
+
+          String definitionFilePath = "837definitions.txt";
+          Map<String, String> definitionMap = loadDefinitionMapFromResource(definitionFilePath);
+
           JSONObject loopJson = new JSONObject();
-          loopJson.put("loopname", loop.getId());
+          String loopId = loop.getId();
+          loopJson.put("loopname", loopId);
 
           for (Segment segment : loop.getSegments()) {
                JSONObject segmentJson = new JSONObject();
                List<Element> elements = segment.getElements();
                for (int index = 0; index < elements.size(); index++) {
-                    segmentJson.put(segment.getId() + (index + 1), elements.get(index));
+                    String formattedIndex = String.format("%02d", index + 1);
+                    String segmentId = segment.getId() + formattedIndex;
+                    String segmentKeyWithBusinessValue = segmentId + "_" + getBusinessValue(definitionMap, segmentId);
+                    segmentJson.put(segmentKeyWithBusinessValue, elements.get(index));
                }
-               loopJson.put(segment.getId(), segmentJson);
+
+               String segmentId = segment.getId();
+               String segmentKeyWithBusinessValue = segmentId + "_" + getBusinessValue(definitionMap, segmentId);
+               loopJson.put(segmentKeyWithBusinessValue, segmentJson);
           }
 
-          // Map to hold child loops categorized by their IDs
           Map<String, JSONArray> childLoopsMap = new HashMap<>();
 
           for (Loop childLoop : loop.getLoops()) {
                String childLoopId = childLoop.getId();
                JSONObject childLoopJson = processLoop(childLoop);
 
-               // If the key already exists, append the loop to the array
-               if (childLoopsMap.containsKey(childLoopId)) {
-                    childLoopsMap.get(childLoopId).put(childLoopJson);
-               } else
-               {
-                    // Create a new array if the key doesn't exist
+               String childLoopKeyWithBusinessValue = childLoopId + "_" + getBusinessValue(definitionMap, childLoopId);
+
+               if (childLoopsMap.containsKey(childLoopKeyWithBusinessValue)) {
+                    childLoopsMap.get(childLoopKeyWithBusinessValue).put(childLoopJson);
+               } else {
                     JSONArray childArray = new JSONArray();
                     childArray.put(childLoopJson);
-                    childLoopsMap.put(childLoopId, childArray);
+                    childLoopsMap.put(childLoopKeyWithBusinessValue, childArray);
                }
           }
 
-          // Add arrays of loops to the main JSON object
           for (Map.Entry<String, JSONArray> entry : childLoopsMap.entrySet()) {
                loopJson.put(entry.getKey(), entry.getValue());
           }
 
           return loopJson;
+     }
+
+     private static String getBusinessValue(Map<String, String> definitionMap, String id) {
+          String businessValue = definitionMap.getOrDefault(id, "");
+          businessValue = businessValue.toLowerCase();
+          businessValue = businessValue.replace(" ", "_");
+          businessValue = businessValue.replaceAll("[^a-z0-9_]", "");
+
+          return businessValue;
+     }
+
+     private static Map<String, String> loadDefinitionMapFromResource(String resourceName) throws IOException {
+          Map<String, String> definitionMap = new HashMap<>();
+
+          // Open the resource as a stream
+          try (InputStream inputStream = X12Test.class.getClassLoader().getResourceAsStream(resourceName)) {
+               if (inputStream == null) {
+                    throw new IOException("Resource not found: " + resourceName);
+               }
+               // Read the stream using BufferedReader
+               try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                         String[] parts = line.split("=", 2);
+                         if (parts.length == 2) {
+                              definitionMap.put(parts[0], parts[1]);
+                         }
+                    }
+               }
+          }
+
+          return definitionMap;
      }
 }

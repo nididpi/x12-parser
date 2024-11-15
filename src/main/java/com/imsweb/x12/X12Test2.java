@@ -22,7 +22,7 @@ public class X12Test2 {
           Map<String, String> definitionMap = loadDefinitionMapFromFile(definitionFilePath);
 
           // Flag to determine if definitions should be used
-          boolean useDefinitions = false; // or set this based on your logic
+          boolean useDefinitions = true; // or set this based on your logic
 
           X12Reader reader837 = new X12Reader(FileType.ANSI837_5010_X222, new File("/Users/weiwu/Documents/git/hl7test/src/main/java/com/example/837sample"));
           List<Loop> loops837 = reader837.getLoops();
