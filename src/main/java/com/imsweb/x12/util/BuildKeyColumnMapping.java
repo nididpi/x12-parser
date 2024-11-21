@@ -42,11 +42,10 @@ public class BuildKeyColumnMapping {
         if (segmentDefs != null) {
             for (SegmentDefinition segmentDef : segmentDefs) {
                 Map<String, Object> segmentMap = new HashMap<>();
-                segmentMap.put("name", segmentDef.getName());
 
-//                if(segmentDef.getXid().equals("CLM")){
-//                    String a = "1";
-//                }
+                String datatype = segmentDef.getMaxUse().equals("1") ? "struct" : "array";
+                segmentMap.put("name", segmentDef.getName());
+                segmentMap.put("datatype", datatype);
 
                 Map<String, String> elementsMap = new HashMap<>();
                 List<ElementDefinition> elementDefs = segmentDef.getElements();

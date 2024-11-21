@@ -1,0 +1,2017 @@
+{
+  "2430": {
+    "SVD": {
+      "elements": {
+        "SVD02": "Service Line Paid Amount",
+        "SVD01": "Other Payer Primary Identifier",
+        "SVD04": "Product/Service ID",
+        "SVD03": "Composite Medical Procedure Identifier",
+        "SVD06": "Bundled or Unbundled Line Number",
+        "SVD05": "Paid Service Unit Count"
+      },
+      "name": "Line Adjudication Information"
+    },
+    "DTP": {
+      "elements": {
+        "DTP01": "Date Time Qualifier",
+        "DTP03": "Adjudication or Payment Date",
+        "DTP02": "Date Time Period Format Qualifier"
+      },
+      "name": "Line Check or Remittance Date"
+    },
+    "CAS": {
+      "elements": {
+        "CAS09": "Adjustment Amount",
+        "CAS07": "Adjustment Quantity",
+        "CAS18": "Adjustment Amount",
+        "CAS08": "Adjustment Reason Code",
+        "CAS19": "Adjustment Quantity",
+        "CAS05": "Adjustment Reason Code",
+        "CAS16": "Adjustment Quantity",
+        "CAS06": "Adjustment Amount",
+        "CAS17": "Adjustment Reason Code",
+        "CAS03": "Adjustment Amount",
+        "CAS14": "Adjustment Reason Code",
+        "CAS04": "Adjustment Quantity",
+        "CAS15": "Adjustment Amount",
+        "CAS01": "Claim Adjustment Group Code",
+        "CAS12": "Adjustment Amount",
+        "CAS02": "Adjustment Reason Code",
+        "CAS13": "Adjustment Quantity",
+        "CAS10": "Adjustment Quantity",
+        "CAS11": "Adjustment Reason Code"
+      },
+      "name": "Line Adjustment"
+    },
+    "name": "Line Adjudication Information",
+    "AMT": {
+      "elements": {
+        "AMT01": "Amount Qualifier Code",
+        "AMT02": "Remaining Patient Liability",
+        "AMT03": "Credit/Debit Flag Code"
+      },
+      "name": "Remaining Patient Liability"
+    }
+  },
+  "HEADER": {
+    "name": "Table 1 - Header",
+    "BHT": {
+      "elements": {
+        "BHT06": "Claim or Encounter Identifier",
+        "BHT02": "Transaction Set Purpose Code",
+        "BHT03": "Originator Application Transaction Identifier",
+        "BHT04": "Transaction Set Creation Date",
+        "BHT05": "Transaction Set Creation Time",
+        "BHT01": "Hierarchical Structure Code"
+      },
+      "name": "Beginning of Hierarchical Transaction"
+    }
+  },
+  "1000B": {
+    "NM1": {
+      "elements": {
+        "NM108": "Identification Code Qualifier",
+        "NM109": "Receiver Primary Identifier",
+        "NM106": "Name Prefix",
+        "NM107": "Name Suffix",
+        "NM104": "Name First",
+        "NM105": "Name Middle",
+        "NM102": "Entity Type Qualifier",
+        "NM103": "Receiver Name",
+        "NM111": "Entity Identifier Code",
+        "NM101": "Entity Identifier Code",
+        "NM112": "Name Last or Organization Name",
+        "NM110": "Entity Relationship Code"
+      },
+      "name": "Receiver Name"
+    },
+    "name": "Receiver Name"
+  },
+  "1000A": {
+    "NM1": {
+      "elements": {
+        "NM108": "Identification Code Qualifier",
+        "NM109": "Submitter Identifier",
+        "NM106": "Name Prefix",
+        "NM107": "Name Suffix",
+        "NM104": "Submitter First Name",
+        "NM105": "Submitter Middle Name",
+        "NM102": "Entity Type Qualifier",
+        "NM103": "Submitter Last or Organization Name",
+        "NM111": "Entity Identifier Code",
+        "NM101": "Entity Identifier Code",
+        "NM112": "Name Last or Organization Name",
+        "NM110": "Entity Relationship Code"
+      },
+      "name": "Submitter Name"
+    },
+    "name": "Submitter Name",
+    "PER": {
+      "elements": {
+        "PER09": "Contact Inquiry Reference",
+        "PER08": "Communication Number",
+        "PER07": "Communication Number Qualifier",
+        "PER06": "Communication Number",
+        "PER05": "Communication Number Qualifier",
+        "PER04": "Communication Number",
+        "PER03": "Communication Number Qualifier",
+        "PER02": "Submitter Contact Name",
+        "PER01": "Contact Function Code"
+      },
+      "name": "Submitter EDI Contact Information"
+    }
+  },
+  "GS_LOOP": {
+    "name": "Functional Group Header",
+    "GS": {
+      "elements": {
+        "GS05": "Time",
+        "GS04": "Date",
+        "GS07": "Responsible Agency Code",
+        "GS06": "Group Control Number",
+        "GS08": "Version / Release / Industry Identifier Code",
+        "GS01": "Functional Identifier Code",
+        "GS03": "Application Receiver\u0027s Code",
+        "GS02": "Application Sender\u0027s Code"
+      },
+      "name": "Functional Group Header"
+    },
+    "GE": {
+      "elements": {
+        "GE02": "Group Control Number",
+        "GE01": "Number of Transaction Sets Included"
+      },
+      "name": "Functional Group Trailer"
+    }
+  },
+  "2010BB": {
+    "REF": {
+      "elements": {
+        "REF04": "Reference Identifier",
+        "REF03": "Description",
+        "REF02": "Billing Provider Secondary Identifier",
+        "REF01": "Reference Identification Qualifier"
+      },
+      "name": "Billing Provider Secondary Identification"
+    },
+    "NM1": {
+      "elements": {
+        "NM108": "Identification Code Qualifier",
+        "NM109": "Payer Identifier",
+        "NM106": "Name Prefix",
+        "NM107": "Name Suffix",
+        "NM104": "Name First",
+        "NM105": "Name Middle",
+        "NM102": "Entity Type Qualifier",
+        "NM103": "Payer Name",
+        "NM111": "Entity Identifier Code",
+        "NM101": "Entity Identifier Code",
+        "NM112": "Name Last or Organization Name",
+        "NM110": "Entity Relationship Code"
+      },
+      "name": "Payer Name"
+    },
+    "N3": {
+      "elements": {
+        "N301": "Payer Address Line",
+        "N302": "Payer Address Line"
+      },
+      "name": "Payer Address"
+    },
+    "N4": {
+      "elements": {
+        "N401": "Payer City Name",
+        "N406": "Location Identifier",
+        "N407": "Country Subdivision Code",
+        "N402": "Payer State or Province Code",
+        "N403": "Payer Postal Zone or ZIP Code",
+        "N404": "Country Code",
+        "N405": "Location Qualifier"
+      },
+      "name": "Payer City, State, ZIP Code"
+    },
+    "name": "Payer Name"
+  },
+  "2420H": {
+    "NM1": {
+      "elements": {
+        "NM108": "Identification Code Qualifier",
+        "NM109": "Identification Code",
+        "NM106": "Name Prefix",
+        "NM107": "Name Suffix",
+        "NM104": "Name First",
+        "NM105": "Name Middle",
+        "NM102": "Entity Type Qualifier",
+        "NM103": "Ambulance Drop-off Location",
+        "NM111": "Entity Identifier Code",
+        "NM101": "Entity Identifier Code",
+        "NM112": "Name Last or Organization Name",
+        "NM110": "Entity Relationship Code"
+      },
+      "name": "Ambulance Drop-off Location"
+    },
+    "N3": {
+      "elements": {
+        "N301": "Ambulance Drop-off Address Line",
+        "N302": "Ambulance Drop-off Address Line"
+      },
+      "name": "Ambulance Drop-off Location Address"
+    },
+    "N4": {
+      "elements": {
+        "N401": "Ambulance Drop-off City Name",
+        "N406": "Location Identifier",
+        "N407": "Country Subdivision Code",
+        "N402": "Ambulance Drop-off State or Province Code",
+        "N403": "Ambulance Drop-off Postal Zone or ZIP Code",
+        "N404": "Country Code",
+        "N405": "Location Qualifier"
+      },
+      "name": "Ambulance Drop-off Location City, State, ZIP Code"
+    },
+    "name": "Ambulance Drop-off Location"
+  },
+  "2010BA": {
+    "REF": {
+      "elements": {
+        "REF04": "Reference Identifier",
+        "REF03": "Description",
+        "REF02": "Property Casualty Claim Number",
+        "REF01": "Reference Identification Qualifier"
+      },
+      "name": "Property and Casualty Claim Number"
+    },
+    "NM1": {
+      "elements": {
+        "NM108": "Identification Code Qualifier",
+        "NM109": "Subscriber Primary Identifier",
+        "NM106": "Name Prefix",
+        "NM107": "Subscriber Name Suffix",
+        "NM104": "Subscriber First Name",
+        "NM105": "Subscriber Middle Name or Initial",
+        "NM102": "Entity Type Qualifier",
+        "NM103": "Subscriber Last Name",
+        "NM111": "Entity Identifier Code",
+        "NM101": "Entity Identifier Code",
+        "NM112": "Name Last or Organization Name",
+        "NM110": "Entity Relationship Code"
+      },
+      "name": "Subscriber Name"
+    },
+    "N3": {
+      "elements": {
+        "N301": "Subscriber Address Line",
+        "N302": "Subscriber Address Line"
+      },
+      "name": "Subscriber Address"
+    },
+    "N4": {
+      "elements": {
+        "N401": "Subscriber City Name",
+        "N406": "Location Identifier",
+        "N407": "Country Subdivision Code",
+        "N402": "Subscriber State Code",
+        "N403": "Subscriber Postal Zone or ZIP Code",
+        "N404": "Country Code",
+        "N405": "Location Qualifier"
+      },
+      "name": "Subscriber City, State, ZIP Code"
+    },
+    "name": "Subscriber Name",
+    "PER": {
+      "elements": {
+        "PER09": "Contact Inquiry Reference",
+        "PER08": "Communication Number",
+        "PER07": "Communication Number Qualifier",
+        "PER06": "Communication Number",
+        "PER05": "Communication Number Qualifier",
+        "PER04": "Communication Number",
+        "PER03": "Communication Number Qualifier",
+        "PER02": "Name",
+        "PER01": "Contact Function Code"
+      },
+      "name": "Property and Casualty Subscriber Contact Information"
+    },
+    "DMG": {
+      "elements": {
+        "DMG04": "Marital Status Code",
+        "DMG05": "Composite Race or Ethnicity Information",
+        "DMG02": "Subscriber Birth Date",
+        "DMG03": "Subscriber Gender Code",
+        "DMG08": "Basis of Verification Code",
+        "DMG09": "Quantity",
+        "DMG06": "Citizenship Status Code",
+        "DMG07": "Country Code",
+        "DMG11": "Industry Code",
+        "DMG01": "Date Time Period Format Qualifier",
+        "DMG10": "Code List Qualifier Code"
+      },
+      "name": "Subscriber Demographic Information"
+    }
+  },
+  "2000C": {
+    "PAT": {
+      "elements": {
+        "PAT03": "Employment Status Code",
+        "PAT04": "Student Status Code",
+        "PAT01": "Individual Relationship Code",
+        "PAT02": "Patient Location Code",
+        "PAT09": "Pregnancy Indicator",
+        "PAT07": "Unit or Basis for Measurement Code",
+        "PAT08": "Patient Weight",
+        "PAT05": "Date Time Period Format Qualifier",
+        "PAT06": "Patient Death Date"
+      },
+      "name": "Patient Information"
+    },
+    "HL": {
+      "elements": {
+        "HL01": "Hierarchical ID Number",
+        "HL03": "Hierarchical Level Code",
+        "HL02": "Hierarchical Parent ID Number",
+        "HL04": "Hierarchical Child Code"
+      },
+      "name": "Patient Hierarchical Level"
+    },
+    "name": "Patient Hierarchical Level"
+  },
+  "2000B": {
+    "SBR": {
+      "elements": {
+        "SBR01": "Payer Responsibility Sequence Number Code",
+        "SBR02": "Individual Relationship Code",
+        "SBR03": "Subscriber Group or Policy Number",
+        "SBR04": "Subscriber Group Name",
+        "SBR05": "Insurance Type Code",
+        "SBR06": "Coordination of Benefits Code",
+        "SBR07": "Yes/No Condition or Response Code",
+        "SBR08": "Employment Status Code",
+        "SBR09": "Claim Filing Indicator Code"
+      },
+      "name": "Subscriber Information"
+    },
+    "PAT": {
+      "elements": {
+        "PAT03": "Employment Status Code",
+        "PAT04": "Student Status Code",
+        "PAT01": "Individual Relationship Code",
+        "PAT02": "Patient Location Code",
+        "PAT09": "Pregnancy Indicator",
+        "PAT07": "Unit or Basis for Measurement Code",
+        "PAT08": "Patient Weight",
+        "PAT05": "Date Time Period Format Qualifier",
+        "PAT06": "Patient Death Date"
+      },
+      "name": "Patient Information"
+    },
+    "HL": {
+      "elements": {
+        "HL01": "Hierarchical ID Number",
+        "HL03": "Hierarchical Level Code",
+        "HL02": "Hierarchical Parent ID Number",
+        "HL04": "Hierarchical Child Code"
+      },
+      "name": "Subscriber Hierarchical Level"
+    },
+    "name": "Subscriber Hierarchical Level"
+  },
+  "2000A": {
+    "CUR": {
+      "elements": {
+        "CUR20": "Date",
+        "CUR10": "Date/Time Qualifier",
+        "CUR21": "Time",
+        "CUR08": "Date",
+        "CUR19": "Date/Time Qualifier",
+        "CUR09": "Time",
+        "CUR11": "Date",
+        "CUR01": "Entity Identifier Code",
+        "CUR12": "Time",
+        "CUR02": "Currency Code",
+        "CUR13": "Date/Time Qualifier",
+        "CUR03": "Exchange Rate",
+        "CUR14": "Date",
+        "CUR04": "Entity Identifier Code",
+        "CUR15": "Time",
+        "CUR05": "Currency Code",
+        "CUR16": "Date/Time Qualifier",
+        "CUR06": "Currency Market/Exchange Code",
+        "CUR17": "Date",
+        "CUR07": "Date/Time Qualifier",
+        "CUR18": "Time"
+      },
+      "name": "Foreign Currency Information"
+    },
+    "HL": {
+      "elements": {
+        "HL01": "Hierarchical ID Number",
+        "HL03": "Hierarchical Level Code",
+        "HL02": "Hierarchical Parent ID Number",
+        "HL04": "Hierarchical Child Code"
+      },
+      "name": "Billing Provider Hierarchical Level"
+    },
+    "PRV": {
+      "elements": {
+        "PRV05": "Provider Specialty Information",
+        "PRV04": "State or Province Code",
+        "PRV06": "Provider Organization Code",
+        "PRV01": "Provider Code",
+        "PRV03": "Provider Taxonomy Code",
+        "PRV02": "Reference Identification Qualifier"
+      },
+      "name": "Billing Provider Specialty Information"
+    },
+    "name": "Billing Provider Hierarchical Level"
+  },
+  "2400": {
+    "DTP": {
+      "elements": {
+        "DTP01": "Date Time Qualifier",
+        "DTP03": "Initial Treatment Date",
+        "DTP02": "Date Time Period Format Qualifier"
+      },
+      "name": "Date - Initial Treatment Date"
+    },
+    "CR1": {
+      "elements": {
+        "CR104": "Ambulance Transport Reason Code",
+        "CR105": "Unit or Basis for Measurement Code",
+        "CR102": "Patient Weight",
+        "CR103": "Ambulance Transport Code",
+        "CR101": "Unit or Basis for Measurement Code",
+        "CR110": "Stretcher Purpose Description",
+        "CR108": "Address Information",
+        "CR109": "Round Trip Purpose Description",
+        "CR106": "Transport Distance",
+        "CR107": "Address Information"
+      },
+      "name": "Ambulance Transport Information"
+    },
+    "PWK": {
+      "elements": {
+        "PWK01": "Attachment Report Type Code",
+        "PWK02": "Attachment Transmission Code",
+        "PWK03": "Report Copies Needed",
+        "PWK04": "Entity Identifier Code",
+        "PWK05": "Identification Code Qualifier",
+        "PWK06": "Identification Code",
+        "PWK07": "Description",
+        "PWK08": "Actions Indicated",
+        "PWK09": "Request Category Code"
+      },
+      "name": "Durable Medical Equipment Certificate of Medical Necessity Indicator"
+    },
+    "CR3": {
+      "elements": {
+        "CR302": "Unit or Basis for Measurement Code",
+        "CR303": "Durable Medical Equipment Duration",
+        "CR301": "Certification Type Code",
+        "CR304": "Insulin Dependent Code",
+        "CR305": "Description"
+      },
+      "name": "Durable Medical Equipment Certification"
+    },
+    "CN1": {
+      "elements": {
+        "CN101": "Contract Type Code",
+        "CN106": "Contract Version Identifier",
+        "CN102": "Contract Amount",
+        "CN103": "Contract Percentage",
+        "CN104": "Contract Code",
+        "CN105": "Terms Discount Percentage"
+      },
+      "name": "Contract Information"
+    },
+    "MEA": {
+      "elements": {
+        "MEA04": "Composite Unit of Measure",
+        "MEA03": "Test Results",
+        "MEA06": "Range Maximum",
+        "MEA05": "Range Minimum",
+        "MEA11": "Code List Qualifier Code",
+        "MEA10": "Measurement Method or Device",
+        "MEA02": "Measurement Qualifier",
+        "MEA01": "Measurement Reference Identification Code",
+        "MEA12": "Industry Code",
+        "MEA08": "Measurement Attribute Code",
+        "MEA07": "Measurement Significance Code",
+        "MEA09": "Surface/Layer/Position Code"
+      },
+      "name": "Test Result"
+    },
+    "AMT": {
+      "elements": {
+        "AMT01": "Amount Qualifier Code",
+        "AMT02": "Postage Claimed Amount",
+        "AMT03": "Credit/Debit Flag Code"
+      },
+      "name": "Postage Claimed Amount"
+    },
+    "K3": {
+      "elements": {
+        "K302": "Record Format Code",
+        "K303": "Composite Unit of Measure",
+        "K301": "Fixed Format Information"
+      },
+      "name": "File Information"
+    },
+    "LX": {
+      "elements": {
+        "LX01": "Assigned Number"
+      },
+      "name": "Service Line Number"
+    },
+    "SV1": {
+      "elements": {
+        "SV103": "Unit or Basis for Measurement Code",
+        "SV114": "National or Local Assigned Review Value",
+        "SV102": "Line Item Charge Amount",
+        "SV113": "Review Code",
+        "SV105": "Place of Service Code",
+        "SV116": "Health Care Professional Shortage Area Code",
+        "SV104": "Service Unit Count",
+        "SV115": "Co-Pay Status Code",
+        "SV118": "Postal Code",
+        "SV107": "Composite Diagnosis Code Pointer",
+        "SV106": "Service Type Code",
+        "SV117": "Reference Identification",
+        "SV109": "Emergency Indicator",
+        "SV108": "Monetary Amount",
+        "SV119": "Monetary Amount",
+        "SV110": "Multiple Procedure Code",
+        "SV121": "Provider Agreement Code",
+        "SV120": "Level of Care Code",
+        "SV112": "Family Planning Indicator",
+        "SV101": "Composite Medical Procedure Identifier",
+        "SV111": "EPSDT Indicator"
+      },
+      "name": "Professional Service"
+    },
+    "PS1": {
+      "elements": {
+        "PS101": "Purchased Service Provider Identifier",
+        "PS103": "State or Province Code",
+        "PS102": "Purchased Service Charge Amount"
+      },
+      "name": "Purchased Service Information"
+    },
+    "REF": {
+      "elements": {
+        "REF04": "Reference Identifier",
+        "REF03": "Description",
+        "REF02": "Referral Number",
+        "REF01": "Reference Identification Qualifier"
+      },
+      "name": "Referral Number"
+    },
+    "SV5": {
+      "elements": {
+        "SV507": "Prognosis Code",
+        "SV506": "Rental Unit Price Indicator",
+        "SV501": "Composite Medical Procedure Identifier",
+        "SV503": "Length of Medical Necessity",
+        "SV502": "Unit or Basis for Measurement Code",
+        "SV505": "DME Purchase Price",
+        "SV504": "DME Rental Price"
+      },
+      "name": "Durable Medical Equipment Service"
+    },
+    "HCP": {
+      "elements": {
+        "HCP01": "Pricing Methodology",
+        "HCP12": "Repriced Approved Service Unit Count",
+        "HCP02": "Repriced Allowed Amount",
+        "HCP13": "Reject Reason Code",
+        "HCP10": "Repriced Approved HCPCS Code",
+        "HCP11": "Unit or Basis for Measurement Code",
+        "HCP09": "Product or Service ID Qualifier",
+        "HCP07": "Repriced Approved Ambulatory Patient Group Amount",
+        "HCP08": "Product/Service ID",
+        "HCP05": "Repricing Per Diem or Flat Rate Amount",
+        "HCP06": "Repriced Approved Ambulatory Patient Group Code",
+        "HCP03": "Repriced Saving Amount",
+        "HCP14": "Policy Compliance Code",
+        "HCP04": "Repricing Organization Identifier",
+        "HCP15": "Exception Code"
+      },
+      "name": "Line Pricing/Repricing Information"
+    },
+    "CRC": {
+      "elements": {
+        "CRC02": "Certification Condition Indicator",
+        "CRC03": "Condition Indicator",
+        "CRC01": "Code Category",
+        "CRC06": "Condition Indicator",
+        "CRC07": "Condition Indicator",
+        "CRC04": "Condition Indicator",
+        "CRC05": "Condition Indicator"
+      },
+      "name": "Condition Indicator/Durable Medical Equipment"
+    },
+    "QTY": {
+      "elements": {
+        "QTY02": "Obstetric Additional Units",
+        "QTY03": "Composite Unit of Measure",
+        "QTY04": "Free-form Information",
+        "QTY01": "Quantity Qualifier"
+      },
+      "name": "Obstetric Anesthesia Additional Units"
+    },
+    "name": "Service Line Number",
+    "NTE": {
+      "elements": {
+        "NTE01": "Note Reference Code",
+        "NTE02": "Line Note Text"
+      },
+      "name": "Third Party Organization Notes"
+    }
+  },
+  "2300": {
+    "DTP": {
+      "elements": {
+        "DTP01": "Date Time Qualifier",
+        "DTP03": "Repricer Received Date",
+        "DTP02": "Date Time Period Format Qualifier"
+      },
+      "name": "Date - Repricer Received Date"
+    },
+    "HI": {
+      "elements": {
+        "HI11": "Health Care Code Information",
+        "HI10": "Health Care Code Information",
+        "HI02": "Health Care Code Information",
+        "HI01": "Health Care Code Information",
+        "HI12": "Health Care Code Information",
+        "HI04": "Health Care Code Information",
+        "HI03": "Health Care Code Information",
+        "HI06": "Health Care Code Information",
+        "HI05": "Health Care Code Information",
+        "HI08": "Health Care Code Information",
+        "HI07": "Health Care Code Information",
+        "HI09": "Health Care Code Information"
+      },
+      "name": "Condition Information"
+    },
+    "CR2": {
+      "elements": {
+        "CR203": "Subluxation Level Code",
+        "CR204": "Subluxation Level Code",
+        "CR201": "Count",
+        "CR212": "Yes/No Condition or Response Code",
+        "CR202": "Quantity",
+        "CR210": "Patient Condition Description",
+        "CR211": "Patient Condition Description",
+        "CR209": "Yes/No Condition or Response Code",
+        "CR207": "Quantity",
+        "CR208": "Patient Condition Code",
+        "CR205": "Unit or Basis for Measurement Code",
+        "CR206": "Quantity"
+      },
+      "name": "Spinal Manipulation Service Information"
+    },
+    "CR1": {
+      "elements": {
+        "CR104": "Ambulance Transport Reason Code",
+        "CR105": "Unit or Basis for Measurement Code",
+        "CR102": "Patient Weight",
+        "CR103": "Ambulance Transport Code",
+        "CR101": "Unit or Basis for Measurement Code",
+        "CR110": "Stretcher Purpose Description",
+        "CR108": "Address Information",
+        "CR109": "Round Trip Purpose Description",
+        "CR106": "Transport Distance",
+        "CR107": "Address Information"
+      },
+      "name": "Ambulance Transport Information"
+    },
+    "CLM": {
+      "elements": {
+        "CLM10": "Patient Signature Source Code",
+        "CLM20": "Delay Reason Code",
+        "CLM03": "Claim Filing Indicator Code",
+        "CLM14": "Level of Service Code",
+        "CLM02": "Total Claim Charge Amount",
+        "CLM13": "Yes/No Condition or Response Code",
+        "CLM01": "Patient Control Number",
+        "CLM12": "Special Program Indicator",
+        "CLM11": "Related Causes Information",
+        "CLM07": "Assignment or Plan Participation Code",
+        "CLM18": "Yes/No Condition or Response Code",
+        "CLM06": "Provider or Supplier Signature Indicator",
+        "CLM17": "Claim Status Code",
+        "CLM16": "Provider Agreement Code",
+        "CLM05": "Health Care Service Location Information",
+        "CLM04": "Non-Institutional Claim Type Code",
+        "CLM15": "Yes/No Condition or Response Code",
+        "CLM09": "Release of Information Code",
+        "CLM08": "Benefits Assignment Certification Indicator",
+        "CLM19": "Claim Submission Reason Code"
+      },
+      "name": "Claim Information"
+    },
+    "PWK": {
+      "elements": {
+        "PWK01": "Attachment Report Type Code",
+        "PWK02": "Attachment Transmission Code",
+        "PWK03": "Report Copies Needed",
+        "PWK04": "Entity Identifier Code",
+        "PWK05": "Identification Code Qualifier",
+        "PWK06": "Attachment Control Number",
+        "PWK07": "Description",
+        "PWK08": "Actions Indicated",
+        "PWK09": "Request Category Code"
+      },
+      "name": "Claim Supplemental Information"
+    },
+    "CN1": {
+      "elements": {
+        "CN101": "Contract Type Code",
+        "CN106": "Contract Version Identifier",
+        "CN102": "Contract Amount",
+        "CN103": "Contract Percentage",
+        "CN104": "Contract Code",
+        "CN105": "Terms Discount Percentage"
+      },
+      "name": "Contract Information"
+    },
+    "AMT": {
+      "elements": {
+        "AMT01": "Amount Qualifier Code",
+        "AMT02": "Patient Amount Paid",
+        "AMT03": "Credit/Debit Flag Code"
+      },
+      "name": "Patient Amount Paid"
+    },
+    "K3": {
+      "elements": {
+        "K302": "Record Format Code",
+        "K303": "Composite Unit of Measure",
+        "K301": "Fixed Format Information"
+      },
+      "name": "File Information"
+    },
+    "REF": {
+      "elements": {
+        "REF04": "Reference Identifier",
+        "REF03": "Description",
+        "REF02": "Care Plan Oversight Number",
+        "REF01": "Reference Identification Qualifier"
+      },
+      "name": "Care Plan Oversight"
+    },
+    "HCP": {
+      "elements": {
+        "HCP01": "Pricing Methodology",
+        "HCP12": "Quantity",
+        "HCP02": "Repriced Allowed Amount",
+        "HCP13": "Reject Reason Code",
+        "HCP10": "Product/Service ID",
+        "HCP11": "Unit or Basis for Measurement Code",
+        "HCP09": "Product/Service ID Qualifier",
+        "HCP07": "Repriced Approved Ambulatory Patient Group Amount",
+        "HCP08": "Product/Service ID",
+        "HCP05": "Repricing Per Diem or Flat Rate Amount",
+        "HCP06": "Repriced Approved Ambulatory Patient Group Code",
+        "HCP03": "Repriced Saving Amount",
+        "HCP14": "Policy Compliance Code",
+        "HCP04": "Repricing Organization Identifier",
+        "HCP15": "Exception Code"
+      },
+      "name": "Claim Pricing/Repricing Information"
+    },
+    "CRC": {
+      "elements": {
+        "CRC02": "Certification Condition Code Applies Indicator",
+        "CRC03": "Condition Indicator",
+        "CRC01": "Code Qualifier",
+        "CRC06": "Condition Indicator",
+        "CRC07": "Condition Indicator",
+        "CRC04": "Condition Indicator",
+        "CRC05": "Condition Indicator"
+      },
+      "name": "EPSDT Referral"
+    },
+    "name": "Claim Information",
+    "NTE": {
+      "elements": {
+        "NTE01": "Note Reference Code",
+        "NTE02": "Claim Note Text"
+      },
+      "name": "Claim Note"
+    }
+  },
+  "ST_LOOP": {
+    "ST": {
+      "elements": {
+        "ST03": "Implementation Convention Reference",
+        "ST01": "Transaction Set Identifier Code",
+        "ST02": "Transaction Set Control Number"
+      },
+      "name": "Transaction Set Header"
+    },
+    "SE": {
+      "elements": {
+        "SE02": "Transaction Set Control Number",
+        "SE01": "Transaction Segment Count"
+      },
+      "name": "Transaction Set Trailer"
+    },
+    "name": "Transaction Set Header"
+  },
+  "2420A": {
+    "REF": {
+      "elements": {
+        "REF04": "Reference Identifier",
+        "REF03": "Description",
+        "REF02": "Rendering Provider Secondary Identifier",
+        "REF01": "Reference Identification Qualifier"
+      },
+      "name": "Rendering Provider Secondary Identification"
+    },
+    "NM1": {
+      "elements": {
+        "NM108": "Identification Code Qualifier",
+        "NM109": "Rendering Provider Identifier",
+        "NM106": "Name Prefix",
+        "NM107": "Rendering Provider Name Suffix",
+        "NM104": "Rendering Provider First Name",
+        "NM105": "Rendering Provider Middle Name or Initial",
+        "NM102": "Entity Type Qualifier",
+        "NM103": "Rendering Provider Last or Organization Name",
+        "NM111": "Entity Identifier Code",
+        "NM101": "Entity Identifier Code",
+        "NM112": "Name Last or Organization Name",
+        "NM110": "Entity Relationship Code"
+      },
+      "name": "Rendering Provider Name"
+    },
+    "PRV": {
+      "elements": {
+        "PRV05": "Provider Specialty Information",
+        "PRV04": "State or Province Code",
+        "PRV06": "Provider Organization Code",
+        "PRV01": "Provider Code",
+        "PRV03": "Provider Taxonomy Code",
+        "PRV02": "Reference Identification Qualifier"
+      },
+      "name": "Rendering Provider Specialty Information"
+    },
+    "name": "Rendering Provider Name"
+  },
+  "2420B": {
+    "REF": {
+      "elements": {
+        "REF04": "Reference Identifier",
+        "REF03": "Description",
+        "REF02": "Purchased Service Provider Secondary Identifier",
+        "REF01": "Reference Identification Qualifier"
+      },
+      "name": "Purchased Service Provider Secondary Identification"
+    },
+    "NM1": {
+      "elements": {
+        "NM108": "Identification Code Qualifier",
+        "NM109": "Purchased Service Provider Identifier",
+        "NM106": "Name Prefix",
+        "NM107": "Name Suffix",
+        "NM104": "Name First",
+        "NM105": "Name Middle",
+        "NM102": "Entity Type Qualifier",
+        "NM103": "Name Last or Organization Name",
+        "NM111": "Entity Identifier Code",
+        "NM101": "Entity Identifier Code",
+        "NM112": "Name Last or Organization Name",
+        "NM110": "Entity Relationship Code"
+      },
+      "name": "Purchased Service Provider Name"
+    },
+    "name": "Purchased Service Provider Name"
+  },
+  "2420C": {
+    "REF": {
+      "elements": {
+        "REF04": "Reference Identifier",
+        "REF03": "Description",
+        "REF02": "Service Facility Location Secondary Identifier",
+        "REF01": "Reference Identification Qualifier"
+      },
+      "name": "Service Facility Location Secondary Identification"
+    },
+    "NM1": {
+      "elements": {
+        "NM108": "Identification Code Qualifier",
+        "NM109": "Laboratory or Facility Primary Identifier",
+        "NM106": "Name Prefix",
+        "NM107": "Name Suffix",
+        "NM104": "Name First",
+        "NM105": "Name Middle",
+        "NM102": "Entity Type Qualifier",
+        "NM103": "Laboratory or Facility Name",
+        "NM111": "Entity Identifier Code",
+        "NM101": "Entity Identifier Code",
+        "NM112": "Name Last or Organization Name",
+        "NM110": "Entity Relationship Code"
+      },
+      "name": "Service Facility Location Name"
+    },
+    "N3": {
+      "elements": {
+        "N301": "Laboratory or Facility Address Line",
+        "N302": "Laboratory or Facility Address Line"
+      },
+      "name": "Service Facility Location Address"
+    },
+    "N4": {
+      "elements": {
+        "N401": "Laboratory or Facility City Name",
+        "N406": "Location Identifier",
+        "N407": "Country Subdivision Code",
+        "N402": "Laboratory or Facility State or Province Code",
+        "N403": "Laboratory or Facility Postal Zone or ZIP Code",
+        "N404": "Country Code",
+        "N405": "Location Qualifier"
+      },
+      "name": "Service Facility Location City, State, ZIP Code"
+    },
+    "name": "Service Facility Location Name"
+  },
+  "2420D": {
+    "REF": {
+      "elements": {
+        "REF04": "Reference Identifier",
+        "REF03": "Description",
+        "REF02": "Supervising Provider Secondary Identifier",
+        "REF01": "Reference Identification Qualifier"
+      },
+      "name": "Supervising Provider Secondary Identification"
+    },
+    "NM1": {
+      "elements": {
+        "NM108": "Identification Code Qualifier",
+        "NM109": "Supervising Provider Identifier",
+        "NM106": "Name Prefix",
+        "NM107": "Supervising Provider Name Suffix",
+        "NM104": "Supervising Provider First Name",
+        "NM105": "Supervising Provider Middle Name or Initial",
+        "NM102": "Entity Type Qualifier",
+        "NM103": "Supervising Provider Last Name",
+        "NM111": "Entity Identifier Code",
+        "NM101": "Entity Identifier Code",
+        "NM112": "Name Last or Organization Name",
+        "NM110": "Entity Relationship Code"
+      },
+      "name": "Supervising Provider Name"
+    },
+    "name": "Supervising Provider Name"
+  },
+  "2420E": {
+    "REF": {
+      "elements": {
+        "REF04": "Reference Identifier",
+        "REF03": "Description",
+        "REF02": "Ordering Provider Secondary Identifier",
+        "REF01": "Reference Identification Qualifier"
+      },
+      "name": "Ordering Provider Secondary Identification"
+    },
+    "NM1": {
+      "elements": {
+        "NM108": "Identification Code Qualifier",
+        "NM109": "Ordering Provider Identifier",
+        "NM106": "Name Prefix",
+        "NM107": "Ordering Provider Name Suffix",
+        "NM104": "Ordering Provider First Name",
+        "NM105": "Ordering Provider Middle Name or Initial",
+        "NM102": "Entity Type Qualifier",
+        "NM103": "Ordering Provider Last Name",
+        "NM111": "Entity Identifier Code",
+        "NM101": "Entity Identifier Code",
+        "NM112": "Name Last or Organization Name",
+        "NM110": "Entity Relationship Code"
+      },
+      "name": "Ordering Provider Name"
+    },
+    "N3": {
+      "elements": {
+        "N301": "Ordering Provider Address Line",
+        "N302": "Ordering Provider Address Line"
+      },
+      "name": "Ordering Provider Address"
+    },
+    "N4": {
+      "elements": {
+        "N401": "Ordering Provider City Name",
+        "N406": "Location Identifier",
+        "N407": "Country Subdivision Code",
+        "N402": "Ordering Provider State or Province Code",
+        "N403": "Ordering Provider Postal Zone or ZIP Code",
+        "N404": "Country Code",
+        "N405": "Location Qualifier"
+      },
+      "name": "Ordering Provider City, State, ZIP Code"
+    },
+    "name": "Ordering Provider Name",
+    "PER": {
+      "elements": {
+        "PER09": "Contact Inquiry Reference",
+        "PER08": "Communication Number",
+        "PER07": "Communication Number Qualifier",
+        "PER06": "Communication Number",
+        "PER05": "Communication Number Qualifier",
+        "PER04": "Communication Number",
+        "PER03": "Communication Number Qualifier",
+        "PER02": "Ordering Provider Contact Name",
+        "PER01": "Contact Function Code"
+      },
+      "name": "Ordering Provider Contact Information"
+    }
+  },
+  "2420F": {
+    "REF": {
+      "elements": {
+        "REF04": "Reference Identifier",
+        "REF03": "Description",
+        "REF02": "Referring Provider Secondary Identifier",
+        "REF01": "Reference Identification Qualifier"
+      },
+      "name": "Referring Provider Secondary Identification"
+    },
+    "NM1": {
+      "elements": {
+        "NM108": "Identification Code Qualifier",
+        "NM109": "Referring Provider Identifier",
+        "NM106": "Name Prefix",
+        "NM107": "Referring Provider Name Suffix",
+        "NM104": "Referring Provider First Name",
+        "NM105": "Referring Provider Middle Name or Initial",
+        "NM102": "Entity Type Qualifier",
+        "NM103": "Referring Provider Last Name",
+        "NM111": "Entity Identifier Code",
+        "NM101": "Entity Identifier Code",
+        "NM112": "Name Last or Organization Name",
+        "NM110": "Entity Relationship Code"
+      },
+      "name": "Referring Provider Name"
+    },
+    "name": "Referring Provider Name"
+  },
+  "2420G": {
+    "NM1": {
+      "elements": {
+        "NM108": "Identification Code Qualifier",
+        "NM109": "Identification Code",
+        "NM106": "Name Prefix",
+        "NM107": "Name Suffix",
+        "NM104": "Name First",
+        "NM105": "Name Middle",
+        "NM102": "Entity Type Qualifier",
+        "NM103": "Name Last or Organization Name",
+        "NM111": "Entity Identifier Code",
+        "NM101": "Entity Identifier Code",
+        "NM112": "Name Last or Organization Name",
+        "NM110": "Entity Relationship Code"
+      },
+      "name": "Ambulance Pick-up Location"
+    },
+    "N3": {
+      "elements": {
+        "N301": "Ambulance Pick-up Address Line",
+        "N302": "Ambulance Pick-up Address Line"
+      },
+      "name": "Ambulance Pick-up Location Address"
+    },
+    "N4": {
+      "elements": {
+        "N401": "Ambulance Pick-up City Name",
+        "N406": "Location Identifier",
+        "N407": "Country Subdivision Code",
+        "N402": "Ambulance Pick-up State or Province Code",
+        "N403": "Ambulance Pick-up Postal Zone or ZIP Code",
+        "N404": "Country Code",
+        "N405": "Location Qualifier"
+      },
+      "name": "Ambulance Pick-up Location City, State, ZIP Code"
+    },
+    "name": "Ambulance Pick-up Location"
+  },
+  "ISA_LOOP": {
+    "IEA": {
+      "elements": {
+        "IEA02": "Interchange Control Number",
+        "IEA01": "Number of Included Functional Groups"
+      },
+      "name": "Interchange Control Trailer"
+    },
+    "TA1": {
+      "elements": {
+        "TA104": "Interchange Acknowledgement Code",
+        "TA105": "Interchange Note Code",
+        "TA102": "Interchange Date",
+        "TA103": "Interchange Time",
+        "TA101": "Interchange Control Number"
+      },
+      "name": "Interchange Acknowledgement"
+    },
+    "ISA": {
+      "elements": {
+        "ISA09": "Interchange Date",
+        "ISA04": "Security Information",
+        "ISA15": "Usage Indicator",
+        "ISA03": "Security Information Qualifier",
+        "ISA14": "Acknowledgment Requested",
+        "ISA02": "Authorization Information",
+        "ISA13": "Interchange Control Number",
+        "ISA01": "Authorization Information Qualifier",
+        "ISA12": "Interchange Control Version Number",
+        "ISA08": "Interchange Receiver ID",
+        "ISA07": "Interchange ID Qualifier",
+        "ISA06": "Interchange Sender ID",
+        "ISA05": "Interchange ID Qualifier",
+        "ISA16": "Component Element Separator",
+        "ISA11": "Interchange Control Standards Identifier",
+        "ISA10": "Interchange Time"
+      },
+      "name": "Interchange Control Header"
+    },
+    "name": "Interchange Control Header"
+  },
+  "2320": {
+    "SBR": {
+      "elements": {
+        "SBR01": "Payer Responsibility Sequence Number Code",
+        "SBR02": "Individual Relationship Code",
+        "SBR03": "Insured Group or Policy Number",
+        "SBR04": "Other Insured Group Name",
+        "SBR05": "Insurance Type Code",
+        "SBR06": "Coordination of Benefits Code",
+        "SBR07": "Yes/No Condition or Response Code",
+        "SBR08": "Employment Status Code",
+        "SBR09": "Claim Filing Indicator Code"
+      },
+      "name": "Other Subscriber Information"
+    },
+    "CAS": {
+      "elements": {
+        "CAS09": "Adjustment Amount",
+        "CAS07": "Adjustment Quantity",
+        "CAS18": "Adjustment Amount",
+        "CAS08": "Adjustment Reason Code",
+        "CAS19": "Adjustment Quantity",
+        "CAS05": "Adjustment Reason Code",
+        "CAS16": "Adjustment Quantity",
+        "CAS06": "Adjustment Amount",
+        "CAS17": "Adjustment Reason Code",
+        "CAS03": "Adjustment Amount",
+        "CAS14": "Adjustment Reason Code",
+        "CAS04": "Adjustment Quantity",
+        "CAS15": "Adjustment Amount",
+        "CAS01": "Claim Adjustment Group Code",
+        "CAS12": "Adjustment Amount",
+        "CAS02": "Adjustment Reason Code",
+        "CAS13": "Adjustment Quantity",
+        "CAS10": "Adjustment Quantity",
+        "CAS11": "Adjustment Reason Code"
+      },
+      "name": "Claim Level Adjustments"
+    },
+    "name": "Other Subscriber Information",
+    "AMT": {
+      "elements": {
+        "AMT01": "Amount Qualifier Code",
+        "AMT02": "Remaining Patient Liability",
+        "AMT03": "Credit/Debit Flag Code"
+      },
+      "name": "Remaining Patient Liability"
+    },
+    "OI": {
+      "elements": {
+        "OI06": "Release of Information Code",
+        "OI03": "Benefits Assignment Certification Indicator",
+        "OI02": "Claim Submission Reason Code",
+        "OI05": "Provider Agreement Code",
+        "OI04": "Patient Signature Source Code",
+        "OI01": "Claim Filing Indicator Code"
+      },
+      "name": "Other Insurance Coverage Information"
+    },
+    "MOA": {
+      "elements": {
+        "MOA02": "HCPCS Payable Amount",
+        "MOA01": "Reimbursement Rate",
+        "MOA04": "Claim Payment Remark Code",
+        "MOA03": "Claim Payment Remark Code",
+        "MOA06": "Claim Payment Remark Code",
+        "MOA05": "Claim Payment Remark Code",
+        "MOA08": "End Stage Renal Disease Payment Amount",
+        "MOA07": "Claim Payment Remark Code",
+        "MOA09": "Non-Payable Professional Component Billed Amount"
+      },
+      "name": "Outpatient Adjudication Information"
+    }
+  },
+  "2440": {
+    "FRM": {
+      "elements": {
+        "FRM01": "Question Number/Letter",
+        "FRM02": "Question Response",
+        "FRM03": "Question Response",
+        "FRM04": "Question Response",
+        "FRM05": "Question Response"
+      },
+      "name": "Supporting Documentation"
+    },
+    "LQ": {
+      "elements": {
+        "LQ02": "Form Identifier",
+        "LQ01": "Code List Qualifier Code"
+      },
+      "name": "Form Identification Code"
+    },
+    "name": "Form Identification Code"
+  },
+  "FOOTER": {
+    "name": "Table 3 - Footer"
+  },
+  "DETAIL": {
+    "name": "Table 2 - Detail"
+  },
+  "2010AA": {
+    "REF": {
+      "elements": {
+        "REF04": "Reference Identifier",
+        "REF03": "Description",
+        "REF02": "Billing Provider License and/or UPIN Information",
+        "REF01": "Reference Identification Qualifier"
+      },
+      "name": "Billing Provider UPIN/License Information"
+    },
+    "NM1": {
+      "elements": {
+        "NM108": "Identification Code Qualifier",
+        "NM109": "Billing Provider Identifier",
+        "NM106": "Name Prefix",
+        "NM107": "Billing Provider Name Suffix",
+        "NM104": "Billing Provider First Name",
+        "NM105": "Billing Provider Middle Name or Initial",
+        "NM102": "Entity Type Qualifier",
+        "NM103": "Billing Provider Last or Organizational Name",
+        "NM111": "Entity Identifier Code",
+        "NM101": "Entity Identifier Code",
+        "NM112": "Name Last or Organization Name",
+        "NM110": "Entity Relationship Code"
+      },
+      "name": "Billing Provider Name"
+    },
+    "N3": {
+      "elements": {
+        "N301": "Billing Provider Address Line",
+        "N302": "Billing Provider Address Line"
+      },
+      "name": "Billing Provider Address"
+    },
+    "N4": {
+      "elements": {
+        "N401": "Billing Provider City Name",
+        "N406": "Location Identifier",
+        "N407": "Country Subdivision Code",
+        "N402": "Billing Provider State or Province Code",
+        "N403": "Billing Provider Postal Zone or ZIP Code",
+        "N404": "Country Code",
+        "N405": "Location Qualifier"
+      },
+      "name": "Billing Provider City, State, ZIP Code"
+    },
+    "name": "Billing Provider Name",
+    "PER": {
+      "elements": {
+        "PER09": "Contact Inquiry Reference",
+        "PER08": "Communication Number",
+        "PER07": "Communication Number Qualifier",
+        "PER06": "Communication Number",
+        "PER05": "Communication Number Qualifier",
+        "PER04": "Communication Number",
+        "PER03": "Communication Number Qualifier",
+        "PER02": "Billing Provider Contact Name",
+        "PER01": "Contact Function Code"
+      },
+      "name": "Billing Provider Contact Information"
+    }
+  },
+  "2330F": {
+    "REF": {
+      "elements": {
+        "REF04": "Reference Identifier",
+        "REF03": "Description",
+        "REF02": "Other Payer Supervising Provider Identifier",
+        "REF01": "Reference Identification Qualifier"
+      },
+      "name": "Other Payer Supervising Provider Secondary Identification"
+    },
+    "NM1": {
+      "elements": {
+        "NM108": "Identification Code Qualifier",
+        "NM109": "Identification Code",
+        "NM106": "Name Prefix",
+        "NM107": "Name Suffix",
+        "NM104": "Name First",
+        "NM105": "Name Middle",
+        "NM102": "Entity Type Qualifier",
+        "NM103": "Name Last or Organization Name",
+        "NM111": "Entity Identifier Code",
+        "NM101": "Entity Identifier Code",
+        "NM112": "Name Last or Organization Name",
+        "NM110": "Entity Relationship Code"
+      },
+      "name": "Other Payer Supervising Provider"
+    },
+    "name": "Other Payer Supervising Provider"
+  },
+  "2330G": {
+    "REF": {
+      "elements": {
+        "REF04": "Reference Identifier",
+        "REF03": "Description",
+        "REF02": "Other Payer Billing Provider Identifier",
+        "REF01": "Reference Identification Qualifier"
+      },
+      "name": "Other Payer Billing Provider Secondary Identification"
+    },
+    "NM1": {
+      "elements": {
+        "NM108": "Identification Code Qualifier",
+        "NM109": "Identification Code",
+        "NM106": "Name Prefix",
+        "NM107": "Name Suffix",
+        "NM104": "Name First",
+        "NM105": "Name Middle",
+        "NM102": "Entity Type Qualifier",
+        "NM103": "Name Last or Organization Name",
+        "NM111": "Entity Identifier Code",
+        "NM101": "Entity Identifier Code",
+        "NM112": "Name Last or Organization Name",
+        "NM110": "Entity Relationship Code"
+      },
+      "name": "Other Payer Billing Provider"
+    },
+    "name": "Other Payer Billing Provider"
+  },
+  "2010AC": {
+    "REF": {
+      "elements": {
+        "REF04": "Reference Identifier",
+        "REF03": "Description",
+        "REF02": "Pay-To Plan Tax Identification Number",
+        "REF01": "Reference Identification Qualifier"
+      },
+      "name": "Pay-To Plan Tax Identification Number"
+    },
+    "NM1": {
+      "elements": {
+        "NM108": "Identification Code Qualifier",
+        "NM109": "Pay-To Plan Primary Identifier",
+        "NM106": "Name Prefix",
+        "NM107": "Pay-To Plan Name Suffix",
+        "NM104": "Pay-To Plan First Name",
+        "NM105": "Pay-To Plan Middle Name",
+        "NM102": "Entity Type Qualifier",
+        "NM103": "Pay-To Plan Organizational Name",
+        "NM111": "Entity Identifier Code",
+        "NM101": "Entity Identifier Code",
+        "NM112": "Name Last or Organization Name",
+        "NM110": "Entity Relationship Code"
+      },
+      "name": "Pay-To Plan Name"
+    },
+    "N3": {
+      "elements": {
+        "N301": "Pay-To Plan Address Line",
+        "N302": "Pay-To Plan Address Line"
+      },
+      "name": "Pay-to Plan Address"
+    },
+    "N4": {
+      "elements": {
+        "N401": "Pay-To Plan City Name",
+        "N406": "Location Identifier",
+        "N407": "Country Subdivision Code",
+        "N402": "Pay-To Plan State or Province Code",
+        "N403": "Pay-To Plan Postal Zone or ZIP Code",
+        "N404": "Country Code",
+        "N405": "Location Qualifier"
+      },
+      "name": "Pay-To Plan City, State, ZIP Code"
+    },
+    "name": "Pay-To Plan Name"
+  },
+  "2010AB": {
+    "NM1": {
+      "elements": {
+        "NM108": "Identification Code Qualifier",
+        "NM109": "Identification Code",
+        "NM106": "Name Prefix",
+        "NM107": "Name Suffix",
+        "NM104": "Name First",
+        "NM105": "Name Middle",
+        "NM102": "Entity Type Qualifier",
+        "NM103": "Name Last or Organization Name",
+        "NM111": "Entity Identifier Code",
+        "NM101": "Entity Identifier Code",
+        "NM112": "Name Last or Organization Name",
+        "NM110": "Entity Relationship Code"
+      },
+      "name": "Pay-to Address Name"
+    },
+    "N3": {
+      "elements": {
+        "N301": "Pay-To Address Line",
+        "N302": "Pay-To Address Line"
+      },
+      "name": "Pay-to Address - ADDRESS"
+    },
+    "N4": {
+      "elements": {
+        "N401": "Pay-to Address City Name",
+        "N406": "Location Identifier",
+        "N407": "Country Subdivision Code",
+        "N402": "Pay-to Address State Code",
+        "N403": "Pay-to Address Postal Zone or ZIP Code",
+        "N404": "Country Code",
+        "N405": "Location Qualifier"
+      },
+      "name": "Pay-To Address City, State, ZIP Code"
+    },
+    "name": "Pay-to Address Name"
+  },
+  "2410": {
+    "LIN": {
+      "elements": {
+        "LIN11": "Product/Service ID",
+        "LIN10": "Product/Service ID Qualifier",
+        "LIN13": "Product/Service ID",
+        "LIN12": "Product/Service ID Qualifier",
+        "LIN15": "Product/Service ID",
+        "LIN14": "Product/Service ID Qualifier",
+        "LIN17": "Product/Service ID",
+        "LIN16": "Product/Service ID Qualifier",
+        "LIN19": "Product/Service ID",
+        "LIN18": "Product/Service ID Qualifier",
+        "LIN31": "Product/Service ID",
+        "LIN30": "Product/Service ID Qualifier",
+        "LIN22": "Product/Service ID Qualifier",
+        "LIN21": "Product/Service ID",
+        "LIN02": "Product or Service ID Qualifier",
+        "LIN24": "Product/Service ID Qualifier",
+        "LIN01": "Assigned Identification",
+        "LIN23": "Product/Service ID",
+        "LIN04": "Product/Service ID Qualifier",
+        "LIN26": "Product/Service ID Qualifier",
+        "LIN03": "National Drug Code or Universal Product Number",
+        "LIN25": "Product/Service ID",
+        "LIN06": "Product/Service ID Qualifier",
+        "LIN28": "Product/Service ID Qualifier",
+        "LIN05": "Product/Service ID",
+        "LIN27": "Product/Service ID",
+        "LIN08": "Product/Service ID Qualifier",
+        "LIN07": "Product/Service ID",
+        "LIN29": "Product/Service ID",
+        "LIN09": "Product/Service ID",
+        "LIN20": "Product/Service ID Qualifier"
+      },
+      "name": "Drug Identification"
+    },
+    "REF": {
+      "elements": {
+        "REF04": "Reference Identifier",
+        "REF03": "Description",
+        "REF02": "Prescription Number",
+        "REF01": "Reference Identification Qualifier"
+      },
+      "name": "Prescription or Compound Drug Association Number"
+    },
+    "name": "Drug Identification",
+    "CTP": {
+      "elements": {
+        "CTP08": "Monetary Amount",
+        "CTP07": "Multiplier",
+        "CTP06": "Price Multiplier Qualifier",
+        "CTP05": "Composite Unit of Measure",
+        "CTP04": "National Drug Unit Count",
+        "CTP03": "Unit Price",
+        "CTP02": "Price Identifier Code",
+        "CTP01": "Class of Trade Code",
+        "CTP11": "Multiple Price Quantity",
+        "CTP10": "Condition Value",
+        "CTP09": "Basis of Unit Price Code"
+      },
+      "name": "Drug Quantity"
+    }
+  },
+  "2010CA": {
+    "REF": {
+      "elements": {
+        "REF04": "Reference Identifier",
+        "REF03": "Description",
+        "REF02": "Property and Casualty Patient Identifier",
+        "REF01": "Reference Identification Qualifier"
+      },
+      "name": "Property and Casualty Patient Identifier"
+    },
+    "NM1": {
+      "elements": {
+        "NM108": "Identification Code Qualifier",
+        "NM109": "Identification Code",
+        "NM106": "Name Prefix",
+        "NM107": "Patient Name Suffix",
+        "NM104": "Patient First Name",
+        "NM105": "Patient Middle Name or Initial",
+        "NM102": "Entity Type Qualifier",
+        "NM103": "Patient Last Name",
+        "NM111": "Entity Identifier Code",
+        "NM101": "Entity Identifier Code",
+        "NM112": "Name Last or Organization Name",
+        "NM110": "Entity Relationship Code"
+      },
+      "name": "Patient Name"
+    },
+    "N3": {
+      "elements": {
+        "N301": "Patient Address Line",
+        "N302": "Patient Address Line"
+      },
+      "name": "Patient Address"
+    },
+    "N4": {
+      "elements": {
+        "N401": "Patient City Name",
+        "N406": "Location Identifier",
+        "N407": "Country Subdivision Code",
+        "N402": "Patient State Code",
+        "N403": "Patient Postal Zone or ZIP Code",
+        "N404": "Country Code",
+        "N405": "Location Qualifier"
+      },
+      "name": "Patient City, State, ZIP Code"
+    },
+    "name": "Patient Name",
+    "PER": {
+      "elements": {
+        "PER09": "Contact Inquiry Reference",
+        "PER08": "Communication Number",
+        "PER07": "Communication Number Qualifier",
+        "PER06": "Communication Number",
+        "PER05": "Communication Number Qualifier",
+        "PER04": "Communication Number",
+        "PER03": "Communication Number Qualifier",
+        "PER02": "Name",
+        "PER01": "Contact Function Code"
+      },
+      "name": "Property and Casualty Patient Contact Information"
+    },
+    "DMG": {
+      "elements": {
+        "DMG04": "Marital Status Code",
+        "DMG05": "Composite Race or Ethnicity Information",
+        "DMG02": "Patient Birth Date",
+        "DMG03": "Patient Gender Code",
+        "DMG08": "Basis of Verification Code",
+        "DMG09": "Quantity",
+        "DMG06": "Citizenship Status Code",
+        "DMG07": "Country Code",
+        "DMG11": "Industry Code",
+        "DMG01": "Date Time Period Format Qualifier",
+        "DMG10": "Code List Qualifier Code"
+      },
+      "name": "Patient Demographic Information"
+    }
+  },
+  "2310A": {
+    "REF": {
+      "elements": {
+        "REF04": "Reference Identifier",
+        "REF03": "Description",
+        "REF02": "Referring Provider Secondary Identifier",
+        "REF01": "Reference Identification Qualifier"
+      },
+      "name": "Referring Provider Secondary Identification"
+    },
+    "NM1": {
+      "elements": {
+        "NM108": "Identification Code Qualifier",
+        "NM109": "Referring Provider Identifier",
+        "NM106": "Name Prefix",
+        "NM107": "Referring Provider Name Suffix",
+        "NM104": "Referring Provider First Name",
+        "NM105": "Referring Provider Middle Name or Initial",
+        "NM102": "Entity Type Qualifier",
+        "NM103": "Referring Provider Last Name",
+        "NM111": "Entity Identifier Code",
+        "NM101": "Entity Identifier Code",
+        "NM112": "Name Last or Organization Name",
+        "NM110": "Entity Relationship Code"
+      },
+      "name": "Referring Provider Name"
+    },
+    "name": "Referring Provider Name"
+  },
+  "2310B": {
+    "REF": {
+      "elements": {
+        "REF04": "Reference Identifier",
+        "REF03": "Description",
+        "REF02": "Rendering Provider Secondary Identifier",
+        "REF01": "Reference Identification Qualifier"
+      },
+      "name": "Rendering Provider Secondary Identification"
+    },
+    "NM1": {
+      "elements": {
+        "NM108": "Identification Code Qualifier",
+        "NM109": "Rendering Provider Identifier",
+        "NM106": "Name Prefix",
+        "NM107": "Rendering Provider Name Suffix",
+        "NM104": "Rendering Provider First Name",
+        "NM105": "Rendering Provider Middle Name or Initial",
+        "NM102": "Entity Type Qualifier",
+        "NM103": "Rendering Provider Last or Organization Name",
+        "NM111": "Entity Identifier Code",
+        "NM101": "Entity Identifier Code",
+        "NM112": "Name Last or Organization Name",
+        "NM110": "Entity Relationship Code"
+      },
+      "name": "Rendering Provider Name"
+    },
+    "PRV": {
+      "elements": {
+        "PRV05": "Provider Specialty Information",
+        "PRV04": "State or Province Code",
+        "PRV06": "Provider Organization Code",
+        "PRV01": "Provider Code",
+        "PRV03": "Provider Taxonomy Code",
+        "PRV02": "Reference Identification Qualifier"
+      },
+      "name": "Rendering Provider Specialty Information"
+    },
+    "name": "Rendering Provider Name"
+  },
+  "2310C": {
+    "REF": {
+      "elements": {
+        "REF04": "Reference Identifier",
+        "REF03": "Description",
+        "REF02": "Laboratory or Facility Secondary Identifier",
+        "REF01": "Reference Identification Qualifier"
+      },
+      "name": "Service Facility Location Secondary Identification"
+    },
+    "NM1": {
+      "elements": {
+        "NM108": "Identification Code Qualifier",
+        "NM109": "Laboratory or Facility Primary Identifier",
+        "NM106": "Name Prefix",
+        "NM107": "Name Suffix",
+        "NM104": "Name First",
+        "NM105": "Name Middle",
+        "NM102": "Entity Type Qualifier",
+        "NM103": "Laboratory or Facility Name",
+        "NM111": "Entity Identifier Code",
+        "NM101": "Entity Identifier Code",
+        "NM112": "Name Last or Organization Name",
+        "NM110": "Entity Relationship Code"
+      },
+      "name": "Service Facility Location Name"
+    },
+    "N3": {
+      "elements": {
+        "N301": "Laboratory or Facility Address Line",
+        "N302": "Laboratory or Facility Address Line"
+      },
+      "name": "Service Facility Location Address"
+    },
+    "N4": {
+      "elements": {
+        "N401": "Laboratory or Facility City Name",
+        "N406": "Location Identifier",
+        "N407": "Country Subdivision Code",
+        "N402": "Laboratory or Facility State or Province Code",
+        "N403": "Laboratory or Facility Postal Zone or ZIP Code",
+        "N404": "Country Code",
+        "N405": "Location Qualifier"
+      },
+      "name": "Service Facility Location City, State, ZIP Code"
+    },
+    "name": "Service Facility Location Name",
+    "PER": {
+      "elements": {
+        "PER09": "Contact Inquiry Reference",
+        "PER08": "Communication Number",
+        "PER07": "Communication Number Qualifier",
+        "PER06": "Communication Number",
+        "PER05": "Communication Number Qualifier",
+        "PER04": "Communication Number",
+        "PER03": "Communication Number Qualifier",
+        "PER02": "Name",
+        "PER01": "Contact Function Code"
+      },
+      "name": "Service Facility Contact Information"
+    }
+  },
+  "2330A": {
+    "REF": {
+      "elements": {
+        "REF04": "Reference Identifier",
+        "REF03": "Description",
+        "REF02": "Other Insured Additional Identifier",
+        "REF01": "Reference Identification Qualifier"
+      },
+      "name": "Other Subscriber Secondary Identification"
+    },
+    "NM1": {
+      "elements": {
+        "NM108": "Identification Code Qualifier",
+        "NM109": "Other Insured Identifier",
+        "NM106": "Name Prefix",
+        "NM107": "Other Insured Name Suffix",
+        "NM104": "Other Insured First Name",
+        "NM105": "Other Insured Middle Name",
+        "NM102": "Entity Type Qualifier",
+        "NM103": "Other Insured Last Name",
+        "NM111": "Entity Identifier Code",
+        "NM101": "Entity Identifier Code",
+        "NM112": "Name Last or Organization Name",
+        "NM110": "Entity Relationship Code"
+      },
+      "name": "Other Subscriber Name"
+    },
+    "N3": {
+      "elements": {
+        "N301": "Other Subscriber Address Line",
+        "N302": "Other Insured Address Line"
+      },
+      "name": "Other Subscriber Address"
+    },
+    "N4": {
+      "elements": {
+        "N401": "Other Subscriber City Name",
+        "N406": "Location Identifier",
+        "N407": "Country Subdivision Code",
+        "N402": "Other Subscriber State or Province Code",
+        "N403": "Other Subscriber Postal Zone or ZIP Code",
+        "N404": "Country Code",
+        "N405": "Location Qualifier"
+      },
+      "name": "Other Subscriber City, State, ZIP Code"
+    },
+    "name": "Other Subscriber Name"
+  },
+  "2310D": {
+    "REF": {
+      "elements": {
+        "REF04": "Reference Identifier",
+        "REF03": "Description",
+        "REF02": "Supervising Provider Secondary Identifier",
+        "REF01": "Reference Identification Qualifier"
+      },
+      "name": "Supervising Provider Secondary Identification"
+    },
+    "NM1": {
+      "elements": {
+        "NM108": "Identification Code Qualifier",
+        "NM109": "Supervising Provider Identifier",
+        "NM106": "Name Prefix",
+        "NM107": "Supervising Provider Name Suffix",
+        "NM104": "Supervising Provider First Name",
+        "NM105": "Supervising Provider Middle Name or Initial",
+        "NM102": "Entity Type Qualifier",
+        "NM103": "Supervising Provider Last Name",
+        "NM111": "Entity Identifier Code",
+        "NM101": "Entity Identifier Code",
+        "NM112": "Name Last or Organization Name",
+        "NM110": "Entity Relationship Code"
+      },
+      "name": "Supervising Provider Name"
+    },
+    "name": "Supervising Provider Name"
+  },
+  "2330B": {
+    "DTP": {
+      "elements": {
+        "DTP01": "Date Time Qualifier",
+        "DTP03": "Adjudication or Payment Date",
+        "DTP02": "Date Time Period Format Qualifier"
+      },
+      "name": "Claim Check or Remittance Date"
+    },
+    "REF": {
+      "elements": {
+        "REF04": "Reference Identifier",
+        "REF03": "Description",
+        "REF02": "Other Payer\u0027s Claim Control Number",
+        "REF01": "Reference Identification Qualifier"
+      },
+      "name": "Other Payer Claim Control Number"
+    },
+    "NM1": {
+      "elements": {
+        "NM108": "Identification Code Qualifier",
+        "NM109": "Other Payer Primary Identifier",
+        "NM106": "Name Prefix",
+        "NM107": "Name Suffix",
+        "NM104": "Name First",
+        "NM105": "Name Middle",
+        "NM102": "Entity Type Qualifier",
+        "NM103": "Other Payer Organization Name",
+        "NM111": "Entity Identifier Code",
+        "NM101": "Entity Identifier Code",
+        "NM112": "Name Last or Organization Name",
+        "NM110": "Entity Relationship Code"
+      },
+      "name": "Other Payer Name"
+    },
+    "N3": {
+      "elements": {
+        "N301": "Other Payer Address Line",
+        "N302": "Other Payer Address Line"
+      },
+      "name": "Other Payer Address"
+    },
+    "N4": {
+      "elements": {
+        "N401": "Other Payer City Name",
+        "N406": "Location Identifier",
+        "N407": "Country Subdivision Code",
+        "N402": "Other Payer State or Province Code",
+        "N403": "Other Payer Postal Zone or ZIP Code",
+        "N404": "Country Code",
+        "N405": "Location Qualifier"
+      },
+      "name": "Other Payer City, State, ZIP Code"
+    },
+    "name": "Other Payer Name"
+  },
+  "2310E": {
+    "NM1": {
+      "elements": {
+        "NM108": "Identification Code Qualifier",
+        "NM109": "Identification Code",
+        "NM106": "Name Prefix",
+        "NM107": "Name Suffix",
+        "NM104": "Name First",
+        "NM105": "Name Middle",
+        "NM102": "Entity Type Qualifier",
+        "NM103": "Name Last or Organization Name",
+        "NM111": "Entity Identifier Code",
+        "NM101": "Entity Identifier Code",
+        "NM112": "Name Last or Organization Name",
+        "NM110": "Entity Relationship Code"
+      },
+      "name": "Ambulance Pick-up Location"
+    },
+    "N3": {
+      "elements": {
+        "N301": "Ambulance Pick-up Address Line",
+        "N302": "Ambulance Pick-up Address Line"
+      },
+      "name": "Ambulance Pick-up Location Address"
+    },
+    "N4": {
+      "elements": {
+        "N401": "Ambulance Pick-up City Name",
+        "N406": "Location Identifier",
+        "N407": "Country Subdivision Code",
+        "N402": "Ambulance Pick-up State or Province Code",
+        "N403": "Ambulance Pick-up Postal Zone or ZIP Code",
+        "N404": "Country Code",
+        "N405": "Location Qualifier"
+      },
+      "name": "Ambulance Pick-up Location City, State, ZIP Code"
+    },
+    "name": "Ambulance Pick-up Location"
+  },
+  "2330C": {
+    "REF": {
+      "elements": {
+        "REF04": "Reference Identifier",
+        "REF03": "Description",
+        "REF02": "Other Payer Referring Provider Identifier",
+        "REF01": "Reference Identification Qualifier"
+      },
+      "name": "Other Payer Referring Provider Secondary Identification"
+    },
+    "NM1": {
+      "elements": {
+        "NM108": "Identification Code Qualifier",
+        "NM109": "Identification Code",
+        "NM106": "Name Prefix",
+        "NM107": "Name Suffix",
+        "NM104": "Name First",
+        "NM105": "Name Middle",
+        "NM102": "Entity Type Qualifier",
+        "NM103": "Name Last or Organization Name",
+        "NM111": "Entity Identifier Code",
+        "NM101": "Entity Identifier Code",
+        "NM112": "Name Last or Organization Name",
+        "NM110": "Entity Relationship Code"
+      },
+      "name": "Other Payer Referring Provider"
+    },
+    "name": "Other Payer Referring Provider"
+  },
+  "2310F": {
+    "NM1": {
+      "elements": {
+        "NM108": "Identification Code Qualifier",
+        "NM109": "Identification Code",
+        "NM106": "Name Prefix",
+        "NM107": "Name Suffix",
+        "NM104": "Name First",
+        "NM105": "Name Middle",
+        "NM102": "Entity Type Qualifier",
+        "NM103": "Ambulance Drop-off Location",
+        "NM111": "Entity Identifier Code",
+        "NM101": "Entity Identifier Code",
+        "NM112": "Name Last or Organization Name",
+        "NM110": "Entity Relationship Code"
+      },
+      "name": "Ambulance Drop-off Location"
+    },
+    "N3": {
+      "elements": {
+        "N301": "Ambulance Drop-off Address Line",
+        "N302": "Ambulance Drop-off Address Line"
+      },
+      "name": "Ambulance Drop-off Location Address"
+    },
+    "N4": {
+      "elements": {
+        "N401": "Ambulance Drop-off City Name",
+        "N406": "Location Identifier",
+        "N407": "Country Subdivision Code",
+        "N402": "Ambulance Drop-off State or Province Code",
+        "N403": "Ambulance Drop-off Postal Zone or ZIP Code",
+        "N404": "Country Code",
+        "N405": "Location Qualifier"
+      },
+      "name": "Ambulance Drop-off Location City, State, ZIP Code"
+    },
+    "name": "Ambulance Drop-off Location"
+  },
+  "2330D": {
+    "REF": {
+      "elements": {
+        "REF04": "Reference Identifier",
+        "REF03": "Description",
+        "REF02": "Other Payer Rendering Provider Secondary Identifier",
+        "REF01": "Reference Identification Qualifier"
+      },
+      "name": "Other Payer Rendering Provider Secondary Identification"
+    },
+    "NM1": {
+      "elements": {
+        "NM108": "Identification Code Qualifier",
+        "NM109": "Identification Code",
+        "NM106": "Name Prefix",
+        "NM107": "Name Suffix",
+        "NM104": "Name First",
+        "NM105": "Name Middle",
+        "NM102": "Entity Type Qualifier",
+        "NM103": "Name Last or Organization Name",
+        "NM111": "Entity Identifier Code",
+        "NM101": "Entity Identifier Code",
+        "NM112": "Name Last or Organization Name",
+        "NM110": "Entity Relationship Code"
+      },
+      "name": "Other Payer Rendering Provider"
+    },
+    "name": "Other Payer Rendering Provider"
+  },
+  "2330E": {
+    "REF": {
+      "elements": {
+        "REF04": "Reference Identifier",
+        "REF03": "Description",
+        "REF02": "Other Payer Service Facility Location Secondary Identifier",
+        "REF01": "Reference Identification Qualifier"
+      },
+      "name": "Other Payer Service Facility Location Secondary Identification"
+    },
+    "NM1": {
+      "elements": {
+        "NM108": "Identification Code Qualifier",
+        "NM109": "Identification Code",
+        "NM106": "Name Prefix",
+        "NM107": "Name Suffix",
+        "NM104": "Name First",
+        "NM105": "Name Middle",
+        "NM102": "Entity Type Qualifier",
+        "NM103": "Name Last or Organization Name",
+        "NM111": "Entity Identifier Code",
+        "NM101": "Entity Identifier Code",
+        "NM112": "Name Last or Organization Name",
+        "NM110": "Entity Relationship Code"
+      },
+      "name": "Other Payer Service Facility Location"
+    },
+    "name": "Other Payer Service Facility Location"
+  }
+}
