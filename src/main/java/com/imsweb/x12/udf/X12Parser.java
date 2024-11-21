@@ -99,19 +99,14 @@ public class X12Parser implements UDF1<String, String> {
 
         JSONObject loopJson = new JSONObject();
         String loopId = loop.getId();
-        loopJson.put("loopname", loopId);
 
         JSONObject loopDefinitions = definitionJson.optJSONObject(loopId);
 
+        Map<String, JSONArray> segmentMap = new HashMap<>();
 
         for (Segment segment : loop.getSegments()) {
             String segmentId = segment.getId();
             JSONObject segmentDefinitions = loopDefinitions != null ? loopDefinitions.optJSONObject(segmentId) : null;
-
-//               System.out.println(segmentId);
-//               if(segmentId.equals("CLM")){
-//                    String a = "1";
-//               }
 
             JSONObject elementDefinitions = segmentDefinitions != null ? segmentDefinitions.optJSONObject("elements") : null;
 
@@ -126,10 +121,24 @@ public class X12Parser implements UDF1<String, String> {
                 segmentJson.put(elementKeyWithBusinessValue, elements.get(index));
             }
 
-            String SegmentName = (segmentDefinitions != null ? segmentDefinitions.optString("name", "") : "").replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase();
+            String segmentName = (segmentDefinitions != null ? segmentDefinitions.optString("name", "") : "").replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase();
+            String segmentKeyWithBusinessValue = segmentId + "_" + segmentName;
 
-            String segmentKeyWithBusinessValue = segmentId + "_" + SegmentName;
-            loopJson.put(segmentKeyWithBusinessValue, segmentJson);
+            if (segmentMap.containsKey(segmentKeyWithBusinessValue)) {
+                segmentMap.get(segmentKeyWithBusinessValue).put(segmentJson);
+            } else {
+                JSONArray segmentArray = new JSONArray();
+                segmentArray.put(segmentJson);
+                segmentMap.put(segmentKeyWithBusinessValue, segmentArray);
+            }
+        }
+
+        for (Map.Entry<String, JSONArray> entry : segmentMap.entrySet()) {
+            if (entry.getValue().length() == 1) {
+                loopJson.put(entry.getKey(), entry.getValue().get(0));
+            } else {
+                loopJson.put(entry.getKey(), entry.getValue());
+            }
         }
 
         Map<String, JSONArray> childLoopsMap = new HashMap<>();
@@ -138,6 +147,7 @@ public class X12Parser implements UDF1<String, String> {
             String childLoopId = childLoop.getId();
             JSONObject childLoopJson = processLoop(childLoop);
 
+//            JSONObject childloopDefinitions = definitionJson.optJSONObject(childLoopId);
             String childDef = definitionJson.optJSONObject(childLoopId).optString("name").replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase();
             String childLoopKeyWithBusinessValue = childLoopId + "_" + childDef;
 
