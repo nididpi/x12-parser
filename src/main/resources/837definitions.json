@@ -1,6 +1,7 @@
 {
   "2430": {
     "SVD": {
+      "datatype": "struct",
       "elements": {
         "SVD02": "Service Line Paid Amount",
         "SVD01": "Other Payer Primary Identifier",
@@ -12,6 +13,7 @@
       "name": "Line Adjudication Information"
     },
     "DTP": {
+      "datatype": "struct",
       "elements": {
         "DTP01": "Date Time Qualifier",
         "DTP03": "Adjudication or Payment Date",
@@ -20,6 +22,7 @@
       "name": "Line Check or Remittance Date"
     },
     "CAS": {
+      "datatype": "array",
       "elements": {
         "CAS09": "Adjustment Amount",
         "CAS07": "Adjustment Quantity",
@@ -45,6 +48,7 @@
     },
     "name": "Line Adjudication Information",
     "AMT": {
+      "datatype": "struct",
       "elements": {
         "AMT01": "Amount Qualifier Code",
         "AMT02": "Remaining Patient Liability",
@@ -56,6 +60,7 @@
   "HEADER": {
     "name": "Table 1 - Header",
     "BHT": {
+      "datatype": "struct",
       "elements": {
         "BHT06": "Claim or Encounter Identifier",
         "BHT02": "Transaction Set Purpose Code",
@@ -69,6 +74,7 @@
   },
   "1000B": {
     "NM1": {
+      "datatype": "struct",
       "elements": {
         "NM108": "Identification Code Qualifier",
         "NM109": "Receiver Primary Identifier",
@@ -89,6 +95,7 @@
   },
   "1000A": {
     "NM1": {
+      "datatype": "struct",
       "elements": {
         "NM108": "Identification Code Qualifier",
         "NM109": "Submitter Identifier",
@@ -107,6 +114,7 @@
     },
     "name": "Submitter Name",
     "PER": {
+      "datatype": "array",
       "elements": {
         "PER09": "Contact Inquiry Reference",
         "PER08": "Communication Number",
@@ -124,6 +132,7 @@
   "GS_LOOP": {
     "name": "Functional Group Header",
     "GS": {
+      "datatype": "struct",
       "elements": {
         "GS05": "Time",
         "GS04": "Date",
@@ -137,6 +146,7 @@
       "name": "Functional Group Header"
     },
     "GE": {
+      "datatype": "struct",
       "elements": {
         "GE02": "Group Control Number",
         "GE01": "Number of Transaction Sets Included"
@@ -146,6 +156,7 @@
   },
   "2010BB": {
     "REF": {
+      "datatype": "array",
       "elements": {
         "REF04": "Reference Identifier",
         "REF03": "Description",
@@ -155,6 +166,7 @@
       "name": "Billing Provider Secondary Identification"
     },
     "NM1": {
+      "datatype": "struct",
       "elements": {
         "NM108": "Identification Code Qualifier",
         "NM109": "Payer Identifier",
@@ -172,6 +184,7 @@
       "name": "Payer Name"
     },
     "N3": {
+      "datatype": "struct",
       "elements": {
         "N301": "Payer Address Line",
         "N302": "Payer Address Line"
@@ -179,6 +192,7 @@
       "name": "Payer Address"
     },
     "N4": {
+      "datatype": "struct",
       "elements": {
         "N401": "Payer City Name",
         "N406": "Location Identifier",
@@ -194,6 +208,7 @@
   },
   "2420H": {
     "NM1": {
+      "datatype": "struct",
       "elements": {
         "NM108": "Identification Code Qualifier",
         "NM109": "Identification Code",
@@ -211,6 +226,7 @@
       "name": "Ambulance Drop-off Location"
     },
     "N3": {
+      "datatype": "struct",
       "elements": {
         "N301": "Ambulance Drop-off Address Line",
         "N302": "Ambulance Drop-off Address Line"
@@ -218,6 +234,7 @@
       "name": "Ambulance Drop-off Location Address"
     },
     "N4": {
+      "datatype": "struct",
       "elements": {
         "N401": "Ambulance Drop-off City Name",
         "N406": "Location Identifier",
@@ -233,6 +250,7 @@
   },
   "2010BA": {
     "REF": {
+      "datatype": "struct",
       "elements": {
         "REF04": "Reference Identifier",
         "REF03": "Description",
@@ -242,6 +260,7 @@
       "name": "Property and Casualty Claim Number"
     },
     "NM1": {
+      "datatype": "struct",
       "elements": {
         "NM108": "Identification Code Qualifier",
         "NM109": "Subscriber Primary Identifier",
@@ -259,6 +278,7 @@
       "name": "Subscriber Name"
     },
     "N3": {
+      "datatype": "struct",
       "elements": {
         "N301": "Subscriber Address Line",
         "N302": "Subscriber Address Line"
@@ -266,6 +286,7 @@
       "name": "Subscriber Address"
     },
     "N4": {
+      "datatype": "struct",
       "elements": {
         "N401": "Subscriber City Name",
         "N406": "Location Identifier",
@@ -279,6 +300,7 @@
     },
     "name": "Subscriber Name",
     "PER": {
+      "datatype": "struct",
       "elements": {
         "PER09": "Contact Inquiry Reference",
         "PER08": "Communication Number",
@@ -293,6 +315,7 @@
       "name": "Property and Casualty Subscriber Contact Information"
     },
     "DMG": {
+      "datatype": "struct",
       "elements": {
         "DMG04": "Marital Status Code",
         "DMG05": "Composite Race or Ethnicity Information",
@@ -311,6 +334,7 @@
   },
   "2000C": {
     "PAT": {
+      "datatype": "struct",
       "elements": {
         "PAT03": "Employment Status Code",
         "PAT04": "Student Status Code",
@@ -325,6 +349,7 @@
       "name": "Patient Information"
     },
     "HL": {
+      "datatype": "struct",
       "elements": {
         "HL01": "Hierarchical ID Number",
         "HL03": "Hierarchical Level Code",
@@ -337,6 +362,7 @@
   },
   "2000B": {
     "SBR": {
+      "datatype": "struct",
       "elements": {
         "SBR01": "Payer Responsibility Sequence Number Code",
         "SBR02": "Individual Relationship Code",
@@ -351,6 +377,7 @@
       "name": "Subscriber Information"
     },
     "PAT": {
+      "datatype": "struct",
       "elements": {
         "PAT03": "Employment Status Code",
         "PAT04": "Student Status Code",
@@ -365,6 +392,7 @@
       "name": "Patient Information"
     },
     "HL": {
+      "datatype": "struct",
       "elements": {
         "HL01": "Hierarchical ID Number",
         "HL03": "Hierarchical Level Code",
@@ -377,6 +405,7 @@
   },
   "2000A": {
     "CUR": {
+      "datatype": "struct",
       "elements": {
         "CUR20": "Date",
         "CUR10": "Date/Time Qualifier",
@@ -403,6 +432,7 @@
       "name": "Foreign Currency Information"
     },
     "HL": {
+      "datatype": "struct",
       "elements": {
         "HL01": "Hierarchical ID Number",
         "HL03": "Hierarchical Level Code",
@@ -412,6 +442,7 @@
       "name": "Billing Provider Hierarchical Level"
     },
     "PRV": {
+      "datatype": "struct",
       "elements": {
         "PRV05": "Provider Specialty Information",
         "PRV04": "State or Province Code",
@@ -426,6 +457,7 @@
   },
   "2400": {
     "DTP": {
+      "datatype": "struct",
       "elements": {
         "DTP01": "Date Time Qualifier",
         "DTP03": "Initial Treatment Date",
@@ -434,6 +466,7 @@
       "name": "Date - Initial Treatment Date"
     },
     "CR1": {
+      "datatype": "struct",
       "elements": {
         "CR104": "Ambulance Transport Reason Code",
         "CR105": "Unit or Basis for Measurement Code",
@@ -449,6 +482,7 @@
       "name": "Ambulance Transport Information"
     },
     "PWK": {
+      "datatype": "struct",
       "elements": {
         "PWK01": "Attachment Report Type Code",
         "PWK02": "Attachment Transmission Code",
@@ -463,6 +497,7 @@
       "name": "Durable Medical Equipment Certificate of Medical Necessity Indicator"
     },
     "CR3": {
+      "datatype": "struct",
       "elements": {
         "CR302": "Unit or Basis for Measurement Code",
         "CR303": "Durable Medical Equipment Duration",
@@ -473,6 +508,7 @@
       "name": "Durable Medical Equipment Certification"
     },
     "CN1": {
+      "datatype": "struct",
       "elements": {
         "CN101": "Contract Type Code",
         "CN106": "Contract Version Identifier",
@@ -484,6 +520,7 @@
       "name": "Contract Information"
     },
     "MEA": {
+      "datatype": "array",
       "elements": {
         "MEA04": "Composite Unit of Measure",
         "MEA03": "Test Results",
@@ -501,6 +538,7 @@
       "name": "Test Result"
     },
     "AMT": {
+      "datatype": "struct",
       "elements": {
         "AMT01": "Amount Qualifier Code",
         "AMT02": "Postage Claimed Amount",
@@ -509,6 +547,7 @@
       "name": "Postage Claimed Amount"
     },
     "K3": {
+      "datatype": "array",
       "elements": {
         "K302": "Record Format Code",
         "K303": "Composite Unit of Measure",
@@ -517,12 +556,14 @@
       "name": "File Information"
     },
     "LX": {
+      "datatype": "struct",
       "elements": {
         "LX01": "Assigned Number"
       },
       "name": "Service Line Number"
     },
     "SV1": {
+      "datatype": "struct",
       "elements": {
         "SV103": "Unit or Basis for Measurement Code",
         "SV114": "National or Local Assigned Review Value",
@@ -549,6 +590,7 @@
       "name": "Professional Service"
     },
     "PS1": {
+      "datatype": "struct",
       "elements": {
         "PS101": "Purchased Service Provider Identifier",
         "PS103": "State or Province Code",
@@ -557,6 +599,7 @@
       "name": "Purchased Service Information"
     },
     "REF": {
+      "datatype": "array",
       "elements": {
         "REF04": "Reference Identifier",
         "REF03": "Description",
@@ -566,6 +609,7 @@
       "name": "Referral Number"
     },
     "SV5": {
+      "datatype": "struct",
       "elements": {
         "SV507": "Prognosis Code",
         "SV506": "Rental Unit Price Indicator",
@@ -578,6 +622,7 @@
       "name": "Durable Medical Equipment Service"
     },
     "HCP": {
+      "datatype": "struct",
       "elements": {
         "HCP01": "Pricing Methodology",
         "HCP12": "Repriced Approved Service Unit Count",
@@ -598,6 +643,7 @@
       "name": "Line Pricing/Repricing Information"
     },
     "CRC": {
+      "datatype": "struct",
       "elements": {
         "CRC02": "Certification Condition Indicator",
         "CRC03": "Condition Indicator",
@@ -610,6 +656,7 @@
       "name": "Condition Indicator/Durable Medical Equipment"
     },
     "QTY": {
+      "datatype": "struct",
       "elements": {
         "QTY02": "Obstetric Additional Units",
         "QTY03": "Composite Unit of Measure",
@@ -620,6 +667,7 @@
     },
     "name": "Service Line Number",
     "NTE": {
+      "datatype": "struct",
       "elements": {
         "NTE01": "Note Reference Code",
         "NTE02": "Line Note Text"
@@ -629,6 +677,7 @@
   },
   "2300": {
     "DTP": {
+      "datatype": "struct",
       "elements": {
         "DTP01": "Date Time Qualifier",
         "DTP03": "Repricer Received Date",
@@ -637,6 +686,7 @@
       "name": "Date - Repricer Received Date"
     },
     "HI": {
+      "datatype": "array",
       "elements": {
         "HI11": "Health Care Code Information",
         "HI10": "Health Care Code Information",
@@ -654,6 +704,7 @@
       "name": "Condition Information"
     },
     "CR2": {
+      "datatype": "struct",
       "elements": {
         "CR203": "Subluxation Level Code",
         "CR204": "Subluxation Level Code",
@@ -671,6 +722,7 @@
       "name": "Spinal Manipulation Service Information"
     },
     "CR1": {
+      "datatype": "struct",
       "elements": {
         "CR104": "Ambulance Transport Reason Code",
         "CR105": "Unit or Basis for Measurement Code",
@@ -686,6 +738,7 @@
       "name": "Ambulance Transport Information"
     },
     "CLM": {
+      "datatype": "struct",
       "elements": {
         "CLM10": "Patient Signature Source Code",
         "CLM20": "Delay Reason Code",
@@ -711,6 +764,7 @@
       "name": "Claim Information"
     },
     "PWK": {
+      "datatype": "array",
       "elements": {
         "PWK01": "Attachment Report Type Code",
         "PWK02": "Attachment Transmission Code",
@@ -725,6 +779,7 @@
       "name": "Claim Supplemental Information"
     },
     "CN1": {
+      "datatype": "struct",
       "elements": {
         "CN101": "Contract Type Code",
         "CN106": "Contract Version Identifier",
@@ -736,6 +791,7 @@
       "name": "Contract Information"
     },
     "AMT": {
+      "datatype": "struct",
       "elements": {
         "AMT01": "Amount Qualifier Code",
         "AMT02": "Patient Amount Paid",
@@ -744,6 +800,7 @@
       "name": "Patient Amount Paid"
     },
     "K3": {
+      "datatype": "array",
       "elements": {
         "K302": "Record Format Code",
         "K303": "Composite Unit of Measure",
@@ -752,6 +809,7 @@
       "name": "File Information"
     },
     "REF": {
+      "datatype": "struct",
       "elements": {
         "REF04": "Reference Identifier",
         "REF03": "Description",
@@ -761,6 +819,7 @@
       "name": "Care Plan Oversight"
     },
     "HCP": {
+      "datatype": "struct",
       "elements": {
         "HCP01": "Pricing Methodology",
         "HCP12": "Quantity",
@@ -781,6 +840,7 @@
       "name": "Claim Pricing/Repricing Information"
     },
     "CRC": {
+      "datatype": "struct",
       "elements": {
         "CRC02": "Certification Condition Code Applies Indicator",
         "CRC03": "Condition Indicator",
@@ -794,6 +854,7 @@
     },
     "name": "Claim Information",
     "NTE": {
+      "datatype": "struct",
       "elements": {
         "NTE01": "Note Reference Code",
         "NTE02": "Claim Note Text"
@@ -803,6 +864,7 @@
   },
   "ST_LOOP": {
     "ST": {
+      "datatype": "struct",
       "elements": {
         "ST03": "Implementation Convention Reference",
         "ST01": "Transaction Set Identifier Code",
@@ -811,6 +873,7 @@
       "name": "Transaction Set Header"
     },
     "SE": {
+      "datatype": "struct",
       "elements": {
         "SE02": "Transaction Set Control Number",
         "SE01": "Transaction Segment Count"
@@ -821,6 +884,7 @@
   },
   "2420A": {
     "REF": {
+      "datatype": "array",
       "elements": {
         "REF04": "Reference Identifier",
         "REF03": "Description",
@@ -830,6 +894,7 @@
       "name": "Rendering Provider Secondary Identification"
     },
     "NM1": {
+      "datatype": "struct",
       "elements": {
         "NM108": "Identification Code Qualifier",
         "NM109": "Rendering Provider Identifier",
@@ -847,6 +912,7 @@
       "name": "Rendering Provider Name"
     },
     "PRV": {
+      "datatype": "struct",
       "elements": {
         "PRV05": "Provider Specialty Information",
         "PRV04": "State or Province Code",
@@ -861,6 +927,7 @@
   },
   "2420B": {
     "REF": {
+      "datatype": "array",
       "elements": {
         "REF04": "Reference Identifier",
         "REF03": "Description",
@@ -870,6 +937,7 @@
       "name": "Purchased Service Provider Secondary Identification"
     },
     "NM1": {
+      "datatype": "struct",
       "elements": {
         "NM108": "Identification Code Qualifier",
         "NM109": "Purchased Service Provider Identifier",
@@ -890,6 +958,7 @@
   },
   "2420C": {
     "REF": {
+      "datatype": "array",
       "elements": {
         "REF04": "Reference Identifier",
         "REF03": "Description",
@@ -899,6 +968,7 @@
       "name": "Service Facility Location Secondary Identification"
     },
     "NM1": {
+      "datatype": "struct",
       "elements": {
         "NM108": "Identification Code Qualifier",
         "NM109": "Laboratory or Facility Primary Identifier",
@@ -916,6 +986,7 @@
       "name": "Service Facility Location Name"
     },
     "N3": {
+      "datatype": "struct",
       "elements": {
         "N301": "Laboratory or Facility Address Line",
         "N302": "Laboratory or Facility Address Line"
@@ -923,6 +994,7 @@
       "name": "Service Facility Location Address"
     },
     "N4": {
+      "datatype": "struct",
       "elements": {
         "N401": "Laboratory or Facility City Name",
         "N406": "Location Identifier",
@@ -938,6 +1010,7 @@
   },
   "2420D": {
     "REF": {
+      "datatype": "array",
       "elements": {
         "REF04": "Reference Identifier",
         "REF03": "Description",
@@ -947,6 +1020,7 @@
       "name": "Supervising Provider Secondary Identification"
     },
     "NM1": {
+      "datatype": "struct",
       "elements": {
         "NM108": "Identification Code Qualifier",
         "NM109": "Supervising Provider Identifier",
@@ -967,6 +1041,7 @@
   },
   "2420E": {
     "REF": {
+      "datatype": "array",
       "elements": {
         "REF04": "Reference Identifier",
         "REF03": "Description",
@@ -976,6 +1051,7 @@
       "name": "Ordering Provider Secondary Identification"
     },
     "NM1": {
+      "datatype": "struct",
       "elements": {
         "NM108": "Identification Code Qualifier",
         "NM109": "Ordering Provider Identifier",
@@ -993,6 +1069,7 @@
       "name": "Ordering Provider Name"
     },
     "N3": {
+      "datatype": "struct",
       "elements": {
         "N301": "Ordering Provider Address Line",
         "N302": "Ordering Provider Address Line"
@@ -1000,6 +1077,7 @@
       "name": "Ordering Provider Address"
     },
     "N4": {
+      "datatype": "struct",
       "elements": {
         "N401": "Ordering Provider City Name",
         "N406": "Location Identifier",
@@ -1013,6 +1091,7 @@
     },
     "name": "Ordering Provider Name",
     "PER": {
+      "datatype": "struct",
       "elements": {
         "PER09": "Contact Inquiry Reference",
         "PER08": "Communication Number",
@@ -1029,6 +1108,7 @@
   },
   "2420F": {
     "REF": {
+      "datatype": "array",
       "elements": {
         "REF04": "Reference Identifier",
         "REF03": "Description",
@@ -1038,6 +1118,7 @@
       "name": "Referring Provider Secondary Identification"
     },
     "NM1": {
+      "datatype": "struct",
       "elements": {
         "NM108": "Identification Code Qualifier",
         "NM109": "Referring Provider Identifier",
@@ -1058,6 +1139,7 @@
   },
   "2420G": {
     "NM1": {
+      "datatype": "struct",
       "elements": {
         "NM108": "Identification Code Qualifier",
         "NM109": "Identification Code",
@@ -1075,6 +1157,7 @@
       "name": "Ambulance Pick-up Location"
     },
     "N3": {
+      "datatype": "struct",
       "elements": {
         "N301": "Ambulance Pick-up Address Line",
         "N302": "Ambulance Pick-up Address Line"
@@ -1082,6 +1165,7 @@
       "name": "Ambulance Pick-up Location Address"
     },
     "N4": {
+      "datatype": "struct",
       "elements": {
         "N401": "Ambulance Pick-up City Name",
         "N406": "Location Identifier",
@@ -1097,6 +1181,7 @@
   },
   "ISA_LOOP": {
     "IEA": {
+      "datatype": "struct",
       "elements": {
         "IEA02": "Interchange Control Number",
         "IEA01": "Number of Included Functional Groups"
@@ -1104,6 +1189,7 @@
       "name": "Interchange Control Trailer"
     },
     "TA1": {
+      "datatype": "struct",
       "elements": {
         "TA104": "Interchange Acknowledgement Code",
         "TA105": "Interchange Note Code",
@@ -1114,6 +1200,7 @@
       "name": "Interchange Acknowledgement"
     },
     "ISA": {
+      "datatype": "struct",
       "elements": {
         "ISA09": "Interchange Date",
         "ISA04": "Security Information",
@@ -1138,6 +1225,7 @@
   },
   "2320": {
     "SBR": {
+      "datatype": "struct",
       "elements": {
         "SBR01": "Payer Responsibility Sequence Number Code",
         "SBR02": "Individual Relationship Code",
@@ -1152,6 +1240,7 @@
       "name": "Other Subscriber Information"
     },
     "CAS": {
+      "datatype": "array",
       "elements": {
         "CAS09": "Adjustment Amount",
         "CAS07": "Adjustment Quantity",
@@ -1177,6 +1266,7 @@
     },
     "name": "Other Subscriber Information",
     "AMT": {
+      "datatype": "struct",
       "elements": {
         "AMT01": "Amount Qualifier Code",
         "AMT02": "Remaining Patient Liability",
@@ -1185,6 +1275,7 @@
       "name": "Remaining Patient Liability"
     },
     "OI": {
+      "datatype": "struct",
       "elements": {
         "OI06": "Release of Information Code",
         "OI03": "Benefits Assignment Certification Indicator",
@@ -1196,6 +1287,7 @@
       "name": "Other Insurance Coverage Information"
     },
     "MOA": {
+      "datatype": "struct",
       "elements": {
         "MOA02": "HCPCS Payable Amount",
         "MOA01": "Reimbursement Rate",
@@ -1212,6 +1304,7 @@
   },
   "2440": {
     "FRM": {
+      "datatype": "array",
       "elements": {
         "FRM01": "Question Number/Letter",
         "FRM02": "Question Response",
@@ -1222,6 +1315,7 @@
       "name": "Supporting Documentation"
     },
     "LQ": {
+      "datatype": "struct",
       "elements": {
         "LQ02": "Form Identifier",
         "LQ01": "Code List Qualifier Code"
@@ -1238,6 +1332,7 @@
   },
   "2010AA": {
     "REF": {
+      "datatype": "array",
       "elements": {
         "REF04": "Reference Identifier",
         "REF03": "Description",
@@ -1247,6 +1342,7 @@
       "name": "Billing Provider UPIN/License Information"
     },
     "NM1": {
+      "datatype": "struct",
       "elements": {
         "NM108": "Identification Code Qualifier",
         "NM109": "Billing Provider Identifier",
@@ -1264,6 +1360,7 @@
       "name": "Billing Provider Name"
     },
     "N3": {
+      "datatype": "struct",
       "elements": {
         "N301": "Billing Provider Address Line",
         "N302": "Billing Provider Address Line"
@@ -1271,6 +1368,7 @@
       "name": "Billing Provider Address"
     },
     "N4": {
+      "datatype": "struct",
       "elements": {
         "N401": "Billing Provider City Name",
         "N406": "Location Identifier",
@@ -1284,6 +1382,7 @@
     },
     "name": "Billing Provider Name",
     "PER": {
+      "datatype": "array",
       "elements": {
         "PER09": "Contact Inquiry Reference",
         "PER08": "Communication Number",
@@ -1300,6 +1399,7 @@
   },
   "2330F": {
     "REF": {
+      "datatype": "array",
       "elements": {
         "REF04": "Reference Identifier",
         "REF03": "Description",
@@ -1309,6 +1409,7 @@
       "name": "Other Payer Supervising Provider Secondary Identification"
     },
     "NM1": {
+      "datatype": "struct",
       "elements": {
         "NM108": "Identification Code Qualifier",
         "NM109": "Identification Code",
@@ -1329,6 +1430,7 @@
   },
   "2330G": {
     "REF": {
+      "datatype": "array",
       "elements": {
         "REF04": "Reference Identifier",
         "REF03": "Description",
@@ -1338,6 +1440,7 @@
       "name": "Other Payer Billing Provider Secondary Identification"
     },
     "NM1": {
+      "datatype": "struct",
       "elements": {
         "NM108": "Identification Code Qualifier",
         "NM109": "Identification Code",
@@ -1358,6 +1461,7 @@
   },
   "2010AC": {
     "REF": {
+      "datatype": "struct",
       "elements": {
         "REF04": "Reference Identifier",
         "REF03": "Description",
@@ -1367,6 +1471,7 @@
       "name": "Pay-To Plan Tax Identification Number"
     },
     "NM1": {
+      "datatype": "struct",
       "elements": {
         "NM108": "Identification Code Qualifier",
         "NM109": "Pay-To Plan Primary Identifier",
@@ -1384,6 +1489,7 @@
       "name": "Pay-To Plan Name"
     },
     "N3": {
+      "datatype": "struct",
       "elements": {
         "N301": "Pay-To Plan Address Line",
         "N302": "Pay-To Plan Address Line"
@@ -1391,6 +1497,7 @@
       "name": "Pay-to Plan Address"
     },
     "N4": {
+      "datatype": "struct",
       "elements": {
         "N401": "Pay-To Plan City Name",
         "N406": "Location Identifier",
@@ -1406,6 +1513,7 @@
   },
   "2010AB": {
     "NM1": {
+      "datatype": "struct",
       "elements": {
         "NM108": "Identification Code Qualifier",
         "NM109": "Identification Code",
@@ -1423,6 +1531,7 @@
       "name": "Pay-to Address Name"
     },
     "N3": {
+      "datatype": "struct",
       "elements": {
         "N301": "Pay-To Address Line",
         "N302": "Pay-To Address Line"
@@ -1430,6 +1539,7 @@
       "name": "Pay-to Address - ADDRESS"
     },
     "N4": {
+      "datatype": "struct",
       "elements": {
         "N401": "Pay-to Address City Name",
         "N406": "Location Identifier",
@@ -1445,6 +1555,7 @@
   },
   "2410": {
     "LIN": {
+      "datatype": "struct",
       "elements": {
         "LIN11": "Product/Service ID",
         "LIN10": "Product/Service ID Qualifier",
@@ -1481,6 +1592,7 @@
       "name": "Drug Identification"
     },
     "REF": {
+      "datatype": "struct",
       "elements": {
         "REF04": "Reference Identifier",
         "REF03": "Description",
@@ -1491,6 +1603,7 @@
     },
     "name": "Drug Identification",
     "CTP": {
+      "datatype": "struct",
       "elements": {
         "CTP08": "Monetary Amount",
         "CTP07": "Multiplier",
@@ -1509,6 +1622,7 @@
   },
   "2010CA": {
     "REF": {
+      "datatype": "struct",
       "elements": {
         "REF04": "Reference Identifier",
         "REF03": "Description",
@@ -1518,6 +1632,7 @@
       "name": "Property and Casualty Patient Identifier"
     },
     "NM1": {
+      "datatype": "struct",
       "elements": {
         "NM108": "Identification Code Qualifier",
         "NM109": "Identification Code",
@@ -1535,6 +1650,7 @@
       "name": "Patient Name"
     },
     "N3": {
+      "datatype": "struct",
       "elements": {
         "N301": "Patient Address Line",
         "N302": "Patient Address Line"
@@ -1542,6 +1658,7 @@
       "name": "Patient Address"
     },
     "N4": {
+      "datatype": "struct",
       "elements": {
         "N401": "Patient City Name",
         "N406": "Location Identifier",
@@ -1555,6 +1672,7 @@
     },
     "name": "Patient Name",
     "PER": {
+      "datatype": "struct",
       "elements": {
         "PER09": "Contact Inquiry Reference",
         "PER08": "Communication Number",
@@ -1569,6 +1687,7 @@
       "name": "Property and Casualty Patient Contact Information"
     },
     "DMG": {
+      "datatype": "struct",
       "elements": {
         "DMG04": "Marital Status Code",
         "DMG05": "Composite Race or Ethnicity Information",
@@ -1587,6 +1706,7 @@
   },
   "2310A": {
     "REF": {
+      "datatype": "array",
       "elements": {
         "REF04": "Reference Identifier",
         "REF03": "Description",
@@ -1596,6 +1716,7 @@
       "name": "Referring Provider Secondary Identification"
     },
     "NM1": {
+      "datatype": "struct",
       "elements": {
         "NM108": "Identification Code Qualifier",
         "NM109": "Referring Provider Identifier",
@@ -1616,6 +1737,7 @@
   },
   "2310B": {
     "REF": {
+      "datatype": "array",
       "elements": {
         "REF04": "Reference Identifier",
         "REF03": "Description",
@@ -1625,6 +1747,7 @@
       "name": "Rendering Provider Secondary Identification"
     },
     "NM1": {
+      "datatype": "struct",
       "elements": {
         "NM108": "Identification Code Qualifier",
         "NM109": "Rendering Provider Identifier",
@@ -1642,6 +1765,7 @@
       "name": "Rendering Provider Name"
     },
     "PRV": {
+      "datatype": "struct",
       "elements": {
         "PRV05": "Provider Specialty Information",
         "PRV04": "State or Province Code",
@@ -1656,6 +1780,7 @@
   },
   "2310C": {
     "REF": {
+      "datatype": "array",
       "elements": {
         "REF04": "Reference Identifier",
         "REF03": "Description",
@@ -1665,6 +1790,7 @@
       "name": "Service Facility Location Secondary Identification"
     },
     "NM1": {
+      "datatype": "struct",
       "elements": {
         "NM108": "Identification Code Qualifier",
         "NM109": "Laboratory or Facility Primary Identifier",
@@ -1682,6 +1808,7 @@
       "name": "Service Facility Location Name"
     },
     "N3": {
+      "datatype": "struct",
       "elements": {
         "N301": "Laboratory or Facility Address Line",
         "N302": "Laboratory or Facility Address Line"
@@ -1689,6 +1816,7 @@
       "name": "Service Facility Location Address"
     },
     "N4": {
+      "datatype": "struct",
       "elements": {
         "N401": "Laboratory or Facility City Name",
         "N406": "Location Identifier",
@@ -1702,6 +1830,7 @@
     },
     "name": "Service Facility Location Name",
     "PER": {
+      "datatype": "struct",
       "elements": {
         "PER09": "Contact Inquiry Reference",
         "PER08": "Communication Number",
@@ -1718,6 +1847,7 @@
   },
   "2330A": {
     "REF": {
+      "datatype": "struct",
       "elements": {
         "REF04": "Reference Identifier",
         "REF03": "Description",
@@ -1727,6 +1857,7 @@
       "name": "Other Subscriber Secondary Identification"
     },
     "NM1": {
+      "datatype": "struct",
       "elements": {
         "NM108": "Identification Code Qualifier",
         "NM109": "Other Insured Identifier",
@@ -1744,6 +1875,7 @@
       "name": "Other Subscriber Name"
     },
     "N3": {
+      "datatype": "struct",
       "elements": {
         "N301": "Other Subscriber Address Line",
         "N302": "Other Insured Address Line"
@@ -1751,6 +1883,7 @@
       "name": "Other Subscriber Address"
     },
     "N4": {
+      "datatype": "struct",
       "elements": {
         "N401": "Other Subscriber City Name",
         "N406": "Location Identifier",
@@ -1766,6 +1899,7 @@
   },
   "2310D": {
     "REF": {
+      "datatype": "array",
       "elements": {
         "REF04": "Reference Identifier",
         "REF03": "Description",
@@ -1775,6 +1909,7 @@
       "name": "Supervising Provider Secondary Identification"
     },
     "NM1": {
+      "datatype": "struct",
       "elements": {
         "NM108": "Identification Code Qualifier",
         "NM109": "Supervising Provider Identifier",
@@ -1795,6 +1930,7 @@
   },
   "2330B": {
     "DTP": {
+      "datatype": "struct",
       "elements": {
         "DTP01": "Date Time Qualifier",
         "DTP03": "Adjudication or Payment Date",
@@ -1803,6 +1939,7 @@
       "name": "Claim Check or Remittance Date"
     },
     "REF": {
+      "datatype": "struct",
       "elements": {
         "REF04": "Reference Identifier",
         "REF03": "Description",
@@ -1812,6 +1949,7 @@
       "name": "Other Payer Claim Control Number"
     },
     "NM1": {
+      "datatype": "struct",
       "elements": {
         "NM108": "Identification Code Qualifier",
         "NM109": "Other Payer Primary Identifier",
@@ -1829,6 +1967,7 @@
       "name": "Other Payer Name"
     },
     "N3": {
+      "datatype": "struct",
       "elements": {
         "N301": "Other Payer Address Line",
         "N302": "Other Payer Address Line"
@@ -1836,6 +1975,7 @@
       "name": "Other Payer Address"
     },
     "N4": {
+      "datatype": "struct",
       "elements": {
         "N401": "Other Payer City Name",
         "N406": "Location Identifier",
@@ -1851,6 +1991,7 @@
   },
   "2310E": {
     "NM1": {
+      "datatype": "struct",
       "elements": {
         "NM108": "Identification Code Qualifier",
         "NM109": "Identification Code",
@@ -1868,6 +2009,7 @@
       "name": "Ambulance Pick-up Location"
     },
     "N3": {
+      "datatype": "struct",
       "elements": {
         "N301": "Ambulance Pick-up Address Line",
         "N302": "Ambulance Pick-up Address Line"
@@ -1875,6 +2017,7 @@
       "name": "Ambulance Pick-up Location Address"
     },
     "N4": {
+      "datatype": "struct",
       "elements": {
         "N401": "Ambulance Pick-up City Name",
         "N406": "Location Identifier",
@@ -1890,6 +2033,7 @@
   },
   "2330C": {
     "REF": {
+      "datatype": "array",
       "elements": {
         "REF04": "Reference Identifier",
         "REF03": "Description",
@@ -1899,6 +2043,7 @@
       "name": "Other Payer Referring Provider Secondary Identification"
     },
     "NM1": {
+      "datatype": "struct",
       "elements": {
         "NM108": "Identification Code Qualifier",
         "NM109": "Identification Code",
@@ -1919,6 +2064,7 @@
   },
   "2310F": {
     "NM1": {
+      "datatype": "struct",
       "elements": {
         "NM108": "Identification Code Qualifier",
         "NM109": "Identification Code",
@@ -1936,6 +2082,7 @@
       "name": "Ambulance Drop-off Location"
     },
     "N3": {
+      "datatype": "struct",
       "elements": {
         "N301": "Ambulance Drop-off Address Line",
         "N302": "Ambulance Drop-off Address Line"
@@ -1943,6 +2090,7 @@
       "name": "Ambulance Drop-off Location Address"
     },
     "N4": {
+      "datatype": "struct",
       "elements": {
         "N401": "Ambulance Drop-off City Name",
         "N406": "Location Identifier",
@@ -1958,6 +2106,7 @@
   },
   "2330D": {
     "REF": {
+      "datatype": "array",
       "elements": {
         "REF04": "Reference Identifier",
         "REF03": "Description",
@@ -1967,6 +2116,7 @@
       "name": "Other Payer Rendering Provider Secondary Identification"
     },
     "NM1": {
+      "datatype": "struct",
       "elements": {
         "NM108": "Identification Code Qualifier",
         "NM109": "Identification Code",
@@ -1987,6 +2137,7 @@
   },
   "2330E": {
     "REF": {
+      "datatype": "array",
       "elements": {
         "REF04": "Reference Identifier",
         "REF03": "Description",
@@ -1996,6 +2147,7 @@
       "name": "Other Payer Service Facility Location Secondary Identification"
     },
     "NM1": {
+      "datatype": "struct",
       "elements": {
         "NM108": "Identification Code Qualifier",
         "NM109": "Identification Code",
