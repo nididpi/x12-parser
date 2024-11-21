@@ -90,7 +90,7 @@ public class X12Test {
 
         JSONObject loopDefinitions = definitionJson.optJSONObject(loopId);
 
-        Map<String, JSONArray> segmentMap = new HashMap<>();
+        Map<String, Object> segmentResults = new HashMap<>();
 
         for (Segment segment : loop.getSegments()) {
             String segmentId = segment.getId();
@@ -111,22 +111,19 @@ public class X12Test {
 
             String segmentName = (segmentDefinitions != null ? segmentDefinitions.optString("name", "") : "").replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase();
             String segmentKeyWithBusinessValue = segmentId + "_" + segmentName;
+            String datatype = segmentDefinitions != null ? segmentDefinitions.optString("datatype") : "struct";
 
-            if (segmentMap.containsKey(segmentKeyWithBusinessValue)) {
-                segmentMap.get(segmentKeyWithBusinessValue).put(segmentJson);
-            } else {
-                JSONArray segmentArray = new JSONArray();
+            if ("array".equals(datatype)) {
+                JSONArray segmentArray = (JSONArray) segmentResults.getOrDefault(segmentKeyWithBusinessValue, new JSONArray());
                 segmentArray.put(segmentJson);
-                segmentMap.put(segmentKeyWithBusinessValue, segmentArray);
+                segmentResults.put(segmentKeyWithBusinessValue, segmentArray);
+            } else {
+                segmentResults.put(segmentKeyWithBusinessValue, segmentJson);
             }
         }
 
-        for (Map.Entry<String, JSONArray> entry : segmentMap.entrySet()) {
-            if (entry.getValue().length() == 1) {
-                loopJson.put(entry.getKey(), entry.getValue().get(0));
-            } else {
-                loopJson.put(entry.getKey(), entry.getValue());
-            }
+        for (Map.Entry<String, Object> entry : segmentResults.entrySet()) {
+            loopJson.put(entry.getKey(), entry.getValue());
         }
 
         Map<String, JSONArray> childLoopsMap = new HashMap<>();
