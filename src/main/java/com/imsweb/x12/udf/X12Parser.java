@@ -19,39 +19,54 @@ import java.util.Map;
 
 import org.apache.spark.sql.api.java.UDF1;
 
-//import java.io.File;
-//import java.nio.file.Files;
-//import java.nio.file.Paths;
-
 public class X12Parser implements UDF1<String, String> {
 
     private static final long serialVersionUID = 1L;
 
-//    public static void main(String[] args) {
-//        // Example of using a hardcoded file path for testing
-//        File file = new File("837sample");
-//
-//        if (!file.exists()) {
-//            System.err.println("The file does not exist: " + file.getAbsolutePath());
-//            System.exit(1);
-//        }
-//
-//        try {
-//            // Read the content of the file into a String
-//            String inputText = new String(Files.readAllBytes(Paths.get(file.toURI())), StandardCharsets.UTF_8);
-//            X12Parser udf = new X12Parser();
-//            String result = udf.call(inputText);
-//            System.out.println("Result: " + result);
-//        } catch (Exception e) {
-//            System.err.println("Error reading or processing file: " + e.toString());
-//        }
-//    }
-
-
     public String call(String inputText) {
+        String fileTypeString = null;
+        FileType fileTypeObject;
         try {
-            InputStream inputStream = new ByteArrayInputStream(inputText.getBytes(StandardCharsets.UTF_8));
-            X12Reader x12reader = new X12Reader(FileType.ANSI837_5010_X222, inputStream);
+            // do this to read the file type
+            byte[] byteContent = inputText.getBytes(StandardCharsets.UTF_8);
+            InputStream inputStream = new ByteArrayInputStream(byteContent);
+
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
+                String line;
+                int lineNumber = 0;
+
+                while ((line = reader.readLine()) != null) {
+                    lineNumber++;
+                    if (lineNumber == 3) {
+                        System.out.println("Third line: " + line);
+                        String[] splitArray = line.split("\\*");
+                        fileTypeString = splitArray[1] + "_" + splitArray[3];
+                        break;
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            if (fileTypeString.contains("837_005010")) {
+                fileTypeObject = FileType.ANSI837_5010_X222;
+            } else if (fileTypeString.contains("835_005010")) {
+                fileTypeObject = FileType.ANSI835_5010_X221;
+            }
+            else if (fileTypeString.contains("834_005010")) {
+                fileTypeObject = FileType.ANSI834_5010_X220;
+            }
+            else if (fileTypeString.contains("832_005010")) {
+                fileTypeObject = FileType.ANSI820_5010_X218;
+            }
+            else {
+                throw new IllegalArgumentException("Unknown file type." + fileTypeString);
+            }
+
+            // Create a new InputStream for X12Reader
+            InputStream freshInputStream = new ByteArrayInputStream(byteContent);
+
+            X12Reader x12reader = new X12Reader(fileTypeObject, freshInputStream);
             List<Loop> loops = x12reader.getLoops();
 
             JSONArray jsonArray = new JSONArray();
@@ -65,12 +80,10 @@ public class X12Parser implements UDF1<String, String> {
             jsonObject.put("FatalErrors", x12reader.getFatalErrors());
             jsonObject.put("Errors", x12reader.getErrors());
 
-            // Add the newly created JSONObject to the jsonArray
             jsonArray.put(jsonObject);
 
             return jsonArray.toString();
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             return e.toString();
         }
     }
@@ -99,7 +112,6 @@ public class X12Parser implements UDF1<String, String> {
 
         JSONObject loopJson = new JSONObject();
         String loopId = loop.getId();
-//        loopJson.put("loopname", loopId);
 
         JSONObject loopDefinitions = definitionJson.optJSONObject(loopId);
 
