@@ -73,14 +73,16 @@ public class X12Parser implements UDF1<String, String> {
 
             for (Loop loop : loops) {
                 JSONObject jsonObject = processLoop(loop);
+                jsonObject.put("FatalErrors", x12reader.getFatalErrors());
+                jsonObject.put("Errors", x12reader.getErrors());
                 jsonArray.put(jsonObject);
             }
 
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("FatalErrors", x12reader.getFatalErrors());
-            jsonObject.put("Errors", x12reader.getErrors());
-
-            jsonArray.put(jsonObject);
+//            JSONObject jsonObject = new JSONObject();
+//            jsonObject.put("FatalErrors", x12reader.getFatalErrors());
+//            jsonObject.put("Errors", x12reader.getErrors());
+//
+//            jsonArray.put(jsonObject);
 
             return jsonArray.toString();
         } catch (Exception e) {
@@ -151,27 +153,27 @@ public class X12Parser implements UDF1<String, String> {
             loopJson.put(entry.getKey(), entry.getValue());
         }
 
-        Map<String, JSONArray> childLoopsMap = new HashMap<>();
-
+        // Handle child loops
         for (Loop childLoop : loop.getLoops()) {
             String childLoopId = childLoop.getId();
             JSONObject childLoopJson = processLoop(childLoop);
 
-//            JSONObject childloopDefinitions = definitionJson.optJSONObject(childLoopId);
+            JSONObject childloopDefinitions = definitionJson.optJSONObject(childLoopId);
+            String datatype = childloopDefinitions != null ? childloopDefinitions.optString("datatype") : "struct";
+
             String childDef = definitionJson.optJSONObject(childLoopId).optString("name").replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase();
             String childLoopKeyWithBusinessValue = childLoopId + "_" + childDef;
 
-            if (childLoopsMap.containsKey(childLoopKeyWithBusinessValue)) {
-                childLoopsMap.get(childLoopKeyWithBusinessValue).put(childLoopJson);
-            } else {
-                JSONArray childArray = new JSONArray();
+            if ("array".equals(datatype)) {
+                JSONArray childArray = loopJson.optJSONArray(childLoopKeyWithBusinessValue);
+                if (childArray == null) {
+                    childArray = new JSONArray();
+                    loopJson.put(childLoopKeyWithBusinessValue, childArray);
+                }
                 childArray.put(childLoopJson);
-                childLoopsMap.put(childLoopKeyWithBusinessValue, childArray);
+            } else {
+                loopJson.put(childLoopKeyWithBusinessValue, childLoopJson);
             }
-        }
-
-        for (Map.Entry<String, JSONArray> entry : childLoopsMap.entrySet()) {
-            loopJson.put(entry.getKey(), entry.getValue());
         }
 
         return loopJson;

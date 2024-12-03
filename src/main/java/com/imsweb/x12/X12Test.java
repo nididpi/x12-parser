@@ -41,18 +41,24 @@ public class X12Test {
 
         try {
             for (Loop loop : loops837) {
-                jsonArray.put(processLoop(loop));
+                JSONObject jsonObject = processLoop(loop);
+                jsonObject.put("FatalErrors", reader837.getFatalErrors());
+                jsonObject.put("Errors", reader837.getErrors());
+
+                jsonArray.put(jsonObject);
+
+//                jsonArray.put(processLoop(loop));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("FatalErrors", reader837.getFatalErrors());
-        jsonObject.put("Errors", reader837.getErrors());
+//        JSONObject jsonObject = new JSONObject();
+//        jsonObject.put("FatalErrors", reader837.getFatalErrors());
+//        jsonObject.put("Errors", reader837.getErrors());
 
         // Add the newly created JSONObject to the jsonArray
-        jsonArray.put(jsonObject);
+//        jsonArray.put(jsonObject);
 
 
         X12Writer writer = new X12Writer(reader837);
@@ -86,7 +92,6 @@ public class X12Test {
 
         JSONObject loopJson = new JSONObject();
         String loopId = loop.getId();
-//        loopJson.put("loopname", loopId);
 
         JSONObject loopDefinitions = definitionJson.optJSONObject(loopId);
 
@@ -126,27 +131,27 @@ public class X12Test {
             loopJson.put(entry.getKey(), entry.getValue());
         }
 
-        Map<String, JSONArray> childLoopsMap = new HashMap<>();
-
+        // Handle child loops
         for (Loop childLoop : loop.getLoops()) {
             String childLoopId = childLoop.getId();
             JSONObject childLoopJson = processLoop(childLoop);
 
-//            JSONObject childloopDefinitions = definitionJson.optJSONObject(childLoopId);
+            JSONObject childloopDefinitions = definitionJson.optJSONObject(childLoopId);
+            String datatype = childloopDefinitions != null ? childloopDefinitions.optString("datatype") : "struct";
+
             String childDef = definitionJson.optJSONObject(childLoopId).optString("name").replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase();
             String childLoopKeyWithBusinessValue = childLoopId + "_" + childDef;
 
-            if (childLoopsMap.containsKey(childLoopKeyWithBusinessValue)) {
-                childLoopsMap.get(childLoopKeyWithBusinessValue).put(childLoopJson);
-            } else {
-                JSONArray childArray = new JSONArray();
+            if ("array".equals(datatype)) {
+                JSONArray childArray = loopJson.optJSONArray(childLoopKeyWithBusinessValue);
+                if (childArray == null) {
+                    childArray = new JSONArray();
+                    loopJson.put(childLoopKeyWithBusinessValue, childArray);
+                }
                 childArray.put(childLoopJson);
-                childLoopsMap.put(childLoopKeyWithBusinessValue, childArray);
+            } else {
+                loopJson.put(childLoopKeyWithBusinessValue, childLoopJson);
             }
-        }
-
-        for (Map.Entry<String, JSONArray> entry : childLoopsMap.entrySet()) {
-            loopJson.put(entry.getKey(), entry.getValue());
         }
 
         return loopJson;

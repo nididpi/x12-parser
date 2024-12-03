@@ -86,9 +86,6 @@ public class BuildJsonSchema {
                 segmentMap.put("nullable", true);
                 segmentMap.put("metadata", new HashMap<String, Object>());
 
-                if (segmentDef.getXid().equals("PER")){
-                 String a ="";}
-
                 List<Map<String, Object>> elementList = new ArrayList<>();
                 List<ElementDefinition> elementDefs = segmentDef.getElements();
                 if (elementDefs != null) {
@@ -141,9 +138,7 @@ public class BuildJsonSchema {
         }
 
 
-//        String datatype = loopDef.getRepeat().equals("1") ? "array" : "struct";
-
-        String datatype = isFirstLoop ? "struct" : "array";
+        String datatype = (loopDef.getRepeat().equals("1") || isFirstLoop) ? "struct" : "array";
 
         Map<String, Object> typeMap = new HashMap<>();
         if ("struct".equals(datatype)) {

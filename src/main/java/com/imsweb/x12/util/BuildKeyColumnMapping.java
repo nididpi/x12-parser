@@ -36,6 +36,7 @@ public class BuildKeyColumnMapping {
 
         Map<String, Object> loopMap = new HashMap<>();
         loopMap.put("name", loopDef.getName());
+        loopMap.put("datatype", loopDef.getRepeat().equals("1") ? "struct" : "array");
 
         // Handle segments and their elements
         List<SegmentDefinition> segmentDefs = loopDef.getSegment();
