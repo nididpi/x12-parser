@@ -33,7 +33,8 @@ public class BuildSqlSelect {
         List<SegmentDefinition> segmentDefs = loopDef.getSegment();
         if (segmentDefs != null) {
             for (SegmentDefinition segmentDef : segmentDefs) {
-                String columnName = parentAlias + "." + segmentDef.getXid() + "_" + segmentDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase();
+                String segmentBusinessName = segmentDef.getXid() + "_" + segmentDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase();
+                String columnName = parentAlias + "." + segmentBusinessName;
                 String columnAlias = "segment_" + columnName.replace(".", "_");
                 selectBuilder.append(columnName + " AS " + columnAlias).append(",\n");
             }
