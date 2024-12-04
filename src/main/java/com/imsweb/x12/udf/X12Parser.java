@@ -78,12 +78,6 @@ public class X12Parser implements UDF1<String, String> {
                 jsonArray.put(jsonObject);
             }
 
-//            JSONObject jsonObject = new JSONObject();
-//            jsonObject.put("FatalErrors", x12reader.getFatalErrors());
-//            jsonObject.put("Errors", x12reader.getErrors());
-//
-//            jsonArray.put(jsonObject);
-
             return jsonArray.toString();
         } catch (Exception e) {
             return e.toString();
