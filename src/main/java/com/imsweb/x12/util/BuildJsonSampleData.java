@@ -37,13 +37,13 @@ public class BuildJsonSampleData {
 
         // Define the Errors field
         Map<String, Object> errorsField = new HashMap<>();
-        errorsField.put("Errors", new HashMap<>());
+        errorsField.put("Errors", new ArrayList<>());
 
         errorFields.add(errorsField);
 
         // Define the FatalErrors field
         Map<String, Object> fatalErrorsField = new HashMap<>();
-        fatalErrorsField.put("FatalErrors", new HashMap<>());
+        fatalErrorsField.put("FatalErrors", new ArrayList<>());
 
         errorFields.add(fatalErrorsField);
 
