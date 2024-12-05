@@ -15,11 +15,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class BuildKeyColumnMapping {
+public class no_BuildKeyColumnMapping {
 
     private TransactionDefinition transactionDef;
 
-    public BuildKeyColumnMapping(TransactionDefinition transactionDef) {
+    public no_BuildKeyColumnMapping(TransactionDefinition transactionDef) {
         this.transactionDef = transactionDef;
     }
 
@@ -93,7 +93,7 @@ public class BuildKeyColumnMapping {
 
             // Assuming you have a valid TransactionDefinition object
             TransactionDefinition transactionDef = reader837.getDefinition();
-            BuildKeyColumnMapping mapper = new BuildKeyColumnMapping(transactionDef);
+            no_BuildKeyColumnMapping mapper = new no_BuildKeyColumnMapping(transactionDef);
 
             // Capture the data in a flat structure
             Map<String, Map<String, Object>> structuredData = mapper.captureDefinitions();
