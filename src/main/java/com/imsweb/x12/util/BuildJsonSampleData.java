@@ -119,6 +119,15 @@ public class BuildJsonSampleData {
 //        }
 
         loopMap.put(loopDef.getXid() + "_" + loopDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase(), combinedFields);
+//        if ("struct".equals(datatype)) {
+//            // Add the first element of combinedFields as a single object if it's a struct
+//            if (!combinedFields.isEmpty()) {
+//                loopMap.put(loopDef.getXid() + "_" + loopDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase(), combinedFields.get(0));
+//            }
+//        } else if ("array".equals(datatype)) {
+//            // Add the entire list as it is if it's an array type
+//            loopMap.put(loopDef.getXid() + "_" + loopDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase(), combinedFields);
+//        }
         return loopMap;
     }
 
