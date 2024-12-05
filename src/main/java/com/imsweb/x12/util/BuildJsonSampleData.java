@@ -75,7 +75,19 @@ public class BuildJsonSampleData {
                     }
                 }
 
-                segmentMap.put(segmentDef.getXid() + "_" + segmentDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase(), elementMap);
+                if ("1".equals(segmentDef.getMaxUse())) { String a = "a";}
+                else {
+                    String a = "b";
+                }
+
+                if ("1".equals(segmentDef.getMaxUse())) {
+                    segmentMap.put(segmentDef.getXid() + "_" + segmentDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase(), elementMap);
+                } else {
+                    List<Map<String, Object>> arrayWrapper = new ArrayList<>();
+                    arrayWrapper.add(elementMap);
+                    segmentMap.put(segmentDef.getXid() + "_" + segmentDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase(), arrayWrapper);
+                }
+
                 segmentList.add(segmentMap);
             }
         }
@@ -153,6 +165,7 @@ public class BuildJsonSampleData {
 
             // Save JSON to file
             String filePath = "837sampledata.json";
+
             mapper.saveToJsonFile(filePath, structuredData);
 //            System.out.println(structuredData);
 
