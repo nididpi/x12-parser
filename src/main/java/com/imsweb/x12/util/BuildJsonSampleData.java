@@ -112,40 +112,26 @@ public class BuildJsonSampleData {
         }
 
 
-        String datatype = (loopDef.getRepeat().equals("1") || isFirstLoop) ? "struct" : "array";
-//        loopMap.put("name", loopDef.getXid() + "_" + loopDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase());
+        if ("1".equals(loopDef.getRepeat()) || isFirstLoop) {
+            if (!combinedFields.isEmpty()) {
+                Map<String, Object> combinedMap = new HashMap<>();
+                for (Map<String, Object> map : combinedFields) {
+                    combinedMap.putAll(map);
+                }
+                loopMap.put(loopDef.getXid() + "_" + loopDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase(), combinedMap);
+            }
+        } else {
+            // Add as an array
+            loopMap.put(loopDef.getXid() + "_" + loopDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase(), combinedFields);
+        }
 
-//        Map<String, Object> typeMap = new HashMap<>();
-//        if ("struct".equals(datatype)) {
-//            typeMap.put("type", "struct");
-//            typeMap.put("fields", combinedFields);
-//        } else if ("array".equals(datatype)) {
-//            typeMap.put("type", "array");
-//            typeMap.put("containsNull", true);
-//
-//            Map<String, Object> elementTypeMap = new HashMap<>();
-//            elementTypeMap.put("type", "struct");
-//            elementTypeMap.put("fields", combinedFields);
-//
-//            typeMap.put("elementType", elementTypeMap);
-//        }
 
-        loopMap.put(loopDef.getXid() + "_" + loopDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase(), combinedFields);
-//        if ("struct".equals(datatype)) {
-//            // Add the first element of combinedFields as a single object if it's a struct
-//            if (!combinedFields.isEmpty()) {
-//                loopMap.put(loopDef.getXid() + "_" + loopDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase(), combinedFields.get(0));
-//            }
-//        } else if ("array".equals(datatype)) {
-//            // Add the entire list as it is if it's an array type
-//            loopMap.put(loopDef.getXid() + "_" + loopDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase(), combinedFields);
-//        }
         return loopMap;
     }
 
     public void saveToJsonFile(String filePath, Map<String, Object> structure) throws IOException {
         Gson gson = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
-        String jsonOutput = gson.toJson(structure);
+        String jsonOutput = gson.toJson(structure.get("ISA_LOOP_interchange_control_header"));
 
         try (FileWriter writer = new FileWriter(filePath)) {
             writer.write(jsonOutput);
