@@ -125,6 +125,9 @@ public class BuildJsonSchema {
         List<LoopDefinition> childLoopDefs = loopDef.getLoop();
         if (childLoopDefs != null) {
             for (LoopDefinition childLoopDef : childLoopDefs) {
+                if (childLoopDef.getUsage().name().equals("NOT_USED")) {
+                    continue;
+                }
                 Map<String, Object> childLoopMap = captureLoopDefinitions(childLoopDef, false);
                 childLoops.add(childLoopMap);
             }
