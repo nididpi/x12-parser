@@ -92,9 +92,6 @@ public class BuildJsonSampleData {
                     for (ElementDefinition elementDef : elementDefs) {
                         Map<String, Object> elementMap = new HashMap<>();
                         elementMap.put("name", elementDef.getXid() + "_" + elementDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase());
-                        elementMap.put("type", "string");
-                        elementMap.put("nullable", true);
-                        elementMap.put("metadata", new HashMap<String, Object>());
                         elementList.add(elementMap);
                     }
                 }
