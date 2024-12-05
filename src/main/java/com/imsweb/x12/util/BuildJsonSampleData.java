@@ -92,7 +92,7 @@ public class BuildJsonSampleData {
 
 
         String datatype = (loopDef.getRepeat().equals("1") || isFirstLoop) ? "struct" : "array";
-        loopMap.put("name", loopDef.getXid() + "_" + loopDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase());
+//        loopMap.put("name", loopDef.getXid() + "_" + loopDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase());
 
 //        Map<String, Object> typeMap = new HashMap<>();
 //        if ("struct".equals(datatype)) {
@@ -109,13 +109,13 @@ public class BuildJsonSampleData {
 //            typeMap.put("elementType", elementTypeMap);
 //        }
 
-        loopMap.put("type", combinedFields);
+        loopMap.put(loopDef.getXid() + "_" + loopDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase(), combinedFields);
         return loopMap;
     }
 
     public void saveToJsonFile(String filePath, Map<String, Object> structure) throws IOException {
         Gson gson = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
-        String jsonOutput = gson.toJson(structure.get("type"));
+        String jsonOutput = gson.toJson(structure);
 
         try (FileWriter writer = new FileWriter(filePath)) {
             writer.write(jsonOutput);
