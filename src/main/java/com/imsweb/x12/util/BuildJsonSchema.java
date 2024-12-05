@@ -81,6 +81,9 @@ public class BuildJsonSchema {
         List<SegmentDefinition> segmentDefs = loopDef.getSegment();
         if (segmentDefs != null) {
             for (SegmentDefinition segmentDef : segmentDefs) {
+                if (segmentDef.getUsage().name().equals("NOT_USED")) {
+                    continue;
+                }
                 Map<String, Object> segmentMap = new HashMap<>();
                 segmentMap.put("name", segmentDef.getXid() + "_" + segmentDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase());
                 segmentMap.put("nullable", true);
@@ -90,6 +93,9 @@ public class BuildJsonSchema {
                 List<ElementDefinition> elementDefs = segmentDef.getElements();
                 if (elementDefs != null) {
                     for (ElementDefinition elementDef : elementDefs) {
+                        if (elementDef.getUsage().name().equals("NOT_USED")) {
+                            continue;
+                        }
                         Map<String, Object> elementMap = new HashMap<>();
                         elementMap.put("name", elementDef.getXid() + "_" + elementDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase());
                         elementMap.put("type", "string");
