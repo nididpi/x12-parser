@@ -54,7 +54,6 @@ public class BuildJsonSampleData {
             return null;
         }
         Map<String, Object> loopMap = new HashMap<>();
-        loopMap.put("name", loopDef.getXid() + "_" + loopDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase());
 
         List<Map<String, Object>> segmentList = new ArrayList<>();
         List<SegmentDefinition> segmentDefs = loopDef.getSegment();
@@ -93,23 +92,24 @@ public class BuildJsonSampleData {
 
 
         String datatype = (loopDef.getRepeat().equals("1") || isFirstLoop) ? "struct" : "array";
+        loopMap.put("name", loopDef.getXid() + "_" + loopDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase());
 
-        Map<String, Object> typeMap = new HashMap<>();
-        if ("struct".equals(datatype)) {
-            typeMap.put("type", "struct");
-            typeMap.put("fields", combinedFields);
-        } else if ("array".equals(datatype)) {
-            typeMap.put("type", "array");
-            typeMap.put("containsNull", true);
+//        Map<String, Object> typeMap = new HashMap<>();
+//        if ("struct".equals(datatype)) {
+//            typeMap.put("type", "struct");
+//            typeMap.put("fields", combinedFields);
+//        } else if ("array".equals(datatype)) {
+//            typeMap.put("type", "array");
+//            typeMap.put("containsNull", true);
+//
+//            Map<String, Object> elementTypeMap = new HashMap<>();
+//            elementTypeMap.put("type", "struct");
+//            elementTypeMap.put("fields", combinedFields);
+//
+//            typeMap.put("elementType", elementTypeMap);
+//        }
 
-            Map<String, Object> elementTypeMap = new HashMap<>();
-            elementTypeMap.put("type", "struct");
-            elementTypeMap.put("fields", combinedFields);
-
-            typeMap.put("elementType", elementTypeMap);
-        }
-
-        loopMap.put("type", typeMap);
+        loopMap.put("type", combinedFields);
         return loopMap;
     }
 
