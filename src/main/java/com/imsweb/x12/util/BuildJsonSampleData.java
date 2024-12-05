@@ -37,31 +37,13 @@ public class BuildJsonSampleData {
 
         // Define the Errors field
         Map<String, Object> errorsField = new HashMap<>();
-        errorsField.put("name", "Errors");
-
-        Map<String, Object> errorsType = new HashMap<>();
-        errorsType.put("type", "array");
-        errorsType.put("elementType", "string");
-        errorsType.put("containsNull", true);
-
-        errorsField.put("type", errorsType);
-        errorsField.put("nullable", true);
-        errorsField.put("metadata", new HashMap<String, Object>());
+        errorsField.put("Errors", new HashMap<>());
 
         errorFields.add(errorsField);
 
         // Define the FatalErrors field
         Map<String, Object> fatalErrorsField = new HashMap<>();
-        fatalErrorsField.put("name", "FatalErrors");
-
-        Map<String, Object> fatalErrorsType = new HashMap<>();
-        fatalErrorsType.put("type", "array");
-        fatalErrorsType.put("elementType", "string");
-        fatalErrorsType.put("containsNull", true);
-
-        fatalErrorsField.put("type", fatalErrorsType);
-        fatalErrorsField.put("nullable", true);
-        fatalErrorsField.put("metadata", new HashMap<String, Object>());
+        fatalErrorsField.put("FatalErrors", new HashMap<>());
 
         errorFields.add(fatalErrorsField);
 
@@ -74,46 +56,21 @@ public class BuildJsonSampleData {
         Map<String, Object> loopMap = new HashMap<>();
         loopMap.put("name", loopDef.getXid() + "_" + loopDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase());
 
-        loopMap.put("nullable", true);
-        loopMap.put("metadata", new HashMap<String, Object>());
-
         List<Map<String, Object>> segmentList = new ArrayList<>();
         List<SegmentDefinition> segmentDefs = loopDef.getSegment();
         if (segmentDefs != null) {
             for (SegmentDefinition segmentDef : segmentDefs) {
                 Map<String, Object> segmentMap = new HashMap<>();
-                segmentMap.put("name", segmentDef.getXid() + "_" + segmentDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase());
-                segmentMap.put("nullable", true);
-                segmentMap.put("metadata", new HashMap<String, Object>());
 
-                List<Map<String, Object>> elementList = new ArrayList<>();
+                Map<String, Object> elementMap = new HashMap<>();
                 List<ElementDefinition> elementDefs = segmentDef.getElements();
                 if (elementDefs != null) {
                     for (ElementDefinition elementDef : elementDefs) {
-                        Map<String, Object> elementMap = new HashMap<>();
-                        elementMap.put("name", elementDef.getXid() + "_" + elementDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase());
-                        elementList.add(elementMap);
+                        elementMap.put(elementDef.getXid() + "_" + elementDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase(), null);
                     }
                 }
 
-                Map<String, Object> typeMap = new HashMap<>();
-                if (segmentDef.getMaxUse().equals("1")) {
-                    // struct
-                    typeMap.put("type", "struct");
-                    typeMap.put("fields", elementList);
-                } else {
-                    // array
-                    typeMap.put("type", "array");
-                    typeMap.put("containsNull", true);
-
-                    Map<String, Object> elementTypeMap = new HashMap<>();
-                    elementTypeMap.put("type", "struct");
-                    elementTypeMap.put("fields", elementList);
-
-                    typeMap.put("elementType", elementTypeMap);
-                }
-
-                segmentMap.put("type", typeMap);
+                segmentMap.put(segmentDef.getXid() + "_" + segmentDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase(), elementMap);
                 segmentList.add(segmentMap);
             }
         }
@@ -157,7 +114,7 @@ public class BuildJsonSampleData {
     }
 
     public void saveToJsonFile(String filePath, Map<String, Object> structure) throws IOException {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        Gson gson = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
         String jsonOutput = gson.toJson(structure.get("type"));
 
         try (FileWriter writer = new FileWriter(filePath)) {
