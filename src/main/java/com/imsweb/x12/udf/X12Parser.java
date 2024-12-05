@@ -3,21 +3,19 @@ package com.imsweb.x12.udf;
 import com.imsweb.x12.Element;
 import com.imsweb.x12.Loop;
 import com.imsweb.x12.Segment;
-import com.imsweb.x12.X12Test;
-import com.imsweb.x12.reader.X12Reader.FileType;
+import com.imsweb.x12.mapping.ElementDefinition;
+import com.imsweb.x12.mapping.LoopDefinition;
+import com.imsweb.x12.mapping.SegmentDefinition;
+import com.imsweb.x12.mapping.CompositeDefinition;
 import com.imsweb.x12.reader.X12Reader;
-
-
+import com.imsweb.x12.reader.X12Reader.FileType;
+import org.apache.spark.sql.api.java.UDF1;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.spark.sql.api.java.UDF1;
+import java.util.*;
 
 public class X12Parser implements UDF1<String, String> {
 
@@ -38,7 +36,7 @@ public class X12Parser implements UDF1<String, String> {
                 while ((line = reader.readLine()) != null) {
                     lineNumber++;
                     if (lineNumber == 3) {
-                        System.out.println("Third line: " + line);
+//                        System.out.println("Third line: " + line);
                         String[] splitArray = line.split("\\*");
                         fileTypeString = splitArray[1] + "_" + splitArray[3];
                         break;
@@ -68,11 +66,12 @@ public class X12Parser implements UDF1<String, String> {
 
             X12Reader x12reader = new X12Reader(fileTypeObject, freshInputStream);
             List<Loop> loops = x12reader.getLoops();
+            LoopDefinition loopDef = x12reader.getDefinition().getLoop();
 
             JSONArray jsonArray = new JSONArray();
 
             for (Loop loop : loops) {
-                JSONObject jsonObject = processLoop(loop);
+                JSONObject jsonObject = processLoop(loop, loopDef);
                 jsonObject.put("FatalErrors", x12reader.getFatalErrors());
                 jsonObject.put("Errors", x12reader.getErrors());
                 jsonArray.put(jsonObject);
@@ -84,55 +83,85 @@ public class X12Parser implements UDF1<String, String> {
         }
     }
 
-    private static JSONObject loadDefinitionJsonFromResource(String resourceName) throws IOException {
-        try (InputStream inputStream = X12Test.class.getClassLoader().getResourceAsStream(resourceName)) {
-            if (inputStream == null) {
-                throw new IOException("Resource not found: " + resourceName);
-            }
+    public static SegmentDefinition findSegmentByName(LoopDefinition loopDef, String segmentId) {
 
-            StringBuilder jsonContent = new StringBuilder();
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    jsonContent.append(line);
-                }
-            }
+        List<SegmentDefinition> segmentDefs = loopDef.getSegment();
 
-            return new JSONObject(jsonContent.toString());
+        for (SegmentDefinition obj : segmentDefs) {
+            if (obj.getXid().equals(segmentId)) {
+                return obj;
+            }
         }
+        throw new IllegalArgumentException("Error: The segment name '" + segmentId + "' does not exist in the list.");
     }
 
-    private static JSONObject processLoop(Loop loop) throws IOException {
+    public static String findElementByName(SegmentDefinition segDef, String elementId) {
 
-        JSONObject definitionJson = loadDefinitionJsonFromResource("837definitions.json");
+        List<ElementDefinition> elementDefs = segDef.getElements();
+        List<CompositeDefinition> elementComDefs = segDef.getComposites();
+
+        if (elementDefs != null) {
+            for (ElementDefinition obj : elementDefs) {
+                if (obj.getXid().equals(elementId)) {
+                    return obj.getName();
+                }
+            }
+        }
+
+        if (elementComDefs != null) {
+            for (CompositeDefinition obj : elementComDefs) {
+                if (obj.getXid().equals(elementId)) {
+                    return obj.getName();
+                }
+            }
+        }
+
+        throw new IllegalArgumentException("Error: The element name '" + elementId + "' does not exist in the list.");
+    }
+    public static LoopDefinition findLoopByName(LoopDefinition loopDef, String loopId) {
+
+        List<LoopDefinition> loopDefs = loopDef.getLoop();
+
+        for (LoopDefinition obj : loopDefs) {
+            if (obj.getXid().equals(loopId)) {
+                return obj;
+            }
+        }
+        throw new IllegalArgumentException("Error: The loop name '" + loopId + "' does not exist in the list.");
+    }
+
+
+
+
+    private static JSONObject processLoop(Loop loop, LoopDefinition loopDef) throws IOException {
+
+        if (!loop.getId().equals(loopDef.getXid())) {
+            throw new IllegalArgumentException("Error:data loop " + loop.getId() + " doesn't match loop def " + loopDef.getXid());
+        }
 
         JSONObject loopJson = new JSONObject();
-        String loopId = loop.getId();
-
-        JSONObject loopDefinitions = definitionJson.optJSONObject(loopId);
 
         Map<String, Object> segmentResults = new HashMap<>();
 
         for (Segment segment : loop.getSegments()) {
             String segmentId = segment.getId();
-            JSONObject segmentDefinitions = loopDefinitions != null ? loopDefinitions.optJSONObject(segmentId) : null;
 
-            JSONObject elementDefinitions = segmentDefinitions != null ? segmentDefinitions.optJSONObject("elements") : null;
+            SegmentDefinition segmentDef = findSegmentByName(loopDef, segment.getId());
 
             JSONObject segmentJson = new JSONObject();
             List<Element> elements = segment.getElements();
-            for (int index = 0; index < elements.size(); index++) {
-                String formattedIndex = String.format("%02d", index + 1);
-                String elementId = segmentId + formattedIndex;
-                String elementDefinition = (elementDefinitions != null ? elementDefinitions.optString(elementId, "") : "");
 
-                String elementKeyWithBusinessValue = elementId + "_" + elementDefinition.replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase();
-                segmentJson.put(elementKeyWithBusinessValue, elements.get(index));
+            for (Element element : elements) {
+                String elementId = element.getId();
+
+                String elementDef = findElementByName(segmentDef, elementId);
+                String elementName = elementId + "_" + elementDef.replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase();
+                segmentJson.put(elementName, element.getValue());
             }
 
-            String segmentName = (segmentDefinitions != null ? segmentDefinitions.optString("name", "") : "").replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase();
+            String segmentName = segmentDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase();
             String segmentKeyWithBusinessValue = segmentId + "_" + segmentName;
-            String datatype = segmentDefinitions != null ? segmentDefinitions.optString("datatype") : "struct";
+            String datatype = segmentDef.getMaxUse().equals("1") ? "struct" : "array";
 
             if ("array".equals(datatype)) {
                 JSONArray segmentArray = (JSONArray) segmentResults.getOrDefault(segmentKeyWithBusinessValue, new JSONArray());
@@ -150,12 +179,14 @@ public class X12Parser implements UDF1<String, String> {
         // Handle child loops
         for (Loop childLoop : loop.getLoops()) {
             String childLoopId = childLoop.getId();
-            JSONObject childLoopJson = processLoop(childLoop);
 
-            JSONObject childloopDefinitions = definitionJson.optJSONObject(childLoopId);
-            String datatype = childloopDefinitions != null ? childloopDefinitions.optString("datatype") : "struct";
+            LoopDefinition childLoopDef = findLoopByName(loopDef, childLoopId);
 
-            String childDef = definitionJson.optJSONObject(childLoopId).optString("name").replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase();
+            JSONObject childLoopJson = processLoop(childLoop, childLoopDef);
+
+            String datatype = childLoopDef.getRepeat().equals("1") ? "struct" : "array";
+
+            String childDef = childLoopDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase();
             String childLoopKeyWithBusinessValue = childLoopId + "_" + childDef;
 
             if ("array".equals(datatype)) {
@@ -172,4 +203,6 @@ public class X12Parser implements UDF1<String, String> {
 
         return loopJson;
     }
+
+
 }
