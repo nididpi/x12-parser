@@ -16,10 +16,7 @@ import org.json.JSONObject;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class X12ParserNew implements UDF1<String, String> {
 
@@ -207,4 +204,6 @@ public class X12ParserNew implements UDF1<String, String> {
 
         return loopJson;
     }
+
+
 }
