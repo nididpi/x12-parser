@@ -37,7 +37,6 @@ public class X12Parser implements UDF1<String, String> {
                 while ((line = reader.readLine()) != null) {
                     lineNumber++;
                     if (lineNumber == 3) {
-//                        System.out.println("Third line: " + line);
                         String[] splitArray = line.split("\\*");
                         fileTypeString = splitArray[1] + "_" + splitArray[3];
                         break;
@@ -81,15 +80,88 @@ public class X12Parser implements UDF1<String, String> {
         }
     }
 
-    public static SegmentDefinition findSegmentByName(LoopDefinition loopDef, String segmentId) {
+    public static  Map<String, List<SegmentDefinition>> findSegmentByName(LoopDefinition loopDef, Segment segment, String MissingId) {
+
+        Map<String, List<SegmentDefinition>> matchMap = new HashMap<>();
+        matchMap.put("matched", new ArrayList<>());
+        matchMap.put("unmatched", new ArrayList<>());
 
         List<SegmentDefinition> segmentDefs = loopDef.getSegment();
+        String segmentId = segment.getId();
+
+        List<SegmentDefinition> matchSegDef = new ArrayList<>();
 
         for (SegmentDefinition obj : segmentDefs) {
             if (obj.getXid().equals(segmentId)) {
-                return obj;
+                matchSegDef.add(obj);
             }
         }
+
+        if (MissingId != null) {
+            for (SegmentDefinition obj : matchSegDef) {
+                if (obj.getXid().equals(segmentId) && !obj.getUsage().name().equals("NOT_USED")) {
+
+                    boolean matchAllElement = true;
+
+// Iterate through each ElementDefinition
+                    if (obj.getElements() != null) {
+                        for (ElementDefinition elementDef : obj.getElements()) {
+                            if (elementDef.getUsage().equals("NOT_USED")) {continue;}
+                            String elementID = elementDef.getXid();
+                            boolean isMatch = false;
+
+                            // Check if valid codes are null, or if they contain the target value
+                            if (elementDef.getValidCodes() == null) {
+                                isMatch = true;
+                            } else if (elementDef.getValidCodes().getCodes().contains(segment.getElement(elementID).getValue())) {
+                                isMatch = true;
+                            }
+
+                            // If this element doesn't match, record it and flag as not all matching
+                            if (!isMatch) {
+                                matchAllElement = false;
+                            }
+                        }
+                    }
+
+                    if (obj.getComposites() != null) {
+                        for (CompositeDefinition comDef : obj.getComposites()) {
+                            if (comDef.getUsage().equals("N")) {continue;}
+                            String elementID = comDef.getXid();
+                            boolean isMatch = false;
+
+//                            // Check if valid codes are null, or if they contain the target value
+//                            if (comDef.getValidCodes() == null) {
+//                                isMatch = true;
+//                            } else if (comDef.getValidCodes().getCodes().contains(segment.getElement(elementID).getValue())) {
+//                                isMatch = true;
+//                            }
+
+                            // If this element doesn't match, record it and flag as not all matching
+                            if (!isMatch) {
+                                matchAllElement = true;
+                            }
+                        }
+                    }
+
+                    if (matchAllElement) {
+                        matchMap.get("matched").add(obj);
+                    } else {
+                        matchMap.get("unmatched").add(obj);
+                        }
+                    }
+
+                }
+            return matchMap;
+        } else {
+            for (SegmentDefinition obj : matchSegDef) {
+                if (obj.getXid().equals(segmentId)) {
+                    matchMap.get("matched").add(obj);
+                    return matchMap;
+                }
+            }
+        }
+
         throw new IllegalArgumentException("Error: The segment name '" + segmentId + "' does not exist in the list.");
     }
 
@@ -138,14 +210,55 @@ public class X12Parser implements UDF1<String, String> {
 
         JSONObject loopJson = new JSONObject();
 
-        Map<String, Object> segmentResults = new HashMap<>();
 
+        // Handle segment
+
+        Map<String, Integer> idCountInLoopDef = new HashMap<>();
+        Map<String, Integer> idCountInLoop = new HashMap<>();
+        if (loopDef.getSegment() != null) {for (SegmentDefinition segmentDef : loopDef.getSegment()) {
+            idCountInLoopDef.merge(segmentDef.getXid(), 1, Integer::sum);
+        }}
+
+//        System.out.println("current loop: " + loop.getId());
+//        if (loop.getId().equals("2400")) {
+//            String a = "a";
+//        }
+
+        // Count occurrences of IDs in loopSegments
+        if (loop != null) {for (Segment segment : loop.getSegments()) {
+            idCountInLoop.merge(segment.getId(), 1, Integer::sum);
+        }}
+
+        List<String> missingSegmentIds = new ArrayList<>();
+        idCountInLoopDef.forEach((id, countInLoopDef) -> {
+            if (countInLoopDef > 1) {
+                int countInLoop = idCountInLoop.getOrDefault(id, 0);
+                if (countInLoop != countInLoopDef) {
+                    missingSegmentIds.add(id);
+                }
+            }
+        });
+        System.out.println("missing IDs with matching counts: " + missingSegmentIds);
+
+
+        Map<String, Object> segmentResults = new HashMap<>();
+        Map<String, List<SegmentDefinition>> matchMap = null;
+        
         if (loop != null) {
             for (Segment segment : loop.getSegments()) {
                 String segmentId = segment.getId();
-
-                SegmentDefinition segmentDef = findSegmentByName(loopDef, segment.getId());
-
+                System.out.println(segmentId);
+                if (segmentId.equals("REF")) {
+                    String a = "a";
+                }
+                
+                if (missingSegmentIds.contains(segmentId)) {
+                    matchMap = findSegmentByName(loopDef, segment, segmentId);
+                } else {
+                   matchMap = findSegmentByName(loopDef, segment, null);
+                }
+                SegmentDefinition segmentDef = matchMap.get("matched").get(0);
+                System.out.println("missing IDs with matching counts: " + matchMap);
                 JSONObject segmentJson = new JSONObject();
                 List<Element> elements = segment.getElements();
 
@@ -173,6 +286,7 @@ public class X12Parser implements UDF1<String, String> {
 
         // Handle missing segment
         List<SegmentDefinition> missingSegments = new ArrayList<>();
+        if(matchMap != null) {missingSegments.addAll(matchMap.get("unmatched"));}
 
         Set<String> segmentIds;
 
@@ -181,8 +295,6 @@ public class X12Parser implements UDF1<String, String> {
         } else {
             segmentIds = Collections.emptySet();
         }
-
-//        System.out.println("current loop: " + loop.getId());
 
         // Iterate over SegmentDefinitions to classify them
         if (loopDef.getSegment() != null) {

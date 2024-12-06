@@ -1,4 +1,4 @@
-package com.imsweb.x12.util;
+package com.imsweb.x12.crap;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.imsweb.x12.mapping.ElementDefinition;
