@@ -15,7 +15,10 @@ import org.json.JSONObject;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class X12Parser implements UDF1<String, String> {
 
@@ -50,14 +53,11 @@ public class X12Parser implements UDF1<String, String> {
                 fileTypeObject = FileType.ANSI837_5010_X222;
             } else if (fileTypeString.contains("835_005010")) {
                 fileTypeObject = FileType.ANSI835_5010_X221;
-            }
-            else if (fileTypeString.contains("834_005010")) {
+            } else if (fileTypeString.contains("834_005010")) {
                 fileTypeObject = FileType.ANSI834_5010_X220;
-            }
-            else if (fileTypeString.contains("832_005010")) {
+            } else if (fileTypeString.contains("832_005010")) {
                 fileTypeObject = FileType.ANSI820_5010_X218;
-            }
-            else {
+            } else {
                 throw new IllegalArgumentException("Unknown file type." + fileTypeString);
             }
 
@@ -69,6 +69,10 @@ public class X12Parser implements UDF1<String, String> {
             LoopDefinition loopDef = x12reader.getDefinition().getLoop();
 
             JSONArray jsonArray = new JSONArray();
+
+            String content = new String(Files.readAllBytes(Paths.get("837sampledata.json")));  //TODO: might not need
+            JSONObject sampleJson = new JSONObject(content); //TODO: might not need
+
 
             for (Loop loop : loops) {
                 JSONObject jsonObject = processLoop(loop, loopDef);
@@ -118,6 +122,7 @@ public class X12Parser implements UDF1<String, String> {
 
         throw new IllegalArgumentException("Error: The element name '" + elementId + "' does not exist in the list.");
     }
+
     public static LoopDefinition findLoopByName(LoopDefinition loopDef, String loopId) {
 
         List<LoopDefinition> loopDefs = loopDef.getLoop();
@@ -129,8 +134,6 @@ public class X12Parser implements UDF1<String, String> {
         }
         throw new IllegalArgumentException("Error: The loop name '" + loopId + "' does not exist in the list.");
     }
-
-
 
 
     private static JSONObject processLoop(Loop loop, LoopDefinition loopDef) throws IOException {
@@ -172,6 +175,53 @@ public class X12Parser implements UDF1<String, String> {
             }
         }
 
+        // Handle missing segment
+        List<SegmentDefinition> missingSegments = new ArrayList<>();
+
+        Set<String> segmentIds = loop.getSegments().stream().map(Segment::getId).collect(Collectors.toSet());
+
+//        System.out.println("current loop: " + loop.getId());
+
+        // Iterate over SegmentDefinitions to classify them
+        if (loopDef.getSegment() != null) {
+            for (SegmentDefinition segmentDef : loopDef.getSegment()) {
+                if (!segmentIds.contains(segmentDef.getXid())) {
+                    missingSegments.add(segmentDef);
+                }
+            }
+        }
+
+        for (SegmentDefinition segmentDef : missingSegments) {
+            if (segmentDef.getUsage().name().equals("NOT_USED")) {
+                continue;
+            }
+
+            JSONObject segmentJson = new JSONObject();
+            List<ElementDefinition> elementDefs = segmentDef.getElements();
+
+            if (elementDefs != null) {
+                for (ElementDefinition elementDef : elementDefs) {
+                    if (elementDef.getUsage().name().equals("NOT_USED")) {
+                        continue;
+                    }
+                    segmentJson.put(elementDef.getXid() + "_" + elementDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase(), JSONObject.NULL);
+                }
+            }
+
+            String segmentKeyWithBusinessValue = segmentDef.getXid() + "_" + segmentDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase();
+
+            if ("1".equals(segmentDef.getMaxUse())) {
+                segmentResults.put(segmentKeyWithBusinessValue, segmentJson);
+            } else {
+                JSONArray segmentArray = (JSONArray) segmentResults.getOrDefault(segmentKeyWithBusinessValue, new JSONArray());
+                segmentArray.put(segmentJson);
+                segmentResults.put(segmentKeyWithBusinessValue, segmentArray);
+            }
+
+        }
+
+
+        // put segment data to current loop json
         for (Map.Entry<String, Object> entry : segmentResults.entrySet()) {
             loopJson.put(entry.getKey(), entry.getValue());
         }
@@ -201,8 +251,10 @@ public class X12Parser implements UDF1<String, String> {
             }
         }
 
+        // Handle missing childloop
+
+
         return loopJson;
     }
-
 
 }
