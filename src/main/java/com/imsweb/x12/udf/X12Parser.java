@@ -15,8 +15,6 @@ import org.json.JSONObject;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -69,10 +67,6 @@ public class X12Parser implements UDF1<String, String> {
             LoopDefinition loopDef = x12reader.getDefinition().getLoop();
 
             JSONArray jsonArray = new JSONArray();
-
-            String content = new String(Files.readAllBytes(Paths.get("837sampledata.json")));  //TODO: might not need
-            JSONObject sampleJson = new JSONObject(content); //TODO: might not need
-
 
             for (Loop loop : loops) {
                 JSONObject jsonObject = processLoop(loop, loopDef);
@@ -138,7 +132,7 @@ public class X12Parser implements UDF1<String, String> {
 
     private static JSONObject processLoop(Loop loop, LoopDefinition loopDef) throws IOException {
 
-        if (!loop.getId().equals(loopDef.getXid())) {
+        if (loop != null && !loop.getId().equals(loopDef.getXid())) {
             throw new IllegalArgumentException("Error:data loop " + loop.getId() + " doesn't match loop def " + loopDef.getXid());
         }
 
@@ -146,47 +140,55 @@ public class X12Parser implements UDF1<String, String> {
 
         Map<String, Object> segmentResults = new HashMap<>();
 
-        for (Segment segment : loop.getSegments()) {
-            String segmentId = segment.getId();
+        if (loop != null) {
+            for (Segment segment : loop.getSegments()) {
+                String segmentId = segment.getId();
 
-            SegmentDefinition segmentDef = findSegmentByName(loopDef, segment.getId());
+                SegmentDefinition segmentDef = findSegmentByName(loopDef, segment.getId());
 
-            JSONObject segmentJson = new JSONObject();
-            List<Element> elements = segment.getElements();
+                JSONObject segmentJson = new JSONObject();
+                List<Element> elements = segment.getElements();
 
-            for (Element element : elements) {
-                String elementId = element.getId();
+                for (Element element : elements) {
+                    String elementId = element.getId();
 
-                String elementDef = findElementByName(segmentDef, elementId);
-                String elementName = elementId + "_" + elementDef.replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase();
-                segmentJson.put(elementName, element.getValue());
-            }
+                    String elementDef = findElementByName(segmentDef, elementId);
+                    String elementName = elementId + "_" + elementDef.replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase();
+                    segmentJson.put(elementName, element.getValue());
+                }
 
-            String segmentName = segmentDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase();
-            String segmentKeyWithBusinessValue = segmentId + "_" + segmentName;
-            String datatype = segmentDef.getMaxUse().equals("1") ? "struct" : "array";
+                String segmentName = segmentDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase();
+                String segmentKeyWithBusinessValue = segmentId + "_" + segmentName;
+                String datatype = segmentDef.getMaxUse().equals("1") ? "struct" : "array";
 
-            if ("array".equals(datatype)) {
-                JSONArray segmentArray = (JSONArray) segmentResults.getOrDefault(segmentKeyWithBusinessValue, new JSONArray());
-                segmentArray.put(segmentJson);
-                segmentResults.put(segmentKeyWithBusinessValue, segmentArray);
-            } else {
-                segmentResults.put(segmentKeyWithBusinessValue, segmentJson);
+                if ("array".equals(datatype)) {
+                    JSONArray segmentArray = (JSONArray) segmentResults.getOrDefault(segmentKeyWithBusinessValue, new JSONArray());
+                    segmentArray.put(segmentJson);
+                    segmentResults.put(segmentKeyWithBusinessValue, segmentArray);
+                } else {
+                    segmentResults.put(segmentKeyWithBusinessValue, segmentJson);
+                }
             }
         }
 
         // Handle missing segment
         List<SegmentDefinition> missingSegments = new ArrayList<>();
 
-        Set<String> segmentIds = loop.getSegments().stream().map(Segment::getId).collect(Collectors.toSet());
+        Set<String> segmentIds;
+
+        if (loop != null && loop.getSegments() != null) {
+            segmentIds = loop.getSegments().stream().map(Segment::getId).collect(Collectors.toSet());
+        } else {
+            segmentIds = Collections.emptySet();
+        }
 
 //        System.out.println("current loop: " + loop.getId());
 
         // Iterate over SegmentDefinitions to classify them
         if (loopDef.getSegment() != null) {
-            for (SegmentDefinition segmentDef : loopDef.getSegment()) {
-                if (!segmentIds.contains(segmentDef.getXid())) {
-                    missingSegments.add(segmentDef);
+            for (SegmentDefinition missSegmentDef : loopDef.getSegment()) {
+                if (!segmentIds.contains(missSegmentDef.getXid())) {
+                    missingSegments.add(missSegmentDef);
                 }
             }
         }
@@ -227,12 +229,57 @@ public class X12Parser implements UDF1<String, String> {
         }
 
         // Handle child loops
-        for (Loop childLoop : loop.getLoops()) {
-            String childLoopId = childLoop.getId();
+        if (loop != null) {
+            for (Loop childLoop : loop.getLoops()) {
+                String childLoopId = childLoop.getId();
 
-            LoopDefinition childLoopDef = findLoopByName(loopDef, childLoopId);
+                LoopDefinition childLoopDef = findLoopByName(loopDef, childLoopId);
 
-            JSONObject childLoopJson = processLoop(childLoop, childLoopDef);
+                JSONObject childLoopJson = processLoop(childLoop, childLoopDef);
+
+                String datatype = childLoopDef.getRepeat().equals("1") ? "struct" : "array";
+
+                String childDef = childLoopDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase();
+                String childLoopKeyWithBusinessValue = childLoopId + "_" + childDef;
+
+                if ("array".equals(datatype)) {
+                    JSONArray childArray = loopJson.optJSONArray(childLoopKeyWithBusinessValue);
+                    if (childArray == null) {
+                        childArray = new JSONArray();
+                        loopJson.put(childLoopKeyWithBusinessValue, childArray);
+                    }
+                    childArray.put(childLoopJson);
+                } else {
+                    loopJson.put(childLoopKeyWithBusinessValue, childLoopJson);
+                }
+            }
+        }
+
+        // Handle missing childloop
+        Set<String> looptIds;
+
+        if (loop != null && loop.getSegments() != null) {
+            looptIds = loop.getLoops().stream().map(Loop::getId).collect(Collectors.toSet());
+        } else {
+            looptIds = Collections.emptySet();
+        }
+
+        List<LoopDefinition> missingLoops = new ArrayList<>();
+//        System.out.println("current loop: " + loop.getId());
+
+        // Iterate over SegmentDefinitions to classify them
+        if (loopDef.getLoop() != null) {
+            for (LoopDefinition missLoopDef : loopDef.getLoop()) {
+                if (!looptIds.contains(missLoopDef.getXid())) {
+                    missingLoops.add(missLoopDef);
+                }
+            }
+        }
+
+        for (LoopDefinition childLoopDef : missingLoops) {
+            String childLoopId = childLoopDef.getXid();
+
+            JSONObject childLoopJson = processLoop(null, childLoopDef);
 
             String datatype = childLoopDef.getRepeat().equals("1") ? "struct" : "array";
 
@@ -250,8 +297,6 @@ public class X12Parser implements UDF1<String, String> {
                 loopJson.put(childLoopKeyWithBusinessValue, childLoopJson);
             }
         }
-
-        // Handle missing childloop
 
 
         return loopJson;
