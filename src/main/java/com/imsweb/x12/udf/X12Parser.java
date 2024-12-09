@@ -410,6 +410,7 @@ public class X12Parser implements UDF1<String, String> {
         }
 
         for (LoopDefinition childLoopDef : missingLoops) {
+            if (childLoopDef.getUsage().toString().equals("NOT_USED")) {continue;}
             String childLoopId = childLoopDef.getXid();
 
             JSONObject childLoopJson = processLoop(null, childLoopDef);
