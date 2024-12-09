@@ -40,6 +40,7 @@ public class BuildSqlSelect {
         List<SegmentDefinition> segmentDefs = loopDef.getSegment();
         if (segmentDefs != null) {
             for (SegmentDefinition segmentDef : segmentDefs) {
+                System.out.println(segmentDef.getUsage().toString());
                 String segmentBusinessName = segmentDef.getXid() + "_" + segmentDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase();
                 String columnName = parentAlias + "." + segmentBusinessName;
 //                String columnAlias = "segment_" + columnName.replace(".", "_");
@@ -51,7 +52,8 @@ public class BuildSqlSelect {
         List<LoopDefinition> childLoopDefs = loopDef.getLoop();
         if (childLoopDefs != null) {
             for (LoopDefinition childLoopDef : childLoopDefs) {
-
+                System.out.println(childLoopDef.getUsage().toString());
+                if (childLoopDef.getUsage().toString().equals("NOT_USED")) {continue;}
                 String exploded_alias;
 
                 if ("2300".equals(childLoopDef.getXid()) && "2000B".equals(loopDef.getXid())) {

@@ -2,10 +2,7 @@ package com.imsweb.x12.util;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.imsweb.x12.mapping.ElementDefinition;
-import com.imsweb.x12.mapping.LoopDefinition;
-import com.imsweb.x12.mapping.SegmentDefinition;
-import com.imsweb.x12.mapping.TransactionDefinition;
+import com.imsweb.x12.mapping.*;
 import com.imsweb.x12.reader.X12Reader;
 
 import java.io.File;
@@ -84,6 +81,10 @@ public class BuildJsonSchema {
                 if (segmentDef.getUsage().name().equals("NOT_USED")) {
                     continue;
                 }
+                if (segmentDef.getXid().equals("HI")) {
+                    String a = "a";
+                }
+
                 Map<String, Object> segmentMap = new HashMap<>();
                 segmentMap.put("name", segmentDef.getXid() + "_" + segmentDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase());
                 segmentMap.put("nullable", true);
@@ -98,6 +99,21 @@ public class BuildJsonSchema {
                         }
                         Map<String, Object> elementMap = new HashMap<>();
                         elementMap.put("name", elementDef.getXid() + "_" + elementDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase());
+                        elementMap.put("type", "string");
+                        elementMap.put("nullable", true);
+                        elementMap.put("metadata", new HashMap<String, Object>());
+                        elementList.add(elementMap);
+                    }
+                }
+
+                List<CompositeDefinition> comDefs = segmentDef.getComposites();
+                if (comDefs != null) {
+                    for (CompositeDefinition comDef : comDefs) {
+                        if (comDef.getUsage().toString().equals("N")) {
+                            continue;
+                        }
+                        Map<String, Object> elementMap = new HashMap<>();
+                        elementMap.put("name", comDef.getXid() + "_" + comDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase());
                         elementMap.put("type", "string");
                         elementMap.put("nullable", true);
                         elementMap.put("metadata", new HashMap<String, Object>());

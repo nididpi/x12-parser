@@ -256,6 +256,11 @@ public class X12Parser implements UDF1<String, String> {
 
         Map<String, Object> segmentResults = new HashMap<>();
         Map<String, List<SegmentDefinition>> matchMap = null;
+        List<SegmentDefinition> missingSegments = new ArrayList<>();
+
+//        if (loop.getId().equals("2300") && loop != null) {
+//            String a = "1";
+//        }
 
         if (loop != null) {
             for (Segment segment : loop.getSegments()) {
@@ -267,6 +272,10 @@ public class X12Parser implements UDF1<String, String> {
                     matchMap = findSegmentByName(loopDef, segment, null);
                 }
                 SegmentDefinition segmentDef = matchMap.get("matched").get(0);
+
+                if (matchMap != null) {
+                    missingSegments.addAll(matchMap.get("unmatched"));
+                }
 
                 JSONObject segmentJson = new JSONObject();
                 List<Element> elements = segment.getElements();
@@ -294,10 +303,6 @@ public class X12Parser implements UDF1<String, String> {
         }
 
         // Handle missing segment
-        List<SegmentDefinition> missingSegments = new ArrayList<>();
-        if (matchMap != null) {
-            missingSegments.addAll(matchMap.get("unmatched"));
-        }
 
         Set<String> segmentIds;
 
