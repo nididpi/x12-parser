@@ -3,10 +3,7 @@ package com.imsweb.x12.udf;
 import com.imsweb.x12.Element;
 import com.imsweb.x12.Loop;
 import com.imsweb.x12.Segment;
-import com.imsweb.x12.mapping.ElementDefinition;
-import com.imsweb.x12.mapping.LoopDefinition;
-import com.imsweb.x12.mapping.SegmentDefinition;
-import com.imsweb.x12.mapping.CompositeDefinition;
+import com.imsweb.x12.mapping.*;
 import com.imsweb.x12.reader.X12Reader;
 import com.imsweb.x12.reader.X12Reader.FileType;
 import org.apache.spark.sql.api.java.UDF1;
@@ -106,7 +103,7 @@ public class X12Parser implements UDF1<String, String> {
 // Iterate through each ElementDefinition
                     if (obj.getElements() != null) {
                         for (ElementDefinition elementDef : obj.getElements()) {
-                            if (elementDef.getUsage().equals("NOT_USED")) {continue;}
+                            if (elementDef.getUsage().toString().equals("NOT_USED")) {continue;}
                             String elementID = elementDef.getXid();
                             boolean isMatch = false;
 
@@ -130,16 +127,30 @@ public class X12Parser implements UDF1<String, String> {
                             String elementID = comDef.getXid();
                             boolean isMatch = false;
 
-//                            // Check if valid codes are null, or if they contain the target value
-//                            if (comDef.getValidCodes() == null) {
-//                                isMatch = true;
-//                            } else if (comDef.getValidCodes().getCodes().contains(segment.getElement(elementID).getValue())) {
-//                                isMatch = true;
-//                            }
+                            List<String> combinedValidCodes = new ArrayList<>();
+                            for (ElementDefinition elementDef : comDef.getElements()) {
+                                // Get valid codes for this element
+                                ValidCodesDefinition validCodes = elementDef.getValidCodes();
+                                if (validCodes != null) {
+                                    combinedValidCodes.addAll(validCodes.getCodes());
+                                    }
+                                }
+
+                            String code = null;
+                            if (segment.getElement(elementID) != null) {
+                                String value = segment.getElement(elementID).getValue();
+                                code = (value.split(":").length > 0) ? value.split(":")[0] : "";
+                            }
+
+                            if (combinedValidCodes.contains(code) || code == null) {
+                                isMatch = true;
+                            } else {
+                                isMatch = false;
+                            }
 
                             // If this element doesn't match, record it and flag as not all matching
                             if (!isMatch) {
-                                matchAllElement = true;
+                                matchAllElement = false;
                             }
                         }
                     }
@@ -202,7 +213,7 @@ public class X12Parser implements UDF1<String, String> {
     }
 
 
-    private static JSONObject processLoop(Loop loop, LoopDefinition loopDef) throws IOException {
+    private static JSONObject processLoop(Loop loop, LoopDefinition loopDef) {
 
         if (loop != null && !loop.getId().equals(loopDef.getXid())) {
             throw new IllegalArgumentException("Error:data loop " + loop.getId() + " doesn't match loop def " + loopDef.getXid());
@@ -248,10 +259,10 @@ public class X12Parser implements UDF1<String, String> {
             for (Segment segment : loop.getSegments()) {
                 String segmentId = segment.getId();
                 System.out.println(segmentId);
-                if (segmentId.equals("REF")) {
+                if (segmentId.equals("HI")) {
                     String a = "a";
                 }
-                
+//
                 if (missingSegmentIds.contains(segmentId)) {
                     matchMap = findSegmentByName(loopDef, segment, segmentId);
                 } else {
@@ -312,6 +323,7 @@ public class X12Parser implements UDF1<String, String> {
 
             JSONObject segmentJson = new JSONObject();
             List<ElementDefinition> elementDefs = segmentDef.getElements();
+            List<CompositeDefinition> comDefs = segmentDef.getComposites();
 
             if (elementDefs != null) {
                 for (ElementDefinition elementDef : elementDefs) {
@@ -319,6 +331,15 @@ public class X12Parser implements UDF1<String, String> {
                         continue;
                     }
                     segmentJson.put(elementDef.getXid() + "_" + elementDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase(), JSONObject.NULL);
+                }
+            }
+
+            if (comDefs != null) {
+                for (CompositeDefinition comDef : comDefs) {
+                    if (comDef.getUsage().toString().equals("N")) {
+                        continue;
+                    }
+                    segmentJson.put(comDef.getXid() + "_" + comDef.getName().replace(' ', '_').replaceAll("[^a-zA-Z0-9_]", "").toLowerCase(), JSONObject.NULL);
                 }
             }
 
