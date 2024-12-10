@@ -21,6 +21,7 @@ public class X12Parser implements UDF1<String, String> {
 
     public String call(String inputText) {
         String fileTypeString = null;
+        String fileSpecString = null;
         FileType fileTypeObject;
         try {
             // do this to read the file type
@@ -33,9 +34,13 @@ public class X12Parser implements UDF1<String, String> {
 
                 while ((line = reader.readLine()) != null) {
                     lineNumber++;
+                    if (lineNumber == 2) {
+                        String[] splitArray = line.split("\\*");
+                        fileSpecString = splitArray[8];
+                    }
                     if (lineNumber == 3) {
                         String[] splitArray = line.split("\\*");
-                        fileTypeString = splitArray[1] + "_" + splitArray[3];
+                        fileTypeString = splitArray[1] + "_" + fileSpecString;
                         break;
                     }
                 }
@@ -49,7 +54,7 @@ public class X12Parser implements UDF1<String, String> {
                 fileTypeObject = FileType.ANSI835_5010_X221;
             } else if (fileTypeString.contains("834_005010")) {
                 fileTypeObject = FileType.ANSI834_5010_X220;
-            } else if (fileTypeString.contains("832_005010")) {
+            } else if (fileTypeString.contains("820_005010")) {
                 fileTypeObject = FileType.ANSI820_5010_X218;
             } else {
                 throw new IllegalArgumentException("Unknown file type." + fileTypeString);
@@ -73,6 +78,7 @@ public class X12Parser implements UDF1<String, String> {
 
             return jsonArray.toString();
         } catch (Exception e) {
+            e.printStackTrace();
             return e.toString();
         }
     }
@@ -112,8 +118,11 @@ public class X12Parser implements UDF1<String, String> {
                             // Check if valid codes are null, or if they contain the target value
                             if (elementDef.getValidCodes() == null) {
                                 isMatch = true;
-                            } else if (elementDef.getValidCodes().getCodes().contains(segment.getElement(elementID).getValue())) {
-                                isMatch = true;
+                            } else {
+                                Element element = segment.getElement(elementID);
+                                if (element == null || elementDef.getValidCodes().getCodes().contains(element.getValue())) {
+                                    isMatch = true;
+                                }
                             }
 
                             // If this element doesn't match, record it and flag as not all matching
@@ -259,16 +268,15 @@ public class X12Parser implements UDF1<String, String> {
         Map<String, List<SegmentDefinition>> matchMap = null;
         List<SegmentDefinition> missingSegments = new ArrayList<>();
 
-//        if (loop.getId().equals("2300") && loop != null) {
-//            String a = "1";
-//        }
-
         if (loop != null) {
             for (Segment segment : loop.getSegments()) {
                 String segmentId = segment.getId();
 
-//                System.out.println("Result: " + loop.getId() + segmentId);
-//
+//                System.out.println(loop.getId() + "_" +  segmentId);
+//                if (loop.getId().equals("1000A")) {
+//                    String a = "1";
+//                }
+
                 if (missingSegmentIds.contains(segmentId)) {
                     matchMap = findSegmentByName(loopDef, segment, segmentId);
                 } else {
