@@ -1,6 +1,5 @@
 package com.imsweb.x12.util;
 
-import com.imsweb.x12.mapping.ElementDefinition;
 import com.imsweb.x12.mapping.LoopDefinition;
 import com.imsweb.x12.mapping.SegmentDefinition;
 import com.imsweb.x12.mapping.TransactionDefinition;
@@ -10,13 +9,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-public class BuildSqlSelect {
+public class Build837SqlSelect {
 
     private TransactionDefinition transactionDef;
     private String parentStatement; // Class-level variable to store the parent statement
 
 
-    public BuildSqlSelect(TransactionDefinition transactionDef) {
+    public Build837SqlSelect(TransactionDefinition transactionDef) {
         this.transactionDef = transactionDef;
     }
 
@@ -124,7 +123,7 @@ public class BuildSqlSelect {
             X12Reader reader837 = new X12Reader(X12Reader.FileType.ANSI837_5010_X222, new File("837sample"));
 
             TransactionDefinition transactionDef = reader837.getDefinition();
-            BuildSqlSelect builder = new BuildSqlSelect(transactionDef);
+            Build837SqlSelect builder = new Build837SqlSelect(transactionDef);
 
             String childSqlSelect = builder.buildSelectStatement();
 
