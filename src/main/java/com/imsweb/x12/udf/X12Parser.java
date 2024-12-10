@@ -147,7 +147,8 @@ public class X12Parser implements UDF1<String, String> {
                             }
 
                             if (combinedValidCodes.contains(code) || code == null) {
-                                isMatch = true;
+//                                isMatch = true;
+                                break;
                             } else {
                                 isMatch = false;
                             }
@@ -265,6 +266,8 @@ public class X12Parser implements UDF1<String, String> {
         if (loop != null) {
             for (Segment segment : loop.getSegments()) {
                 String segmentId = segment.getId();
+
+//                System.out.println("Result: " + loop.getId() + segmentId);
 //
                 if (missingSegmentIds.contains(segmentId)) {
                     matchMap = findSegmentByName(loopDef, segment, segmentId);
@@ -276,7 +279,7 @@ public class X12Parser implements UDF1<String, String> {
                 if (matchMap != null) {
                     missingSegments.addAll(matchMap.get("unmatched"));
                 }
-
+//                System.out.println(missingSegments);
                 JSONObject segmentJson = new JSONObject();
                 List<Element> elements = segment.getElements();
 
