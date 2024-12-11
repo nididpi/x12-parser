@@ -2,16 +2,17 @@ package com.imsweb.x12.util;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.imsweb.x12.udf.X12Parser;
 import com.imsweb.x12.mapping.*;
 import com.imsweb.x12.reader.X12Reader;
+import org.json.JSONObject;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.nio.charset.StandardCharsets;
 
 public class BuildJsonSchema {
 
@@ -20,6 +21,58 @@ public class BuildJsonSchema {
     public BuildJsonSchema(TransactionDefinition transactionDef) {
         this.transactionDef = transactionDef;
     }
+
+    public BuildJsonSchema(String fileType) throws IOException {
+        X12Reader.FileType fileTypeObject;
+        String resourceName;
+
+        try {
+            if (fileType.contains("837_005010")) {
+                fileTypeObject = X12Reader.FileType.ANSI837_5010_X222;
+                resourceName = "837sample";
+            } else if (fileType.contains("835_005010")) {
+                fileTypeObject = X12Reader.FileType.ANSI835_5010_X221;
+                resourceName = "835sample";
+            } else if (fileType.contains("834_005010")) {
+                fileTypeObject = X12Reader.FileType.ANSI834_5010_X220;
+                resourceName = "834sample";
+            } else if (fileType.contains("820_005010")) {
+                fileTypeObject = X12Reader.FileType.ANSI820_5010_X218;
+                resourceName = "820sample";
+            } else {
+                throw new IllegalArgumentException("Unknown file type." + fileType);
+            }
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException("Invalid file type provided: " + fileType, e);
+        }
+
+
+        InputStream x12InputStream = loadSampleX12FromResource(resourceName);
+
+        X12Reader reader = new X12Reader(fileTypeObject, x12InputStream);
+        this.transactionDef = reader.getDefinition();
+    }
+
+    private static ByteArrayInputStream loadSampleX12FromResource(String resourceName) throws IOException {
+        // Access the resource using the class loader
+        try (InputStream inputStream = X12Parser.class.getClassLoader().getResourceAsStream(resourceName)) {
+            if (inputStream == null) {
+                throw new IOException("Resource not found: " + resourceName);
+            }
+
+            // Read the InputStream into a byte array
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                byteArrayOutputStream.write(buffer, 0, bytesRead);
+            }
+
+            // Convert the byte array to ByteArrayInputStream
+            return new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
+        }
+    }
+
 
     public Map<String, Object> captureDefinitions() {
         return captureLoopDefinitions(transactionDef.getLoop());
@@ -80,9 +133,6 @@ public class BuildJsonSchema {
             for (SegmentDefinition segmentDef : segmentDefs) {
                 if (segmentDef.getUsage().name().equals("NOT_USED")) {
                     continue;
-                }
-                if (segmentDef.getXid().equals("HI")) {
-                    String a = "a";
                 }
 
                 Map<String, Object> segmentMap = new HashMap<>();
@@ -193,25 +243,37 @@ public class BuildJsonSchema {
         }
     }
 
-    public static void main(String[] args) {
+    public String getJsonSchema() {
         try {
-            X12Reader reader837 = new X12Reader(X12Reader.FileType.ANSI837_5010_X222, new File("837sample"));
-
-            // Assuming you have a valid TransactionDefinition object
-            TransactionDefinition transactionDef = reader837.getDefinition();
-            BuildJsonSchema mapper = new BuildJsonSchema(transactionDef);
-
-            // Capture hierarchical data
-            Map<String, Object> structuredData = mapper.captureDefinitions();
-
-            // Save JSON to file
-            String filePath = "837schema.json";
-            mapper.saveToJsonFile(filePath, structuredData);
-//            System.out.println(structuredData);
-
-            System.out.println("JSON saved to " + filePath);
-        } catch (IOException e) {
+            Map<String, Object> structuredData = captureDefinitions();
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            return gson.toJson(structuredData.get("type"));
+        } catch (Exception e) {
             e.printStackTrace();
+            throw new RuntimeException("Failed to get schema", e);
         }
     }
+
+
+//    public static void main(String[] args) {
+//        try {
+//            X12Reader reader837 = new X12Reader(X12Reader.FileType.ANSI837_5010_X222, new File("837sample"));
+//
+//            // Assuming you have a valid TransactionDefinition object
+//            TransactionDefinition transactionDef = reader837.getDefinition();
+//            BuildJsonSchema mapper = new BuildJsonSchema(transactionDef);
+//
+//            // Capture hierarchical data
+//            Map<String, Object> structuredData = mapper.captureDefinitions();
+//
+//            // Save JSON to file
+//            String filePath = "837schema.json";
+//            mapper.saveToJsonFile(filePath, structuredData);
+////            System.out.println(structuredData);
+//
+//            System.out.println("JSON saved to " + filePath);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }
