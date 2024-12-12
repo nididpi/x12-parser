@@ -5,14 +5,12 @@ import com.google.gson.GsonBuilder;
 import com.imsweb.x12.udf.X12Parser;
 import com.imsweb.x12.mapping.*;
 import com.imsweb.x12.reader.X12Reader;
-import org.json.JSONObject;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.nio.charset.StandardCharsets;
 
 public class BuildJsonSchema {
 
@@ -29,22 +27,22 @@ public class BuildJsonSchema {
         try {
             if (fileType.contains("837_5010_X231")) {
                 fileTypeObject = X12Reader.FileType.ANSI837_5010_X231;
-                resourceName = "837sample";
+                resourceName = "837X222sample";
             } else if (fileType.contains("837_5010_X223")) {
                 fileTypeObject = X12Reader.FileType.ANSI837_5010_X223;
-                resourceName = "837sample";
+                resourceName = "837X222sample";
             } else if (fileType.contains("837_5010_X222")) {
                 fileTypeObject = X12Reader.FileType.ANSI837_5010_X222;
-                resourceName = "837sample";
+                resourceName = "837X222sample";
             } else if (fileType.contains("837_4010_X098")) {
                 fileTypeObject = X12Reader.FileType.ANSI837_4010_X098;
-                resourceName = "837sample";
+                resourceName = "837X222sample";
             } else if (fileType.contains("837_4010_X097")) {
                 fileTypeObject = X12Reader.FileType.ANSI837_4010_X097;
-                resourceName = "837sample";
+                resourceName = "837X222sample";
             } else if (fileType.contains("837_4010_X096")) {
                 fileTypeObject = X12Reader.FileType.ANSI837_4010_X096;
-                resourceName = "837sample";
+                resourceName = "837X222sample";
             } else if (fileType.contains("835_5010_X221")) {
                 fileTypeObject = X12Reader.FileType.ANSI835_5010_X221;
                 resourceName = "835sample";
@@ -275,7 +273,7 @@ public class BuildJsonSchema {
 
 //    public static void main(String[] args) {
 //        try {
-//            X12Reader reader837 = new X12Reader(X12Reader.FileType.ANSI837_5010_X222, new File("837sample"));
+//            X12Reader reader837 = new X12Reader(X12Reader.FileType.ANSI837_5010_X222, new File("837X222sample"));
 //
 //            // Assuming you have a valid TransactionDefinition object
 //            TransactionDefinition transactionDef = reader837.getDefinition();

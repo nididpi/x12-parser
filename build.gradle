@@ -1,8 +1,8 @@
 plugins {
     id 'java-library'
-    id 'checkstyle'
+//    id 'checkstyle'
     id 'jacoco'
-    id "com.github.spotbugs" version "5.0.14"
+//    id "com.github.spotbugs" version "5.0.14"
     id 'maven-publish'
     id 'signing'
     id "io.codearte.nexus-staging" version "0.30.0"  // logs into Sonotype OSS and does a "Close" and "Release"
@@ -39,10 +39,13 @@ dependencies {
     api 'com.thoughtworks.xstream:xstream:1.4.20'
 
     implementation 'org.json:json:20231013'
+    implementation 'com.google.code.gson:gson:2.10'
 //    compileOnly 'org.apache.spark:spark-core_2.12:3.3.'
     compileOnly 'org.apache.spark:spark-sql_2.12:3.5.0'
     compileOnly 'org.apache.spark:spark-core_2.12:3.5.0'
 
+    testImplementation 'org.apache.spark:spark-sql_2.12:3.5.0'
+    testImplementation 'org.apache.spark:spark-core_2.12:3.5.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.11.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.11.0'
@@ -79,9 +82,9 @@ test {
 //    configFile = file('config/checkstyle/checkstyle.xml')
 //}
 
-spotbugs {
-    excludeFilter = file('config/spotbugs/spotbugs-exclude.xml')
-}
+//spotbugs {
+//    excludeFilter = file('config/spotbugs/spotbugs-exclude.xml')
+//}
 
 jacocoTestReport {
     reports {

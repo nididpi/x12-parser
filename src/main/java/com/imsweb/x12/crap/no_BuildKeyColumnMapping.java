@@ -89,7 +89,7 @@ public class no_BuildKeyColumnMapping {
 
     public static void main(String[] args) {
         try {
-            X12Reader reader837 = new X12Reader(X12Reader.FileType.ANSI837_5010_X222, new File("837sample"));
+            X12Reader reader837 = new X12Reader(X12Reader.FileType.ANSI837_5010_X222, new File("837X222sample"));
 
             // Assuming you have a valid TransactionDefinition object
             TransactionDefinition transactionDef = reader837.getDefinition();

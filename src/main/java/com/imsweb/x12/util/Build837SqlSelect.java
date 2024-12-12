@@ -120,7 +120,7 @@ public class Build837SqlSelect {
 
     public static void main(String[] args) {
         try {
-            X12Reader reader837 = new X12Reader(X12Reader.FileType.ANSI837_5010_X222, new File("837sample"));
+            X12Reader reader837 = new X12Reader(X12Reader.FileType.ANSI837_5010_X222, new File("837X222sample"));
 
             TransactionDefinition transactionDef = reader837.getDefinition();
             Build837SqlSelect builder = new Build837SqlSelect(transactionDef);

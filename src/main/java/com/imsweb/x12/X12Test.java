@@ -8,7 +8,6 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -20,7 +19,7 @@ import java.util.Map;
 public class X12Test {
 
     public static void main(String[] args) throws IOException {
-        X12Reader reader837 = new X12Reader(FileType.ANSI837_5010_X222, new File("837sample"));
+        X12Reader reader837 = new X12Reader(FileType.ANSI837_5010_X222, new File("837X222sample"));
 
         List<Loop> loops837 = reader837.getLoops();
 //
