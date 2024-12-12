@@ -27,10 +27,10 @@ public class BuildJsonSchema {
         try {
             if (fileType.contains("837_5010_X231")) {
                 fileTypeObject = X12Reader.FileType.ANSI837_5010_X231;
-                resourceName = "837X222sample";
+                resourceName = "837X231sample";
             } else if (fileType.contains("837_5010_X223")) {
                 fileTypeObject = X12Reader.FileType.ANSI837_5010_X223;
-                resourceName = "837X222sample";
+                resourceName = "837X223sample";
             } else if (fileType.contains("837_5010_X222")) {
                 fileTypeObject = X12Reader.FileType.ANSI837_5010_X222;
                 resourceName = "837X222sample";
@@ -45,10 +45,10 @@ public class BuildJsonSchema {
                 resourceName = "837X222sample";
             } else if (fileType.contains("835_5010_X221")) {
                 fileTypeObject = X12Reader.FileType.ANSI835_5010_X221;
-                resourceName = "835sample";
+                resourceName = "835X221sample";
             } else if (fileType.contains("835_4010_X091")) {
                 fileTypeObject = X12Reader.FileType.ANSI835_4010_X091;
-                resourceName = "835sample";
+                resourceName = "835X221sample";
             } else if (fileType.contains("834_5010_X220")) {
                 fileTypeObject = X12Reader.FileType.ANSI834_5010_X220;
                 resourceName = "834sample";

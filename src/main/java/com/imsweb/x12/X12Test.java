@@ -23,7 +23,7 @@ public class X12Test {
 
         List<Loop> loops837 = reader837.getLoops();
 //
-//          X12Reader reader835 = new X12Reader(FileType.ANSI835_5010_X221, new File("/Users/weiwu/Documents/git/hl7test/src/main/java/com/example/835sample"));
+//          X12Reader reader835 = new X12Reader(FileType.ANSI835_5010_X221, new File("/Users/weiwu/Documents/git/hl7test/src/main/java/com/example/835X221sample"));
 //
 //          List<Loop> loops835 = reader835.getLoops();
 //
