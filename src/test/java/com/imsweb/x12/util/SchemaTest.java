@@ -15,7 +15,7 @@ class SchemaTest {
 
         try {
 
-            BuildJsonSchema schemaGen = new BuildJsonSchema("837_005010");
+            BuildJsonSchema schemaGen = new BuildJsonSchema("837_5010_X222");
             String resultNew = schemaGen.getJsonSchema();
             System.out.println(resultNew);
 //
