@@ -27,16 +27,34 @@ public class BuildJsonSchema {
         String resourceName;
 
         try {
-            if (fileType.contains("837_005010")) {
+            if (fileType.contains("837_5010_X231")) {
+                fileTypeObject = X12Reader.FileType.ANSI837_5010_X231;
+                resourceName = "837sample";
+            } else if (fileType.contains("837_5010_X223")) {
+                fileTypeObject = X12Reader.FileType.ANSI837_5010_X223;
+                resourceName = "837sample";
+            } else if (fileType.contains("837_5010_X222")) {
                 fileTypeObject = X12Reader.FileType.ANSI837_5010_X222;
                 resourceName = "837sample";
-            } else if (fileType.contains("835_005010")) {
+            } else if (fileType.contains("837_4010_X098")) {
+                fileTypeObject = X12Reader.FileType.ANSI837_4010_X098;
+                resourceName = "837sample";
+            } else if (fileType.contains("837_4010_X097")) {
+                fileTypeObject = X12Reader.FileType.ANSI837_4010_X097;
+                resourceName = "837sample";
+            } else if (fileType.contains("837_4010_X096")) {
+                fileTypeObject = X12Reader.FileType.ANSI837_4010_X096;
+                resourceName = "837sample";
+            } else if (fileType.contains("835_5010_X221")) {
                 fileTypeObject = X12Reader.FileType.ANSI835_5010_X221;
                 resourceName = "835sample";
-            } else if (fileType.contains("834_005010")) {
+            } else if (fileType.contains("835_4010_X091")) {
+                fileTypeObject = X12Reader.FileType.ANSI835_4010_X091;
+                resourceName = "835sample";
+            } else if (fileType.contains("834_5010_X220")) {
                 fileTypeObject = X12Reader.FileType.ANSI834_5010_X220;
                 resourceName = "834sample";
-            } else if (fileType.contains("820_005010")) {
+            }  else if (fileType.contains("820_5010_X218")) {
                 fileTypeObject = X12Reader.FileType.ANSI820_5010_X218;
                 resourceName = "820sample";
             } else {

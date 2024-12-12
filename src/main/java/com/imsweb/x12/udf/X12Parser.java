@@ -48,11 +48,23 @@ public class X12Parser implements UDF1<String, String> {
                 e.printStackTrace();
             }
 
-            if (fileTypeString.contains("837_005010")) {
+            if (fileTypeString.contains("837_005010X231")) {
+                fileTypeObject = FileType.ANSI837_5010_X231;
+            } else if (fileTypeString.contains("837_005010X223")) {
+                fileTypeObject = FileType.ANSI837_5010_X223;
+            } else if (fileTypeString.contains("837_005010X222")) {
                 fileTypeObject = FileType.ANSI837_5010_X222;
-            } else if (fileTypeString.contains("835_005010")) {
+            } else if (fileTypeString.contains("837_005010X098")) {
+                fileTypeObject = FileType.ANSI837_4010_X098;
+            } else if (fileTypeString.contains("837_005010X097")) {
+                fileTypeObject = FileType.ANSI837_4010_X097;
+            } else if (fileTypeString.contains("837_005010X096")) {
+                fileTypeObject = FileType.ANSI837_4010_X096;
+            } else if (fileTypeString.contains("835_005010X221")) {
                 fileTypeObject = FileType.ANSI835_5010_X221;
-            } else if (fileTypeString.contains("834_005010")) {
+            } else if (fileTypeString.contains("835_004010X091")) {
+                fileTypeObject = FileType.ANSI835_4010_X091;
+            }  else if (fileTypeString.contains("834_005010X220")) {
                 fileTypeObject = FileType.ANSI834_5010_X220;
             } else if (fileTypeString.contains("820_005010")) {
                 fileTypeObject = FileType.ANSI820_5010_X218;
