@@ -251,6 +251,9 @@ public class X12Reader {
 
             String line = scanner.next().trim();
             while (scanner.hasNext()) {
+                if (line.equals("RMR*IK*970501002*PI*250")) {
+                    String a = "a";
+                }
                 // Determine if we have started a new loop
                 loopConfig = getMatchedLoop(_separators.splitElement(line), currentLoopConfig == null ? null : currentLoopConfig.getLoopId());
                 if (loopConfig == null)

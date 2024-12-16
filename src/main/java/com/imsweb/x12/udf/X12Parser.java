@@ -284,10 +284,10 @@ public class X12Parser implements UDF1<String, String> {
             for (Segment segment : loop.getSegments()) {
                 String segmentId = segment.getId();
 
-//                System.out.println(loop.getId() + "_" +  segmentId);
-//                if (loop.getId().equals("1000A")) {
-//                    String a = "1";
-//                }
+                System.out.println(loop.getId() + "_" +  segmentId);
+                if (loop.getId().equals("2315A")) {
+                    String a = "1";
+                }
 
                 if (missingSegmentIds.contains(segmentId)) {
                     matchMap = findSegmentByName(loopDef, segment, segmentId);
