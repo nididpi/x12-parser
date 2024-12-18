@@ -19,58 +19,65 @@ public class X12Parser implements UDF1<String, String> {
 
     private static final long serialVersionUID = 1L;
 
+    private static final Map<String, FileType> FILE_TYPE_MAP = new HashMap<>();
+
+    static {
+        FILE_TYPE_MAP.put("837_005010X231", FileType.ANSI837_5010_X231);
+        FILE_TYPE_MAP.put("837_005010X223", FileType.ANSI837_5010_X223);
+        FILE_TYPE_MAP.put("837_005010X222", FileType.ANSI837_5010_X222);
+//        FILE_TYPE_MAP.put("837_005010X098", FileType.ANSI837_4010_X098);
+//        FILE_TYPE_MAP.put("837_005010X097", FileType.ANSI837_4010_X097);
+//        FILE_TYPE_MAP.put("837_005010X096", FileType.ANSI837_4010_X096);
+        FILE_TYPE_MAP.put("835_005010X221", FileType.ANSI835_5010_X221);
+//        FILE_TYPE_MAP.put("835_004010X091", FileType.ANSI835_4010_X091);
+        FILE_TYPE_MAP.put("834_005010X220", FileType.ANSI834_5010_X220);
+//        FILE_TYPE_MAP.put("820_005010", FileType.ANSI837_5010_X222);
+    }
+
     public String call(String inputText) {
+
         String fileTypeString = null;
         String fileSpecString = null;
-        FileType fileTypeObject;
+
         try {
             // do this to read the file type
             byte[] byteContent = inputText.getBytes(StandardCharsets.UTF_8);
             InputStream inputStream = new ByteArrayInputStream(byteContent);
+            String[] lines = new String[0];
 
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
+                StringBuilder contentBuilder = new StringBuilder();
                 String line;
-                int lineNumber = 0;
 
                 while ((line = reader.readLine()) != null) {
-                    lineNumber++;
-                    if (lineNumber == 2) {
-                        String[] splitArray = line.split("\\*");
-                        fileSpecString = splitArray[8];
+                    contentBuilder.append(line);
+                }
+                String content = contentBuilder.toString();
+                lines = content.split("~");
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            for (int lineNumber = 0; lineNumber < lines.length; lineNumber++) {
+                String line = lines[lineNumber];
+                if (lineNumber == 1 && line.contains("*")) {
+                    String[] splitArray = line.split("\\*");
+                    if (splitArray.length > 8) {
+                        fileSpecString = splitArray[8]; // Ensure the index is safe
                     }
-                    if (lineNumber == 3) {
-                        String[] splitArray = line.split("\\*");
+                }
+                if (lineNumber == 2 && line.contains("*")) {
+                    String[] splitArray = line.split("\\*");
+                    if (splitArray.length > 1 && fileSpecString != null) {
                         fileTypeString = splitArray[1] + "_" + fileSpecString;
                         break;
                     }
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
             }
 
-            if (fileTypeString.contains("837_005010X231")) {
-                fileTypeObject = FileType.ANSI837_5010_X231;
-            } else if (fileTypeString.contains("837_005010X223")) {
-                fileTypeObject = FileType.ANSI837_5010_X223;
-            } else if (fileTypeString.contains("837_005010X222")) {
-                fileTypeObject = FileType.ANSI837_5010_X222;
-            } else if (fileTypeString.contains("837_005010X098")) {
-                fileTypeObject = FileType.ANSI837_4010_X098;
-            } else if (fileTypeString.contains("837_005010X097")) {
-                fileTypeObject = FileType.ANSI837_4010_X097;
-            } else if (fileTypeString.contains("837_005010X096")) {
-                fileTypeObject = FileType.ANSI837_4010_X096;
-            } else if (fileTypeString.contains("835_005010X221")) {
-                fileTypeObject = FileType.ANSI835_5010_X221;
-            } else if (fileTypeString.contains("835_004010X091")) {
-                fileTypeObject = FileType.ANSI835_4010_X091;
-            }  else if (fileTypeString.contains("834_005010X220")) {
-                fileTypeObject = FileType.ANSI834_5010_X220;
-            } else if (fileTypeString.contains("820_005010")) {
-                fileTypeObject = FileType.ANSI820_5010_X218;
-            } else {
-                throw new IllegalArgumentException("Unknown file type." + fileTypeString);
-            }
+
+            FileType fileTypeObject = determineFileType(fileTypeString);
 
             // Create a new InputStream for X12Reader
             InputStream freshInputStream = new ByteArrayInputStream(byteContent);
@@ -95,8 +102,15 @@ public class X12Parser implements UDF1<String, String> {
         }
     }
 
-    public static Map<String, List<SegmentDefinition>> findSegmentByName(LoopDefinition loopDef, Segment segment, String MissingId) {
+    private FileType determineFileType(String fileTypeString) {
+        return FILE_TYPE_MAP.entrySet().stream()
+                .filter(entry -> fileTypeString.contains(entry.getKey()))
+                .map(Map.Entry::getValue)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Unknown file type: " + fileTypeString));
+    }
 
+    private static Map<String, List<SegmentDefinition>> findSegmentByName(LoopDefinition loopDef, Segment segment, String missingId) {
         Map<String, List<SegmentDefinition>> matchMap = new HashMap<>();
         matchMap.put("matched", new ArrayList<>());
         matchMap.put("unmatched", new ArrayList<>());
@@ -112,13 +126,12 @@ public class X12Parser implements UDF1<String, String> {
             }
         }
 
-        if (MissingId != null) {
+        if (missingId != null) {
             for (SegmentDefinition obj : matchSegDef) {
                 if (obj.getXid().equals(segmentId) && !obj.getUsage().name().equals("NOT_USED")) {
-
                     boolean matchAllElement = true;
 
-// Iterate through each ElementDefinition
+                    // Iterate through each ElementDefinition
                     if (obj.getElements() != null) {
                         for (ElementDefinition elementDef : obj.getElements()) {
                             if (elementDef.getUsage().toString().equals("NOT_USED")) {
@@ -150,7 +163,6 @@ public class X12Parser implements UDF1<String, String> {
                                 continue;
                             }
                             String elementID = comDef.getXid();
-                            boolean isMatch = false;
 
                             List<String> combinedValidCodes = new ArrayList<>();
                             for (ElementDefinition elementDef : comDef.getElements()) {
@@ -167,17 +179,13 @@ public class X12Parser implements UDF1<String, String> {
                                 code = (value.split(":").length > 0) ? value.split(":")[0] : "";
                             }
 
+                            // Only check for the first subElement
                             if (combinedValidCodes.contains(code) || code == null) {
-//                                isMatch = true;
                                 break;
                             } else {
-                                isMatch = false;
-                            }
-
-                            // If this element doesn't match, record it and flag as not all matching
-                            if (!isMatch) {
                                 matchAllElement = false;
                             }
+
                         }
                     }
 
@@ -187,7 +195,6 @@ public class X12Parser implements UDF1<String, String> {
                         matchMap.get("unmatched").add(obj);
                     }
                 }
-
             }
             return matchMap;
         } else {
@@ -199,10 +206,10 @@ public class X12Parser implements UDF1<String, String> {
             }
         }
 
-        throw new IllegalArgumentException("Error: The segment name '" + segmentId + "' does not exist in the list.");
+        throw new IllegalArgumentException("Error: The segment name '" + segmentId + "' does not exist in " + loopDef.getXid());
     }
 
-    public static String findElementByName(SegmentDefinition segDef, String elementId) {
+    private static String findElementByName(SegmentDefinition segDef, String elementId) {
 
         List<ElementDefinition> elementDefs = segDef.getElements();
         List<CompositeDefinition> elementComDefs = segDef.getComposites();
@@ -223,10 +230,10 @@ public class X12Parser implements UDF1<String, String> {
             }
         }
 
-        throw new IllegalArgumentException("Error: The element name '" + elementId + "' does not exist in the list.");
+        throw new IllegalArgumentException("Error: The element name '" + elementId + "' does not exist in " + segDef.getXid());
     }
 
-    public static LoopDefinition findLoopByName(LoopDefinition loopDef, String loopId) {
+    private static LoopDefinition findLoopByName(LoopDefinition loopDef, String loopId) {
 
         List<LoopDefinition> loopDefs = loopDef.getLoop();
 
@@ -235,59 +242,17 @@ public class X12Parser implements UDF1<String, String> {
                 return obj;
             }
         }
-        throw new IllegalArgumentException("Error: The loop name '" + loopId + "' does not exist in the list.");
+        throw new IllegalArgumentException("Error: The loop name '" + loopId + "' does not exist in " + loopDef.getXid());
     }
 
-
-    private static JSONObject processLoop(Loop loop, LoopDefinition loopDef) {
-
-        if (loop != null && !loop.getId().equals(loopDef.getXid())) {
-            throw new IllegalArgumentException("Error:data loop " + loop.getId() + " doesn't match loop def " + loopDef.getXid());
-        }
-
-        JSONObject loopJson = new JSONObject();
-
-
-        // Handle segment
-
-        Map<String, Integer> idCountInLoopDef = new HashMap<>();
-        Map<String, Integer> idCountInLoop = new HashMap<>();
-        if (loopDef.getSegment() != null) {
-            for (SegmentDefinition segmentDef : loopDef.getSegment()) {
-                idCountInLoopDef.merge(segmentDef.getXid(), 1, Integer::sum);
-            }
-        }
-
-        // Count occurrences of IDs in loopSegments
-        if (loop != null) {
-            for (Segment segment : loop.getSegments()) {
-                idCountInLoop.merge(segment.getId(), 1, Integer::sum);
-            }
-        }
-
-        List<String> missingSegmentIds = new ArrayList<>();
-        idCountInLoopDef.forEach((id, countInLoopDef) -> {
-            if (countInLoopDef > 1) {
-                int countInLoop = idCountInLoop.getOrDefault(id, 0);
-                if (countInLoop != countInLoopDef) {
-                    missingSegmentIds.add(id);
-                }
-            }
-        });
-
-
+    private static Map<String, Object> processSegments(Loop loop, LoopDefinition loopDef, List<String> missingSegmentIds) {
+        Map<String, List<SegmentDefinition>> matchMap;
         Map<String, Object> segmentResults = new HashMap<>();
-        Map<String, List<SegmentDefinition>> matchMap = null;
         List<SegmentDefinition> missingSegments = new ArrayList<>();
 
         if (loop != null) {
             for (Segment segment : loop.getSegments()) {
                 String segmentId = segment.getId();
-
-                System.out.println(loop.getId() + "_" +  segmentId);
-                if (loop.getId().equals("2315A")) {
-                    String a = "1";
-                }
 
                 if (missingSegmentIds.contains(segmentId)) {
                     matchMap = findSegmentByName(loopDef, segment, segmentId);
@@ -299,7 +264,7 @@ public class X12Parser implements UDF1<String, String> {
                 if (matchMap != null) {
                     missingSegments.addAll(matchMap.get("unmatched"));
                 }
-//                System.out.println(missingSegments);
+
                 JSONObject segmentJson = new JSONObject();
                 List<Element> elements = segment.getElements();
 
@@ -325,8 +290,7 @@ public class X12Parser implements UDF1<String, String> {
             }
         }
 
-        // Handle missing segment
-
+        // missing
         Set<String> segmentIds;
 
         if (loop != null && loop.getSegments() != null) {
@@ -383,6 +347,46 @@ public class X12Parser implements UDF1<String, String> {
 
         }
 
+        return segmentResults;
+    }
+
+    private static JSONObject processLoop(Loop loop, LoopDefinition loopDef) {
+
+        if (loop != null && !loop.getId().equals(loopDef.getXid())) {
+            throw new IllegalArgumentException("Error:data loop " + loop.getId() + " doesn't match loop def " + loopDef.getXid());
+        }
+
+        JSONObject loopJson = new JSONObject();
+
+
+        // Handle segment
+        Map<String, Integer> idCountInLoopDef = new HashMap<>();
+        Map<String, Integer> idCountInLoop = new HashMap<>();
+        if (loopDef.getSegment() != null) {
+            for (SegmentDefinition segmentDef : loopDef.getSegment()) {
+                idCountInLoopDef.merge(segmentDef.getXid(), 1, Integer::sum);
+            }
+        }
+
+        // Count occurrences of IDs in loopSegments
+        if (loop != null) {
+            for (Segment segment : loop.getSegments()) {
+                idCountInLoop.merge(segment.getId(), 1, Integer::sum);
+            }
+        }
+
+        List<String> missingSegmentIds = new ArrayList<>();
+        idCountInLoopDef.forEach((id, countInLoopDef) -> {
+            if (countInLoopDef > 1) {
+                int countInLoop = idCountInLoop.getOrDefault(id, 0);
+                if (countInLoop != countInLoopDef) {
+                    missingSegmentIds.add(id);
+                }
+            }
+        });
+
+        Map<String, Object> segmentResults = processSegments(loop, loopDef, missingSegmentIds);
+
 
         // put segment data to current loop json
         for (Map.Entry<String, Object> entry : segmentResults.entrySet()) {
@@ -426,7 +430,6 @@ public class X12Parser implements UDF1<String, String> {
         }
 
         List<LoopDefinition> missingLoops = new ArrayList<>();
-//        System.out.println("current loop: " + loop.getId());
 
         // Iterate over SegmentDefinitions to classify them
         if (loopDef.getLoop() != null) {
@@ -438,7 +441,9 @@ public class X12Parser implements UDF1<String, String> {
         }
 
         for (LoopDefinition childLoopDef : missingLoops) {
-            if (childLoopDef.getUsage().toString().equals("NOT_USED")) {continue;}
+            if (childLoopDef.getUsage().toString().equals("NOT_USED")) {
+                continue;
+            }
             String childLoopId = childLoopDef.getXid();
 
             JSONObject childLoopJson = processLoop(null, childLoopDef);
