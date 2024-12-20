@@ -1,12 +1,6 @@
 package com.imsweb.x12.util;
 
-import com.imsweb.x12.util.BuildJsonSchema;
 import org.junit.jupiter.api.Test;
-
-import java.io.File;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 class SchemaTest {
 
@@ -15,7 +9,7 @@ class SchemaTest {
 
         try {
 
-            BuildJsonSchema schemaGen = new BuildJsonSchema("837_5010_X231");
+            BuildX12JsonSchema schemaGen = new BuildX12JsonSchema("837_5010_X224");
             String resultNew = schemaGen.getJsonSchema();
             System.out.println(resultNew);
 //

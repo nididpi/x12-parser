@@ -13,7 +13,7 @@ class UdfTest {
 
     @Test
     void testUdf() {
-        String resourceName = "820sample";
+        String resourceName = "837X224sample";
 
         try {
             InputStream inputStream = X12Parser.class.getClassLoader().getResourceAsStream(resourceName);
