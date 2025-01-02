@@ -6301,7 +6301,7 @@
                     <element xid="SV303">
                       <data_ele>1331</data_ele>
                       <name>Place of Service Code</name>
-                      <usage>R</usage>
+                      <usage>S</usage>
                       <seq>03</seq>
                     </element>
                     <composite xid="SV304">
@@ -6533,7 +6533,7 @@
                           <!--End of TOO segment-->
                           <segment xid="DTP">
                     <name>Date - Service Date</name>
-                    <usage>R</usage>
+                    <usage>S</usage>
                     <pos>4550</pos>
                     <max_use>1</max_use>
                     <element xid="DTP01">
@@ -12879,7 +12879,7 @@
                           <element xid="SV303">
                             <data_ele>1331</data_ele>
                             <name>Place of Service Code</name>
-                            <usage>R</usage>
+                            <usage>S</usage>
                             <seq>03</seq>
                           </element>
                           <composite xid="SV304">
