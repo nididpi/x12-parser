@@ -7,16 +7,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 class UdfTest {
 
     @Test
     void testUdf() {
-        String resourceName = "837X224sample";
+        String resourceName = "820sample";
 
         try {
-            InputStream inputStream = X12Parser.class.getClassLoader().getResourceAsStream(resourceName);
+            InputStream inputStream = X12Reader_udf2.class.getClassLoader().getResourceAsStream(resourceName);
             if (inputStream == null) {
                 System.err.println("Resource not found: " + resourceName);
                 System.exit(1);
@@ -34,8 +32,9 @@ class UdfTest {
 
             String inputText = inputTextBuilder.toString();
 
-            X12Parser spark_udf_new = new X12Parser();
-            String resultNew = spark_udf_new.call(inputText);
+            System.out.println("start parser");
+            X12Reader_udf2 spark_udf_new = new X12Reader_udf2();
+            String resultNew = spark_udf_new.call(inputText, "820_5010_X218");
             System.out.println(resultNew);
 //
 //            X12ParserOld spark_udf = new X12ParserOld();

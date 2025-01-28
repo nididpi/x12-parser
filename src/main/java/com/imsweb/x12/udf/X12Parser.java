@@ -22,6 +22,7 @@ public class X12Parser implements UDF1<String, String> {
     private static final Map<String, FileType> FILE_TYPE_MAP = new HashMap<>();
 
     static {
+        FILE_TYPE_MAP.put("820_005010X218", FileType.ANSI820_5010_X218);
         FILE_TYPE_MAP.put("837_005010X231", FileType.ANSI837_5010_X231);
         FILE_TYPE_MAP.put("837_005010X223", FileType.ANSI837_5010_X223);
         FILE_TYPE_MAP.put("837_005010X222", FileType.ANSI837_5010_X222);
@@ -82,11 +83,11 @@ public class X12Parser implements UDF1<String, String> {
 
             // Create a new InputStream for X12Reader
             InputStream freshInputStream = new ByteArrayInputStream(byteContent);
-
+            System.out.println("start x12");
             X12Reader x12reader = new X12Reader(fileTypeObject, freshInputStream);
             List<Loop> loops = x12reader.getLoops();
             LoopDefinition loopDef = x12reader.getDefinition().getLoop();
-
+            System.out.println("start process");
             JSONArray jsonArray = new JSONArray();
 
             for (Loop loop : loops) {
