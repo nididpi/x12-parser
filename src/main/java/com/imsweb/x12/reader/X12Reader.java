@@ -254,7 +254,7 @@ public class X12Reader {
 
             String line = scanner.next().trim();
             while (scanner.hasNext()) {
-                if (line.equals("RMR*IK*970501002*PI*250")) {
+                if (line.equals("NM1*82*1*SMITH*TERESA****XX*5595436374")) {
                     String a = "a";
                 }
                 // Determine if we have started a new loop
@@ -786,6 +786,50 @@ public class X12Reader {
                 break;
             }
         }
+        return result;
+    }
+
+
+    private LoopConfig getFinalizedMatch2(String previousLoopId, List<LoopConfig> matchedLoops) {
+        LoopConfig result = null;
+        String currentLoopId = previousLoopId;
+        for (LoopConfig lc : _config) {
+            if (lc.getLoopId().equals(currentLoopId)) {
+                if (lc.getChildList() != null) {
+                    result = matchedLoops.stream()
+                            .filter(matchedLoop -> lc.getChildList().contains(matchedLoop.getLoopId()))
+                            .findFirst()
+                            .orElse(null);
+                }
+                // Break loop if a result was found
+                if (result != null) {
+                    return result;
+                }
+                break;
+            }
+        }
+
+        // Continue checking for parent loops
+        while (result == null && currentLoopId != null) {
+            String parentLoop = getParentLoop(currentLoopId, null);
+
+            if (parentLoop == null) {
+                break;
+            }
+
+            result = matchedLoops.stream()
+                    .filter(matchedLoop -> parentLoop.equals(getParentLoop(matchedLoop.getLoopId(), null)))
+                    .findFirst()
+                    .orElse(null);
+
+            if (result != null) {
+                return result;
+            }
+
+            // Move up to the next parent
+            currentLoopId = parentLoop;
+        }
+
         return result;
     }
 

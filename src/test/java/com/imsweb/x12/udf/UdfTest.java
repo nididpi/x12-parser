@@ -11,7 +11,10 @@ class UdfTest {
 
     @Test
     void testUdf() {
-        String resourceName = "820sample";
+//        String resourceName = "834test.txt";
+//        String resourceName = "820sample";
+        String resourceName = "835X221sample";
+
 
         try {
             InputStream inputStream = X12Reader_udf2.class.getClassLoader().getResourceAsStream(resourceName);
@@ -34,8 +37,8 @@ class UdfTest {
 
             System.out.println("start parser");
             X12Reader_udf2 spark_udf_new = new X12Reader_udf2();
-            String resultNew = spark_udf_new.call(inputText, "820_5010_X218");
-            System.out.println(resultNew);
+            String resultNew = spark_udf_new.call(inputText, "835_5010_X221");
+//            System.out.println(resultNew);
 //
 //            X12ParserOld spark_udf = new X12ParserOld();
 //            String result = spark_udf.call(inputText);

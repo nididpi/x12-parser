@@ -75,7 +75,7 @@ jar {
 
 test {
     useJUnitPlatform()
-    maxHeapSize = '40048m'
+    maxHeapSize = '20048m'
 }
 
 //checkstyle {
